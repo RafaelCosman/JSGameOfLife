@@ -8,6 +8,14 @@
 
   context.fillStyle = "#FF0000";
 
+  translate(50, 50);
+
+  circle(10);
+
+  translate(function(x, y) {
+    return context.translate(x, y);
+  });
+
   fillRect(function(width, height) {
     return context.fillRect(0, 0, width, height);
   });
