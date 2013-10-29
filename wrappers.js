@@ -6,18 +6,6 @@
 
   context = c.getContext("2d");
 
-  translate(function(x, y) {
-    return context.translate(x, y);
-  });
-
-  fillRect(function(width, height) {
-    return context.fillRect(0, 0, width, height);
-  });
-
-  circle(function(radius) {
-    return context.arc(0, 0, radius, 0, 2 * Math.PI, false);
-  });
-
   ellipseByLocationAndDimensions = function(location, dimensions) {
     return ellipse(location.x, location.y, dimensions.x, dimensions.y);
   };
