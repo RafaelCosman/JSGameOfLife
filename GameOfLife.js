@@ -8,8 +8,6 @@
 
   context.fillStyle = "#FF0000";
 
-  translate(50, 50);
-
   circle(10);
 
 }).call(this);
