@@ -42,7 +42,7 @@ Author Rafael Cosman
 
   ages = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
 
-  window.setTimeout(runn, 1);
+  window.setTimeout(run, 1);
 
   console.log("end setup");
 
