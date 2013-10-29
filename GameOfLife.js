@@ -6,7 +6,7 @@ Author Rafael Cosman
 
 
 (function() {
-  var ages, background, c, circle, context, fillRect, fillStyle, run, translate;
+  var ages, background, c, circle, context, fillRect, fillStyle, runn, translate;
 
   c = document.getElementById("myCanvas");
 
@@ -42,11 +42,11 @@ Author Rafael Cosman
 
   ages = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
 
-  setTimeout(run, 1);
+  setTimeout(runn, 1);
 
   console.log("end setup");
 
-  run = function() {
+  runn = function() {
     var x, y, _i, _results;
     _results = [];
     for (x = _i = 0; _i <= 3; x = ++_i) {
