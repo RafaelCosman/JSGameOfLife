@@ -21,6 +21,8 @@
 
   context.fillStyle = "#FF0000";
 
+  context.fillRect(10, 10, 100, 100);
+
   translate(50, 50);
 
   circle(100);
