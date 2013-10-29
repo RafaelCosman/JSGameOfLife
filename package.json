@@ -1,0 +1,8 @@
+
+{
+	"name" : "rrees-hello-node",
+	"version" : "0.0.1",
+	"dependencies" : {
+		"zappajs" : "0.3.7"
+	}
+}
