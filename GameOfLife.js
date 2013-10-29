@@ -21,7 +21,7 @@
 
   context.fillStyle = "#FF0000";
 
-  context.fillRect(10, 10, 100, 100);
+  fillRect(100, 100);
 
   translate(50, 50);
 
