@@ -2,6 +2,8 @@
 (function() {
   var c, context;
 
+  require("wrappers.coffee");
+
   c = document.getElementById("myCanvas");
 
   context = c.getContext("2d");
