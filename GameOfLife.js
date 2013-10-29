@@ -32,20 +32,6 @@ Author Rafael Cosman
     return context.fillStyle = string;
   };
 
-  console.log("setup");
-
-  fillRect(100, 100);
-
-  translate(50, 50);
-
-  circle(100);
-
-  ages = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
-
-  setTimeout(this.run, 1000);
-
-  console.log("end setup");
-
   run = function() {
     var x, y, _i, _results;
     _results = [];
@@ -63,5 +49,19 @@ Author Rafael Cosman
     }
     return _results;
   };
+
+  console.log("setup");
+
+  fillRect(100, 100);
+
+  translate(50, 50);
+
+  circle(100);
+
+  ages = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+
+  setTimeout(this.run, 1000);
+
+  console.log("end setup");
 
 }).call(this);
