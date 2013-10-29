@@ -12,16 +12,4 @@
 
   circle(10);
 
-  translate(function(x, y) {
-    return context.translate(x, y);
-  });
-
-  fillRect(function(width, height) {
-    return context.fillRect(0, 0, width, height);
-  });
-
-  circle(function(radius) {
-    return context.arc(0, 0, radius, 0, 2 * Math.PI, false);
-  });
-
 }).call(this);
