@@ -2,7 +2,7 @@
 (function() {
   var c, context;
 
-  require("wrappers.coffee");
+  require('wrappers.coffee');
 
   c = document.getElementById("myCanvas");
 
