@@ -2,16 +2,6 @@
 (function() {
   var c, context;
 
-  c = document.getElementById("myCanvas");
-
-  context = c.getContext("2d");
-
-  context.fillStyle = "#FF0000";
-
-  translate(50, 50);
-
-  circle(10);
-
   translate(function(x, y) {
     return context.translate(x, y);
   });
@@ -23,5 +13,15 @@
   circle(function(radius) {
     return context.arc(0, 0, radius, 0, 2 * Math.PI, false);
   });
+
+  c = document.getElementById("myCanvas");
+
+  context = c.getContext("2d");
+
+  context.fillStyle = "#FF0000";
+
+  translate(50, 50);
+
+  circle(10);
 
 }).call(this);
