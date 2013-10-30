@@ -106,6 +106,7 @@ Author Rafael Cosman
 
   inc = function(arr, x, y) {
     if (x > 0 && y > 0 && x < arr.length && y > arr[0].length) {
+      println("WHOOP!");
       return arr[x][y]++;
     }
   };
