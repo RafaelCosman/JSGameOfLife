@@ -120,6 +120,8 @@ Author Rafael Cosman
 
   ages = makeNewGrid();
 
+  console.log(ages);
+
   rules = [[false, false, false, true, false, false, false, false], [false, false, true, true, false, false, false, false]];
 
   draw();
