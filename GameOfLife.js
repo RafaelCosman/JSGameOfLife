@@ -6,7 +6,7 @@ Author Rafael Cosman
 
 
 (function() {
-  var ages, background, c, circle, context, fillRect, fillStyle, restore, run, save, translate;
+  var ages, background, c, circle, context, createArray, draw, fillRect, fillStyle, restore, save, translate;
 
   c = document.getElementById("myCanvas");
 
@@ -42,23 +42,40 @@ Author Rafael Cosman
     return context.restore();
   };
 
-  run = function() {
+  createArray = function(length) {
+    var args, arr, i;
+    arr = new Array(length || 0);
+    i = length;
+    if (arguments_.length > 1) {
+      args = Array.prototype.slice.call(arguments_, 1);
+      while (i--) {
+        arr[length - 1 - i] = createArray.apply(this, args);
+      }
+    }
+    return arr;
+  };
+
+  draw = function() {
     var x, y, _i, _j;
     background(0);
     for (x = _i = 0; _i <= 300; x = ++_i) {
       for (y = _j = 0; _j <= 300; y = ++_j) {
         save();
         translate(10 * x, 10 * y);
-        fillStyle("FFFF00");
-        fillRect(5, 5);
+        if (ages[x][y] !== 0) {
+          fillStyle("FFFF00");
+          fillRect(5, 5);
+        }
         restore();
       }
     }
-    return setTimeout(run, 1000);
+    return setTimeout(draw, 1000);
   };
+
+  context.shadowBlur = 20;
 
   ages = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
 
-  run();
+  draw();
 
 }).call(this);
