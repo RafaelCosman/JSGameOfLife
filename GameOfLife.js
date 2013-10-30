@@ -6,7 +6,7 @@ Author Rafael Cosman
 
 
 (function() {
-  var ages, background, c, circle, context, createArray, draw, fillRect, fillStyle, gridHeight, gridWidth, makeNewGrid, println, restore, rules, save, translate;
+  var ages, background, c, circle, context, createArray, draw, fillRect, fillStyle, gridHeight, gridWidth, makeNewGrid, println, randomGrid, randomizeGrid, restore, rules, save, translate;
 
   c = document.getElementById("myCanvas");
 
@@ -68,6 +68,27 @@ Author Rafael Cosman
         _results1 = [];
         for (y = _j = 0; 0 <= gridHeight ? _j < gridHeight : _j > gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
           _results1.push(0);
+        }
+        return _results1;
+      })());
+    }
+    return _results;
+  };
+
+  randomizeGrid = function() {
+    var ages;
+    return ages = randomGrid;
+  };
+
+  randomGrid = function() {
+    var x, y, _i, _results;
+    _results = [];
+    for (x = _i = 0; 0 <= gridWidth ? _i < gridWidth : _i > gridWidth; x = 0 <= gridWidth ? ++_i : --_i) {
+      _results.push((function() {
+        var _j, _results1;
+        _results1 = [];
+        for (y = _j = 0; 0 <= gridHeight ? _j < gridHeight : _j > gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
+          _results1.push(Math.floor(Math.random() + .1));
         }
         return _results1;
       })());
