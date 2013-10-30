@@ -74,7 +74,7 @@ Author Rafael Cosman
 
   context.shadowBlur = 20;
 
-  ages = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+  ages = createArray(300, 300);
 
   draw();
 
