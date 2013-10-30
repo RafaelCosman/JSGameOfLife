@@ -6,7 +6,7 @@ Author Rafael Cosman
 
 
 (function() {
-  var ages, background, c, circle, context, fillRect, fillStyle, run, translate;
+  var ages, background, c, circle, context, fillRect, fillStyle, restore, run, save, translate;
 
   c = document.getElementById("myCanvas");
 
@@ -30,6 +30,14 @@ Author Rafael Cosman
 
   fillStyle = function(string) {
     return context.fillStyle = string;
+  };
+
+  save = function() {
+    return context.save();
+  };
+
+  restore = function() {
+    return context.restore();
   };
 
   run = function() {
