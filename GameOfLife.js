@@ -161,7 +161,7 @@ Author Rafael Cosman
         g = p;
         b = q;
     }
-    return "" + Math.floor(r * 255) + "" + Math.floor(g * 255) + "" + Math.floor(b * 255);
+    return "#" + Math.floor(r * 255) + "" + Math.floor(g * 255) + "" + Math.floor(b * 255);
   };
 
   draw = function() {
