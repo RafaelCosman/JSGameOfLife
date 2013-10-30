@@ -25,7 +25,9 @@ Author Rafael Cosman
   };
 
   background = function() {
-    return context;
+    var bigNum;
+    bigNum = 100000;
+    return context.fillRect(-bigNum, -bigNum, 2 * bigNum, 2 * bigNum);
   };
 
   fillStyle = function(string) {
@@ -42,6 +44,7 @@ Author Rafael Cosman
 
   run = function() {
     var x, y, _i, _j;
+    background(0);
     for (x = _i = 0; _i <= 300; x = ++_i) {
       for (y = _j = 0; _j <= 300; y = ++_j) {
         save();
@@ -53,12 +56,6 @@ Author Rafael Cosman
     }
     return setTimeout(run, 1000);
   };
-
-  fillRect(100, 100);
-
-  translate(50, 50);
-
-  circle(100);
 
   ages = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
 
