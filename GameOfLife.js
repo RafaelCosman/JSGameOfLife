@@ -6,7 +6,7 @@ Author Rafael Cosman
 
 
 (function() {
-  var ages, background, c, circle, context, createArray, draw, fillRect, fillStyle, gridHeight, gridWidth, makeNewGrid, restore, save, translate;
+  var ages, background, c, circle, context, createArray, draw, fillRect, fillStyle, gridHeight, gridWidth, makeNewGrid, restore, rules, save, translate;
 
   c = document.getElementById("myCanvas");
 
@@ -72,10 +72,34 @@ Author Rafael Cosman
   };
 
   draw = function() {
-    var x, y, _i, _j;
+    var numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
+    numNeighbors = makeNewGrid();
+    for (x = _i = 0, _ref = gridWidth - 1; 0 <= _ref ? _i < _ref : _i > _ref; x = 0 <= _ref ? ++_i : --_i) {
+      for (y = _j = 0, _ref1 = gridHeight - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
+        if (ages[x][y] !== 0) {
+          numNeighbors[x - 1][y - 1]++;
+          numNeighbors[x - 1][y]++;
+          numNeighbors[x - 1][y + 1]++;
+          numNeighbors[x1][y - 1]++;
+          numNeighbors[x1][y + 1]++;
+          numNeighbors[x + 1][y - 1]++;
+          numNeighbors[x + 1][y]++;
+          numNeighbors[x + 1][y + 1]++;
+        }
+      }
+    }
+    for (x = _k = 0, _ref2 = gridWidth - 1; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; x = 0 <= _ref2 ? ++_k : --_k) {
+      for (y = _l = 0, _ref3 = gridHeight - 1; 0 <= _ref3 ? _l <= _ref3 : _l >= _ref3; y = 0 <= _ref3 ? ++_l : --_l) {
+        if (rules[ages[x][y] !== 0][numNeighbors]) {
+          ages[x][y]++;
+        } else {
+          ages[x][y] = 0;
+        }
+      }
+    }
     background(0);
-    for (x = _i = 0; 0 <= gridWidth ? _i < gridWidth : _i > gridWidth; x = 0 <= gridWidth ? ++_i : --_i) {
-      for (y = _j = 0; 0 <= gridHeight ? _j <= gridHeight : _j >= gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
+    for (x = _m = 0, _ref4 = gridWidth - 1; 0 <= _ref4 ? _m < _ref4 : _m > _ref4; x = 0 <= _ref4 ? ++_m : --_m) {
+      for (y = _n = 0, _ref5 = gridHeight - 1; 0 <= _ref5 ? _n <= _ref5 : _n >= _ref5; y = 0 <= _ref5 ? ++_n : --_n) {
         save();
         translate(10 * x, 10 * y);
         if (ages[x][y] !== 0) {
@@ -95,6 +119,8 @@ Author Rafael Cosman
   context.shadowBlur = 20;
 
   ages = makeNewGrid();
+
+  rules = [[F, F, F, T, F, F, F, F], [F, F, T, T, F, F, F, F]];
 
   draw();
 
