@@ -1,3 +1,7 @@
+c=document.getElementById("myCanvas");
+context=c.getContext("2d");
+
+
 #Little one-line wrapper functions
 #-----------------------------
 ellipseByLocationAndDimensions = (location, dimensions) ->

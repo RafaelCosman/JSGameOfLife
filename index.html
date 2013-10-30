@@ -21,10 +21,16 @@ olark.identify('2271-458-10-8073');/*]]>*/</script><noscript><a href="https://ww
 
 
 
-<canvas id="myCanvas"></canvas>
+<canvas id="myCanvas", width=1500, height=900></canvas>
 
-
-<script type="text/javascript" src="PVector.js"></script>
-
-<script type="text/javascript" src="wrappers.js"></script>
+<script type="text/javascript">
+var canvas = document.getElementById("myCanvas");
+if(canvas.requestFullScreen)
+	canvas.requestFullScreen();
+else if(canvas.webkitRequestFullScreen)
+	canvas.webkitRequestFullScreen();
+else if(canvas.mozRequestFullScreen)
+	canvas.mozRequestFullScreen();
+</script>
+	
 <script type="text/javascript" src="GameOfLife.js"></script>
