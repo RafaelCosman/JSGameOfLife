@@ -6,7 +6,7 @@ Author Rafael Cosman
 
 
 (function() {
-  var HSVtoRGB, ages, background, c, circle, context, createArray, draw, fillRect, fillStyle, getBinaryThingey, gridHeight, gridWidth, inc, makeNewGrid, println, randomGrid, randomizeGrid, restore, rules, save, translate;
+  var HSVtoRGB, ages, background, c, circle, context, convertTo2DigitHex, createArray, draw, fillRect, fillStyle, getBinaryThingey, gridHeight, gridWidth, inc, makeNewGrid, println, randomGrid, randomizeGrid, restore, rules, save, translate;
 
   c = document.getElementById("myCanvas");
 
@@ -161,7 +161,17 @@ Author Rafael Cosman
         g = p;
         b = q;
     }
-    return Math.floor(r * 255) + "," + Math.floor(g * 255) + "," + Math.floor(b * 255);
+    return convertTo2DigitHex(r * 255) + convertTo2DigitHex(g * 255) + convertTo2DigitHex(b * 255);
+  };
+
+  convertTo2DigitHex = function(number) {
+    var string;
+    string = "" + Math.floor(number).toString(16);
+    if (string.length === 1) {
+      return "0" + string;
+    } else {
+      return string;
+    }
   };
 
   draw = function() {
