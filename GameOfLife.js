@@ -150,7 +150,7 @@ Author Rafael Cosman
         restore();
       }
     }
-    return setTimeout(draw, 1000);
+    return setTimeout(draw, 50);
   };
 
   gridWidth = 300;
