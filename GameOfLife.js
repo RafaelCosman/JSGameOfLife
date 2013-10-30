@@ -117,6 +117,7 @@ Author Rafael Cosman
     for (x = _i = 0, _ref = gridWidth - 1; 0 <= _ref ? _i < _ref : _i > _ref; x = 0 <= _ref ? ++_i : --_i) {
       for (y = _j = 0, _ref1 = gridHeight - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
         if (ages[x][y] !== 0) {
+          println("LOL");
           inc(numNeighbors, x - 1, y - 1);
           inc(numNeighbors, x - 1, y);
           inc(numNeighbors, x - 1, y + 1);
