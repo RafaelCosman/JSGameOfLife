@@ -127,7 +127,6 @@ Author Rafael Cosman
         }
       }
     }
-    println(numNeighbors[0]);
     for (x = _k = 0, _ref2 = gridWidth - 1; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; x = 0 <= _ref2 ? ++_k : --_k) {
       for (y = _l = 0, _ref3 = gridHeight - 1; 0 <= _ref3 ? _l <= _ref3 : _l >= _ref3; y = 0 <= _ref3 ? ++_l : --_l) {
         if (rules[getBinaryThingey(ages[x][y])][numNeighbors[x][y]]) {
@@ -138,7 +137,6 @@ Author Rafael Cosman
       }
     }
     background(0);
-    println(ages[0]);
     for (x = _m = 0, _ref4 = gridWidth - 1; 0 <= _ref4 ? _m < _ref4 : _m > _ref4; x = 0 <= _ref4 ? ++_m : --_m) {
       for (y = _n = 0, _ref5 = gridHeight - 1; 0 <= _ref5 ? _n <= _ref5 : _n >= _ref5; y = 0 <= _ref5 ? ++_n : --_n) {
         save();
@@ -150,7 +148,7 @@ Author Rafael Cosman
         restore();
       }
     }
-    return setTimeout(draw, 50);
+    return setTimeout(draw, 1);
   };
 
   gridWidth = 300;
