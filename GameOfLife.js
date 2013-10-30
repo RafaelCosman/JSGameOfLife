@@ -119,6 +119,8 @@ Author Rafael Cosman
     for (x = _k = 0, _ref2 = gridWidth - 1; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; x = 0 <= _ref2 ? ++_k : --_k) {
       for (y = _l = 0, _ref3 = gridHeight - 1; 0 <= _ref3 ? _l <= _ref3 : _l >= _ref3; y = 0 <= _ref3 ? ++_l : --_l) {
         println(ages[x][y]);
+        println(numNeighbors[x][y]);
+        println(rules[0]);
         if (rules[ages[x][y] !== 0][numNeighbors[x][y]]) {
           ages[x][y]++;
         } else {
