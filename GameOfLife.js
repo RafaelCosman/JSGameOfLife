@@ -197,7 +197,7 @@ Author Rafael Cosman
         save();
         translate(10 * x, 10 * y);
         if (age !== 0) {
-          context.fillStyle = 255;
+          context.fillStyle = "#FFFFFF";
           fillRect(5, 5);
         }
         restore();
