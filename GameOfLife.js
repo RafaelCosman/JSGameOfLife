@@ -121,15 +121,8 @@ Author Rafael Cosman
         }
       }
     }
-    console.log(ages);
-    console.log(rules);
-    console.log(numNeighbors);
     for (x = _k = 0, _ref2 = gridWidth - 1; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; x = 0 <= _ref2 ? ++_k : --_k) {
       for (y = _l = 0, _ref3 = gridHeight - 1; 0 <= _ref3 ? _l <= _ref3 : _l >= _ref3; y = 0 <= _ref3 ? ++_l : --_l) {
-        println(ages[x][y]);
-        println(numNeighbors[x][y]);
-        println(rules[0]);
-        println(rules[false]);
         if (rules[getBinaryThingey(ages[x][y])][numNeighbors[x][y]]) {
           ages[x][y]++;
         } else {
@@ -159,6 +152,8 @@ Author Rafael Cosman
   context.shadowBlur = 20;
 
   ages = makeNewGrid();
+
+  randomizeGrid();
 
   rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]];
 
