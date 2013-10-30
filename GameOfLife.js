@@ -117,6 +117,13 @@ Author Rafael Cosman
       for (y = _j = 0, _ref1 = gridHeight - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
         if (ages[x][y] !== 0) {
           inc(numNeighbors, x - 1, y - 1);
+          inc(numNeighbors, x - 1, y);
+          inc(numNeighbors, x - 1, y + 1);
+          inc(numNeighbors, x, y - 1);
+          inc(numNeighbors, x, y + 1);
+          inc(numNeighbors, x + 1, y - 1);
+          inc(numNeighbors, x + 1, y);
+          inc(numNeighbors, x + 1, y + 1);
         }
       }
     }
