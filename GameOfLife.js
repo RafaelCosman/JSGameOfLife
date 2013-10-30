@@ -6,7 +6,7 @@ Author Rafael Cosman
 
 
 (function() {
-  var ages, background, c, circle, context, createArray, draw, fillRect, fillStyle, getBinaryThingey, gridHeight, gridWidth, inc, makeNewGrid, println, randomGrid, randomizeGrid, restore, rules, save, translate;
+  var HSVtoRGB, ages, background, c, circle, context, createArray, draw, fillRect, fillStyle, getBinaryThingey, gridHeight, gridWidth, inc, makeNewGrid, println, randomGrid, randomizeGrid, restore, rules, save, translate;
 
   c = document.getElementById("myCanvas");
 
@@ -110,8 +110,62 @@ Author Rafael Cosman
     }
   };
 
+  HSVtoRGB = function(h, s, v) {
+    var b, f, g, i, p, q, r, t;
+    r = void 0;
+    g = void 0;
+    b = void 0;
+    i = void 0;
+    f = void 0;
+    p = void 0;
+    q = void 0;
+    t = void 0;
+    if (h && s === undefined && v === undefined) {
+      s = h.s;
+      v = h.v;
+      h = h.h;
+    }
+    i = Math.floor(h * 6);
+    f = h * 6 - i;
+    p = v * (1 - s);
+    q = v * (1 - f * s);
+    t = v * (1 - (1 - f) * s);
+    switch (i % 6) {
+      case 0:
+        r = v;
+        g = t;
+        b = p;
+        break;
+      case 1:
+        r = q;
+        g = v;
+        b = p;
+        break;
+      case 2:
+        r = p;
+        g = v;
+        b = t;
+        break;
+      case 3:
+        r = p;
+        g = q;
+        b = v;
+        break;
+      case 4:
+        r = t;
+        g = p;
+        b = v;
+        break;
+      case 5:
+        r = v;
+        g = p;
+        b = q;
+    }
+    return "" + Math.floor(r * 255) + "" + Math.floor(g * 255) + "" + Math.floor(b * 255);
+  };
+
   draw = function() {
-    var numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
+    var age, numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
     numNeighbors = makeNewGrid();
     for (x = _i = 0, _ref = gridWidth - 1; 0 <= _ref ? _i < _ref : _i > _ref; x = 0 <= _ref ? ++_i : --_i) {
       for (y = _j = 0, _ref1 = gridHeight - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
@@ -139,10 +193,11 @@ Author Rafael Cosman
     background(0);
     for (x = _m = 0, _ref4 = gridWidth - 1; 0 <= _ref4 ? _m < _ref4 : _m > _ref4; x = 0 <= _ref4 ? ++_m : --_m) {
       for (y = _n = 0, _ref5 = gridHeight - 1; 0 <= _ref5 ? _n <= _ref5 : _n >= _ref5; y = 0 <= _ref5 ? ++_n : --_n) {
+        age = ages[x][y];
         save();
         translate(10 * x, 10 * y);
-        if (ages[x][y] !== 0) {
-          fillStyle("FF0000");
+        if (age !== 0) {
+          fillStyle(HSVtoRGB(age));
           fillRect(5, 5);
         }
         restore();
