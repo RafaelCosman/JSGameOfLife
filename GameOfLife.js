@@ -6,7 +6,7 @@ Author Rafael Cosman
 
 
 (function() {
-  var ages, background, c, circle, context, createArray, draw, fillRect, fillStyle, restore, save, translate, x, y;
+  var ages, background, c, circle, context, createArray, draw, fillRect, fillStyle, gridHeight, gridWidth, makeNewGrid, restore, save, translate;
 
   c = document.getElementById("myCanvas");
 
@@ -55,11 +55,27 @@ Author Rafael Cosman
     return arr;
   };
 
+  makeNewGrid = function() {
+    var x, y, _i, _results;
+    _results = [];
+    for (x = _i = 0; 0 <= gridWidth ? _i < gridWidth : _i > gridWidth; x = 0 <= gridWidth ? ++_i : --_i) {
+      _results.push((function() {
+        var _j, _results1;
+        _results1 = [];
+        for (y = _j = 0; 0 <= gridHeight ? _j < gridHeight : _j > gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
+          _results1.push(0);
+        }
+        return _results1;
+      })());
+    }
+    return _results;
+  };
+
   draw = function() {
     var x, y, _i, _j;
     background(0);
-    for (x = _i = 0; _i <= 300; x = ++_i) {
-      for (y = _j = 0; _j <= 300; y = ++_j) {
+    for (x = _i = 0; 0 <= gridWidth ? _i < gridWidth : _i > gridWidth; x = 0 <= gridWidth ? ++_i : --_i) {
+      for (y = _j = 0; 0 <= gridHeight ? _j <= gridHeight : _j >= gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
         save();
         translate(10 * x, 10 * y);
         if (ages[x][y] !== 0) {
@@ -72,23 +88,13 @@ Author Rafael Cosman
     return setTimeout(draw, 1000);
   };
 
+  gridWidth = 300;
+
+  gridHeight = 300;
+
   context.shadowBlur = 20;
 
-  ages = (function() {
-    var _i, _results;
-    _results = [];
-    for (x = _i = 0; _i < 300; x = ++_i) {
-      _results.push((function() {
-        var _j, _results1;
-        _results1 = [];
-        for (y = _j = 0; _j < 300; y = ++_j) {
-          _results1.push(0);
-        }
-        return _results1;
-      })());
-    }
-    return _results;
-  })();
+  ages = makeNewGrid();
 
   draw();
 
