@@ -120,7 +120,7 @@ Author Rafael Cosman
 
   ages = makeNewGrid();
 
-  rules = [[F, F, F, T, F, F, F, F], [F, F, T, T, F, F, F, F]];
+  rules = [[false, false, false, true, false, false, false, false], [false, false, true, true, false, false, false, false]];
 
   draw();
 
