@@ -42,8 +42,8 @@ Author Rafael Cosman
 
   run = function() {
     var x, y, _i, _j;
-    for (x = _i = 0; _i <= 3; x = ++_i) {
-      for (y = _j = 0; _j <= 3; y = ++_j) {
+    for (x = _i = 0; _i <= 300; x = ++_i) {
+      for (y = _j = 0; _j <= 300; y = ++_j) {
         save();
         translate(10 * x, 10 * y);
         fillStyle("FFFF00");
