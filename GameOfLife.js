@@ -88,7 +88,7 @@ Author Rafael Cosman
         var _j, _results1;
         _results1 = [];
         for (y = _j = 0; 0 <= gridHeight ? _j < gridHeight : _j > gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
-          _results1.push(Math.floor(Math.random() + .1));
+          _results1.push(Math.floor(Math.random() + .5));
         }
         return _results1;
       })());
