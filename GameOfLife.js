@@ -222,4 +222,6 @@ Author Rafael Cosman
 
   draw();
 
+  println(HSVtoRGB(0, 1, 1));
+
 }).call(this);
