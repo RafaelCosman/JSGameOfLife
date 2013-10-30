@@ -6,7 +6,7 @@ Author Rafael Cosman
 
 
 (function() {
-  var ages, background, c, circle, context, createArray, draw, fillRect, fillStyle, gridHeight, gridWidth, makeNewGrid, restore, rules, save, translate;
+  var ages, background, c, circle, context, createArray, draw, fillRect, fillStyle, gridHeight, gridWidth, makeNewGrid, println, restore, rules, save, translate;
 
   c = document.getElementById("myCanvas");
 
@@ -40,6 +40,10 @@ Author Rafael Cosman
 
   restore = function() {
     return context.restore();
+  };
+
+  println = function(obj) {
+    return console.log(obj);
   };
 
   createArray = function(length) {
@@ -93,6 +97,7 @@ Author Rafael Cosman
     console.log(numNeighbors);
     for (x = _k = 0, _ref2 = gridWidth - 1; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; x = 0 <= _ref2 ? ++_k : --_k) {
       for (y = _l = 0, _ref3 = gridHeight - 1; 0 <= _ref3 ? _l <= _ref3 : _l >= _ref3; y = 0 <= _ref3 ? ++_l : --_l) {
+        println(ages[x][y]);
         if (rules[ages[x][y] !== 0][numNeighbors]) {
           ages[x][y]++;
         } else {
@@ -123,7 +128,7 @@ Author Rafael Cosman
 
   ages = makeNewGrid();
 
-  rules = [[false, false, false, true, false, false, false, false], [false, false, true, true, false, false, false, false]];
+  rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]];
 
   draw();
 
