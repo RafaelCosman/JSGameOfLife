@@ -136,7 +136,7 @@ Author Rafael Cosman
         save();
         translate(10 * x, 10 * y);
         if (ages[x][y] !== 0) {
-          fillStyle("FFFF00");
+          fillStyle("FF0000");
           fillRect(5, 5);
         }
         restore();
@@ -154,6 +154,8 @@ Author Rafael Cosman
   ages = makeNewGrid();
 
   randomizeGrid();
+
+  println(ages[0]);
 
   rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]];
 
