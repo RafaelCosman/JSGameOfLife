@@ -207,7 +207,7 @@ Author Rafael Cosman
         save();
         translate(10 * x, 10 * y);
         if (age !== 0) {
-          context.fillStyle = "#FFFFFF";
+          context.fillStyle = HSVtoRGB(age / 100, 1, 1);
           fillRect(5, 5);
         }
         restore();
