@@ -121,6 +121,7 @@ Author Rafael Cosman
         println(ages[x][y]);
         println(numNeighbors[x][y]);
         println(rules[0]);
+        println(rules[false]);
         if (rules[ages[x][y] !== 0][numNeighbors[x][y]]) {
           ages[x][y]++;
         } else {
