@@ -88,6 +88,9 @@ Author Rafael Cosman
         }
       }
     }
+    console.log(ages);
+    console.log(rules);
+    console.log(numNeighbors);
     for (x = _k = 0, _ref2 = gridWidth - 1; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; x = 0 <= _ref2 ? ++_k : --_k) {
       for (y = _l = 0, _ref3 = gridHeight - 1; 0 <= _ref3 ? _l <= _ref3 : _l >= _ref3; y = 0 <= _ref3 ? ++_l : --_l) {
         if (rules[ages[x][y] !== 0][numNeighbors]) {
