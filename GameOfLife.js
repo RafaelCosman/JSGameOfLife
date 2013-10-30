@@ -6,7 +6,7 @@ Author Rafael Cosman
 
 
 (function() {
-  var ages, background, c, circle, context, createArray, draw, fillRect, fillStyle, getBinaryThingey, gridHeight, gridWidth, makeNewGrid, println, randomGrid, randomizeGrid, restore, rules, save, translate;
+  var ages, background, c, circle, context, createArray, draw, fillRect, fillStyle, getBinaryThingey, gridHeight, gridWidth, inc, makeNewGrid, println, randomGrid, randomizeGrid, restore, rules, save, translate;
 
   c = document.getElementById("myCanvas");
 
@@ -104,20 +104,19 @@ Author Rafael Cosman
     }
   };
 
+  inc = function(arr, x, y) {
+    if (x > 0 && y > 0 && x < arr.length && y > arr[0].length) {
+      return arr[x][y]++;
+    }
+  };
+
   draw = function() {
     var numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
     numNeighbors = makeNewGrid();
     for (x = _i = 0, _ref = gridWidth - 1; 0 <= _ref ? _i < _ref : _i > _ref; x = 0 <= _ref ? ++_i : --_i) {
       for (y = _j = 0, _ref1 = gridHeight - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
         if (ages[x][y] !== 0) {
-          numNeighbors[x - 1][y - 1]++;
-          numNeighbors[x - 1][y]++;
-          numNeighbors[x - 1][y + 1]++;
-          numNeighbors[x1][y - 1]++;
-          numNeighbors[x1][y + 1]++;
-          numNeighbors[x + 1][y - 1]++;
-          numNeighbors[x + 1][y]++;
-          numNeighbors[x + 1][y + 1]++;
+          inc(numNeighbors, x - 1, y - 1);
         }
       }
     }
