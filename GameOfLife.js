@@ -6,7 +6,7 @@ Author Rafael Cosman
 
 
 (function() {
-  var ages, background, c, circle, context, createArray, draw, fillRect, fillStyle, gridHeight, gridWidth, makeNewGrid, println, randomGrid, randomizeGrid, restore, rules, save, translate;
+  var ages, background, c, circle, context, createArray, draw, fillRect, fillStyle, getBinaryThingey, gridHeight, gridWidth, makeNewGrid, println, randomGrid, randomizeGrid, restore, rules, save, translate;
 
   c = document.getElementById("myCanvas");
 
@@ -96,6 +96,14 @@ Author Rafael Cosman
     return _results;
   };
 
+  getBinaryThingey = function(num) {
+    if (num === 0) {
+      return 0;
+    } else {
+      return 1;
+    }
+  };
+
   draw = function() {
     var numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
     numNeighbors = makeNewGrid();
@@ -122,7 +130,7 @@ Author Rafael Cosman
         println(numNeighbors[x][y]);
         println(rules[0]);
         println(rules[false]);
-        if (rules[ages[x][y] !== 0][numNeighbors[x][y]]) {
+        if (rules[getBinaryThingey(ages[x][y])][numNeighbors[x][y]]) {
           ages[x][y]++;
         } else {
           ages[x][y] = 0;
