@@ -77,11 +77,11 @@ Author Rafael Cosman
   ages = (function() {
     var _i, _results;
     _results = [];
-    for (x = _i = 0; _i < 20; x = ++_i) {
+    for (x = _i = 0; _i < 300; x = ++_i) {
       _results.push((function() {
         var _j, _results1;
         _results1 = [];
-        for (y = _j = 0; _j < 20; y = ++_j) {
+        for (y = _j = 0; _j < 300; y = ++_j) {
           _results1.push(0);
         }
         return _results1;
