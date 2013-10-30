@@ -33,24 +33,18 @@ Author Rafael Cosman
   };
 
   run = function() {
-    var x, y, _i, _results;
-    _results = [];
+    var x, y, _i, _j;
     for (x = _i = 0; _i <= 3; x = ++_i) {
-      _results.push((function() {
-        var _j, _results1;
-        _results1 = [];
-        for (y = _j = 0; _j <= 3; y = ++_j) {
-          fillStyle("FFFF00");
-          fillRect(10 * x, 10 * y);
-          _results1.push(console.log("LOL"));
-        }
-        return _results1;
-      })());
+      for (y = _j = 0; _j <= 3; y = ++_j) {
+        save();
+        translate(10 * x, 10 * y);
+        fillStyle("FFFF00");
+        fillRect(5, 5);
+        restore();
+      }
     }
-    return _results;
+    return setTimeout(run, 1000);
   };
-
-  console.log("setup");
 
   fillRect(100, 100);
 
@@ -60,8 +54,6 @@ Author Rafael Cosman
 
   ages = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
 
-  setTimeout(run, 1000);
-
-  console.log("end setup");
+  run();
 
 }).call(this);
