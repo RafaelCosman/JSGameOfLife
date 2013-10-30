@@ -55,7 +55,70 @@ randomizeGrid = () ->
 randomGrid = () ->
 	for x in [0...gridWidth]
 		for y in [0...gridHeight]
-			Math.floor(Math.random() + .1)
+			Math.floor(Math.random() + .5)
+			
+getBinaryThingey = (num) ->
+	if num == 0
+		return 0
+	else
+		return 1
+		
+inc = (arr, x, y) ->
+	if x >= 0 and y >= 0 and x < arr.length and y < arr[0].length
+		arr[x][y]++
+
+HSVtoRGB = (h, s, v) ->
+  r = undefined
+  g = undefined
+  b = undefined
+  i = undefined
+  f = undefined
+  p = undefined
+  q = undefined
+  t = undefined
+  if h and s is `undefined` and v is `undefined`
+    s = h.s
+    v = h.v
+    h = h.h
+  i = Math.floor(h * 6)
+  f = h * 6 - i
+  p = v * (1 - s)
+  q = v * (1 - f * s)
+  t = v * (1 - (1 - f) * s)
+  switch i % 6
+    when 0
+      r = v
+      g = t
+      b = p
+    when 1
+      r = q
+      g = v
+      b = p
+    when 2
+      r = p
+      g = v
+      b = t
+    when 3
+      r = p
+      g = q
+      b = v
+    when 4
+      r = t
+      g = p
+      b = v
+    when 5
+      r = v
+      g = p
+      b = q
+  
+  convertTo2DigitHex(r * 255) + convertTo2DigitHex(g * 255) + convertTo2DigitHex(b * 255)
+			
+convertTo2DigitHex = (number) ->
+	string = "" + Math.floor(number).toString(16)
+	if string.length == 1
+		return "0" + string
+	else
+		return string
 			
 #Run
 #----------------
@@ -66,26 +129,21 @@ draw = () ->
 	for x in [0...gridWidth-1]
 		for y in [0..gridHeight-1]
 			if ages[x][y] != 0
-				numNeighbors[x-1][y-1]++
-				numNeighbors[x-1][y]++
-				numNeighbors[x-1][y+1]++
+				inc(numNeighbors, x-1, y-1)
+				inc(numNeighbors, x-1, y)
+				inc(numNeighbors, x-1, y+1)
 				
-				numNeighbors[x1][y-1]++
-				numNeighbors[x1][y+1]++
+				inc(numNeighbors, x, y-1)
+				inc(numNeighbors, x, y+1)
 				
-				numNeighbors[x+1][y-1]++
-				numNeighbors[x+1][y]++
-				numNeighbors[x+1][y+1]++
-	
-	console.log(ages)
-	console.log(rules)
-	console.log(numNeighbors)
+				inc(numNeighbors, x+1, y-1)
+				inc(numNeighbors, x+1, y)
+				inc(numNeighbors, x+1, y+1)
 	
 	#Apply the current rules
 	for x in [0...gridWidth-1]
 		for y in [0..gridHeight-1]
-			println(ages[x][y])
-			if rules[ages[x][y] != 0][numNeighbors[x][y]]
+			if rules[getBinaryThingey(ages[x][y])][numNeighbors[x][y]]
 				ages[x][y]++
 			else
 				ages[x][y] = 0
@@ -95,17 +153,19 @@ draw = () ->
 
 	for x in [0...gridWidth-1]
 		for y in [0..gridHeight-1]
+			age = ages[x][y]
+			
 			save()
 
 			translate(10 * x, 10 * y)
 			
-			if ages[x][y] != 0
-				fillStyle("FFFF00")
+			if age != 0
+				context.fillStyle = HSVtoRGB(age/100, 1, 1)
 				fillRect(5, 5)
 
 			restore()
 
-	setTimeout(draw, 1000)
+	setTimeout(draw, 1)
 			
 #Setup
 #----------
@@ -115,6 +175,9 @@ gridHeight = 300
 context.shadowBlur = 20
 
 ages = makeNewGrid()
+ages = randomGrid()
+println(ages[0])
 rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]]
 
 draw()
+println(HSVtoRGB(0, 1, 1))
