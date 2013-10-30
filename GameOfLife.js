@@ -153,7 +153,7 @@ Author Rafael Cosman
 
   ages = makeNewGrid();
 
-  randomizeGrid();
+  ages = randomGrid();
 
   println(ages[0]);
 
