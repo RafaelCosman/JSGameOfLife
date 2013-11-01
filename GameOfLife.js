@@ -209,7 +209,7 @@ Author Rafael Cosman
     return setTimeout(draw, 0);
   };
 
-  gridSpacing = 10;
+  gridSpacing = 15;
 
   canvas.width = window.innerWidth;
 
@@ -233,12 +233,21 @@ Author Rafael Cosman
 
   document.body.onmousedown = function(evt) {
     ++mouseDown[evt.button];
-    return ++mouseDownCount;
+    ++mouseDownCount;
+    if (evt.button === 0) {
+      return console.log("left mouse button clicked!");
+    }
   };
 
   document.body.onmouseup = function(evt) {
     --mouseDown[evt.button];
     return --mouseDownCount;
+  };
+
+  document.body.onmousemove = function(evt) {
+    if (mouseDown[0]) {
+      return console.log("Drawing cells");
+    }
   };
 
 }).call(this);
