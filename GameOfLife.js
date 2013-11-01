@@ -195,9 +195,9 @@ Maddy approved.
         _results1 = [];
         for (y = _p = 0; _p < 8; y = ++_p) {
           if (rules[x][y]) {
-            context.fillStyle = "rgba(0, 0, 0, 100)";
+            context.fillStyle = "rgba(0, 0, 0, .5)";
           } else {
-            context.fillStyle = "#FFFFFF44";
+            context.fillStyle = "#FFFFFF";
           }
           _results1.push(context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight));
         }
