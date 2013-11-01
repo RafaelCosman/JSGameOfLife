@@ -153,7 +153,7 @@ Maddy approved.
   };
 
   draw = function() {
-    var age, ageTillLoop, border, numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _o, _results;
+    var age, ageTillLoop, border, numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _o, _ref, _results;
     numNeighbors = makeNewGrid();
     for (x = _i = 0; 0 <= gridWidth ? _i < gridWidth : _i > gridWidth; x = 0 <= gridWidth ? ++_i : --_i) {
       for (y = _j = 0; 0 <= gridHeight ? _j < gridHeight : _j > gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
@@ -193,11 +193,11 @@ Maddy approved.
     }
     setTimeout(draw, 0);
     _results = [];
-    for (x = _o = 0; _o < 2; x = ++_o) {
+    for (x = _o = 0, _ref = 1 + 1; 0 <= _ref ? _o < _ref : _o > _ref; x = 0 <= _ref ? ++_o : --_o) {
       _results.push((function() {
-        var _p, _results1;
+        var _p, _ref1, _results1;
         _results1 = [];
-        for (y = _p = 0; _p < 8; y = ++_p) {
+        for (y = _p = 0, _ref1 = 8 + 1; 0 <= _ref1 ? _p < _ref1 : _p > _ref1; y = 0 <= _ref1 ? ++_p : --_p) {
           if (rules[x][y]) {
             context.fillStyle = "rgba(255, 255, 255, .6)";
           } else {
