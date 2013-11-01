@@ -219,9 +219,9 @@ Author Rafael Cosman
 
   gridSpacing = 10;
 
-  gridWidth = context.width / gridSpacing;
+  gridWidth = context.getImageData().width / gridSpacing;
 
-  gridHeight = context.width / gridSpacing;
+  gridHeight = context.getImageData().height / gridSpacing;
 
   context.shadowBlur = 20;
 
