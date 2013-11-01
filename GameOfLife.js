@@ -209,7 +209,7 @@ Author Rafael Cosman
         if (age !== 0) {
           ageTillLoop = 50;
           context.fillStyle = HSVtoRGB(age % ageTillLoop / ageTillLoop, 1, 1);
-          fillRect(5, 5);
+          fillRect(gridSpacing, gridSpacing);
         }
         restore();
       }
