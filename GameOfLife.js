@@ -221,7 +221,11 @@ Author Rafael Cosman
 
   gridWidth = context.getImageData().width / gridSpacing;
 
+  console.log(gridWidth);
+
   gridHeight = context.getImageData().height / gridSpacing;
+
+  console.log(gridHeight);
 
   context.shadowBlur = 20;
 
