@@ -171,14 +171,14 @@ Author Rafael Cosman
         }
       }
     }
-    context.fillStyle = "#000000";
+    context.fillStyle = "rgb(0, 0, 0)";
     background();
     for (x = _m = 0, _ref4 = gridWidth - 1; 0 <= _ref4 ? _m < _ref4 : _m > _ref4; x = 0 <= _ref4 ? ++_m : --_m) {
       for (y = _n = 0, _ref5 = gridHeight - 1; 0 <= _ref5 ? _n <= _ref5 : _n >= _ref5; y = 0 <= _ref5 ? ++_n : --_n) {
         age = ages[x][y];
         if (age !== 0) {
           ageTillLoop = 50;
-          context.fillStyle = HSVtoRGB(age % ageTillLoop / ageTillLoop, 1, 1);
+          context.fillStyle = "HSV(" + age % ageTillLoop / ageTillLoop + ", 255, 255)";
           border = 3;
           context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border);
         }
@@ -194,7 +194,7 @@ Author Rafael Cosman
         _results1 = [];
         for (y = _p = 0; _p < 8; y = ++_p) {
           if (rules[x][y]) {
-            context.fillStyle = "#00000044";
+            context.fillStyle = "rgba(0, 0, 0, 100)";
           } else {
             context.fillStyle = "#FFFFFF44";
           }
