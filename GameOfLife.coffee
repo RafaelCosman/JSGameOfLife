@@ -113,8 +113,8 @@ draw = () ->
 	numNeighbors = makeNewGrid()
 	
 	#Count up the number of neighbors each cell has
-	for x in [0...gridWidth-1]
-		for y in [0..gridHeight-1]
+	for x in [0...gridWidth]
+		for y in [0...gridHeight]
 			if ages[x][y] != 0
 				inc(numNeighbors, x-1, y-1)
 				inc(numNeighbors, x-1, y)
@@ -128,8 +128,8 @@ draw = () ->
 				inc(numNeighbors, x+1, y+1)
 	
 	#Apply the current rules
-	for x in [0...gridWidth-1]
-		for y in [0..gridHeight-1]
+	for x in [0...gridWidth]
+		for y in [0...gridHeight]
 			if rules[getBinaryThingey(ages[x][y])][numNeighbors[x][y]]
 				ages[x][y]++
 			else
@@ -140,8 +140,8 @@ draw = () ->
 	background()
 	
 	#Display the cells to the screen
-	for x in [0...gridWidth-1]
-		for y in [0..gridHeight-1]
+	for x in [0...gridWidth]
+		for y in [0...gridHeight]
 			age = ages[x][y]
 			
 			if age != 0
@@ -153,10 +153,8 @@ draw = () ->
 	setTimeout(draw, 0)
 	
 	#Draw the buttons
-	buttonWidth = 50
-	buttonHeight = canvas.height / 9
-	for x in [0...2] #this corresponds to life or death
-		for y in [0...8] #this is the number of neighbors
+	for x in [0...1+1] #this corresponds to life or death
+		for y in [0...8+1] #this is the number of neighbors
 			if rules[x][y]
 				context.fillStyle = "rgba(255, 255, 255, .6)"
 			else
@@ -168,6 +166,9 @@ draw = () ->
 #----------
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
+
+buttonWidth = 50
+buttonHeight = canvas.height / 9
 
 gridSpacing = 15
 gridWidth = canvas.width / gridSpacing
@@ -189,7 +190,11 @@ document.body.onmousedown = (event) ->
 	++mouseDownCount
   
 	if event.button is 0
-		console.log("left mouse button clicked!")
+		if event.clientX < 2 * buttonWidth
+			buttonGridX = Math.floor(event.clientX / buttonWidth)
+			buttonGridY = Math.floor(event.clientY / buttonHeight)
+			
+			rules[buttonGridX][buttonGridY] = !rules[buttonGridX][buttonGridY]
 
 document.body.onmouseup = (event) ->
 	--mouseDown[event.button]
@@ -214,3 +219,4 @@ document.body.onmousemove = (event) ->
 				
 #Keyboard io
 #------------------------
+#I want to add space clears board
