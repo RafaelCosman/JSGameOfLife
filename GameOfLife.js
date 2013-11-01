@@ -153,10 +153,10 @@ Maddy approved.
   };
 
   draw = function() {
-    var age, ageTillLoop, border, numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _o, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _results;
+    var age, ageTillLoop, border, numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _o, _results;
     numNeighbors = makeNewGrid();
-    for (x = _i = 0, _ref = gridWidth - 1; 0 <= _ref ? _i < _ref : _i > _ref; x = 0 <= _ref ? ++_i : --_i) {
-      for (y = _j = 0, _ref1 = gridHeight - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
+    for (x = _i = 0; 0 <= gridWidth ? _i < gridWidth : _i > gridWidth; x = 0 <= gridWidth ? ++_i : --_i) {
+      for (y = _j = 0; 0 <= gridHeight ? _j < gridHeight : _j > gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
         if (ages[x][y] !== 0) {
           inc(numNeighbors, x - 1, y - 1);
           inc(numNeighbors, x - 1, y);
@@ -169,8 +169,8 @@ Maddy approved.
         }
       }
     }
-    for (x = _k = 0, _ref2 = gridWidth - 1; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; x = 0 <= _ref2 ? ++_k : --_k) {
-      for (y = _l = 0, _ref3 = gridHeight - 1; 0 <= _ref3 ? _l <= _ref3 : _l >= _ref3; y = 0 <= _ref3 ? ++_l : --_l) {
+    for (x = _k = 0; 0 <= gridWidth ? _k < gridWidth : _k > gridWidth; x = 0 <= gridWidth ? ++_k : --_k) {
+      for (y = _l = 0; 0 <= gridHeight ? _l < gridHeight : _l > gridHeight; y = 0 <= gridHeight ? ++_l : --_l) {
         if (rules[getBinaryThingey(ages[x][y])][numNeighbors[x][y]]) {
           ages[x][y]++;
         } else {
@@ -180,8 +180,8 @@ Maddy approved.
     }
     context.fillStyle = "rgb(0, 0, 0)";
     background();
-    for (x = _m = 0, _ref4 = gridWidth - 1; 0 <= _ref4 ? _m < _ref4 : _m > _ref4; x = 0 <= _ref4 ? ++_m : --_m) {
-      for (y = _n = 0, _ref5 = gridHeight - 1; 0 <= _ref5 ? _n <= _ref5 : _n >= _ref5; y = 0 <= _ref5 ? ++_n : --_n) {
+    for (x = _m = 0; 0 <= gridWidth ? _m < gridWidth : _m > gridWidth; x = 0 <= gridWidth ? ++_m : --_m) {
+      for (y = _n = 0; 0 <= gridHeight ? _n < gridHeight : _n > gridHeight; y = 0 <= gridHeight ? ++_n : --_n) {
         age = ages[x][y];
         if (age !== 0) {
           ageTillLoop = 50;
