@@ -177,7 +177,11 @@ Author Rafael Cosman
     buttonHeight = canvas.height / 9;
     for (x = _m = 0; _m < 1; x = ++_m) {
       for (y = _n = 0; _n < 8; y = ++_n) {
-        context.fillStyle = rules[x][y];
+        if (rules[x][y]) {
+          context.fillStyle = "#000000";
+        } else {
+          context.fillStyle = "#FFFFFF";
+        }
         context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight);
       }
     }
@@ -195,17 +199,15 @@ Author Rafael Cosman
     return setTimeout(draw, 0);
   };
 
-  gridSpacing = 15;
-
   canvas.width = window.innerWidth;
-
-  gridWidth = canvas.width / gridSpacing;
 
   canvas.height = window.innerHeight;
 
-  gridHeight = canvas.width / gridSpacing;
+  gridSpacing = 15;
 
-  context.shadowBlur = 20;
+  gridWidth = canvas.width / gridSpacing;
+
+  gridHeight = canvas.width / gridSpacing;
 
   ages = randomGrid();
 
