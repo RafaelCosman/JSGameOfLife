@@ -179,8 +179,7 @@ Maddy approved.
         age = ages[x][y];
         if (age !== 0) {
           ageTillLoop = 50;
-          context.fillStyle = "hsla(" + age % ageTillLoop / ageTillLoop + ", 255, 255, 255)";
-          console.log(context.fillStyle);
+          context.fillStyle = HSVtoRGB(age % ageTillLoop / ageTillLoop, 1, 1);
           border = 3;
           context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border);
         }
