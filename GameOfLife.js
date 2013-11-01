@@ -6,9 +6,7 @@ Author Rafael Cosman
 
 
 (function() {
-  var $, HSVtoRGB, ages, background, canvas, circle, context, convertTo2DigitHex, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, randomGrid, randomizeGrid, rules, translate;
-
-  $ = jQuery;
+  var HSVtoRGB, ages, background, canvas, circle, context, convertTo2DigitHex, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, randomGrid, randomizeGrid, rules, translate;
 
   canvas = document.getElementById("myCanvas");
 
