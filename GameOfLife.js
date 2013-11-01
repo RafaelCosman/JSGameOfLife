@@ -6,7 +6,7 @@ Author Rafael Cosman
 
 
 (function() {
-  var HSVtoRGB, ages, background, canvas, circle, context, convertTo2DigitHex, createArray, draw, fillRect, fillStyle, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, println, randomGrid, randomizeGrid, restore, rules, save, translate;
+  var HSVtoRGB, ages, background, canvas, circle, context, convertTo2DigitHex, createArray, draw, fillRect, fillStyle, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, println, randomGrid, randomizeGrid, rules, translate;
 
   canvas = document.getElementById("myCanvas");
 
@@ -32,14 +32,6 @@ Author Rafael Cosman
 
   fillStyle = function(string) {
     return context.fillStyle = string;
-  };
-
-  save = function() {
-    return context.save();
-  };
-
-  restore = function() {
-    return context.restore();
   };
 
   println = function(obj) {
@@ -176,6 +168,7 @@ Author Rafael Cosman
 
   draw = function() {
     var age, ageTillLoop, border, numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
+    console.log(mouseDown);
     numNeighbors = makeNewGrid();
     for (x = _i = 0, _ref = gridWidth - 1; 0 <= _ref ? _i < _ref : _i > _ref; x = 0 <= _ref ? ++_i : --_i) {
       for (y = _j = 0, _ref1 = gridHeight - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
@@ -233,5 +226,19 @@ Author Rafael Cosman
   rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]];
 
   draw();
+
+  mouseDown = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+  mouseDownCount = 0;
+
+  document.body.onmousedown = function(evt) {
+    ++mouseDown[evt.button];
+    return ++mouseDownCount;
+  };
+
+  document.body.onmouseup = function(evt) {
+    --mouseDown[evt.button];
+    return --mouseDownCount;
+  };
 
 }).call(this);
