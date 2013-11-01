@@ -178,7 +178,7 @@ Author Rafael Cosman
         age = ages[x][y];
         if (age !== 0) {
           ageTillLoop = 50;
-          context.fillStyle = "HSL(" + age % ageTillLoop / ageTillLoop + ", 255, 255)";
+          context.fillStyle = HSL(age % ageTillLoop / ageTillLoop, 255, 255);
           border = 3;
           context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border);
         }
