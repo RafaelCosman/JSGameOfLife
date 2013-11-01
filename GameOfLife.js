@@ -244,8 +244,22 @@ Author Rafael Cosman
   };
 
   document.body.onmousemove = function(event) {
+    var gridX, gridY, x, y, _i, _ref, _ref1, _results;
     if (mouseDown[0]) {
-      return ages[Math.floor(event.clientX / gridSpacing)][Math.floor(event.clientY / gridSpacing)]++;
+      gridX = Math.floor(event.clientX / gridSpacing);
+      gridY = Math.floor(event.clientY / gridSpacing);
+      _results = [];
+      for (x = _i = _ref = gridX - 1, _ref1 = gridX + 1; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; x = _ref <= _ref1 ? ++_i : --_i) {
+        _results.push((function() {
+          var _j, _ref2, _ref3, _results1;
+          _results1 = [];
+          for (y = _j = _ref2 = gridY - 1, _ref3 = gridY + 1; _ref2 <= _ref3 ? _j < _ref3 : _j > _ref3; y = _ref2 <= _ref3 ? ++_j : --_j) {
+            _results1.push(inc(ages, x, y));
+          }
+          return _results1;
+        })());
+      }
+      return _results;
     }
   };
 
