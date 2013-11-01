@@ -245,7 +245,7 @@ Author Rafael Cosman
 
   document.body.onmousemove = function(event) {
     if (mouseDown[0]) {
-      return ages[event.clientX / spacing][event.clientY / spacing]++;
+      return ages[event.clientX / gridSpacing][event.clientY / gridSpacing]++;
     }
   };
 
