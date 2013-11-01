@@ -205,7 +205,7 @@ Author Rafael Cosman
       for (y = _n = 0, _ref5 = gridHeight - 1; 0 <= _ref5 ? _n <= _ref5 : _n >= _ref5; y = 0 <= _ref5 ? ++_n : --_n) {
         age = ages[x][y];
         save();
-        translate(gridSpacing * x, gridSpacing * y);
+        context.translate(gridSpacing * x, gridSpacing * y);
         if (age !== 0) {
           ageTillLoop = 50;
           context.fillStyle = HSVtoRGB(age % ageTillLoop / ageTillLoop, 1, 1);
@@ -220,13 +220,13 @@ Author Rafael Cosman
 
   gridSpacing = 10;
 
+  canvas.width = window.innerWidth;
+
   gridWidth = canvas.width / gridSpacing;
 
-  console.log(gridWidth);
+  canvas.height = window.innerHeight;
 
   gridHeight = canvas.width / gridSpacing;
-
-  console.log(gridHeight);
 
   context.shadowBlur = 20;
 
