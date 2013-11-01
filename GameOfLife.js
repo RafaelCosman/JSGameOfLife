@@ -6,7 +6,9 @@ Author Rafael Cosman
 
 
 (function() {
-  var HSVtoRGB, ages, background, canvas, circle, context, convertTo2DigitHex, draw, fillRect, fillStyle, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, println, randomGrid, randomizeGrid, rules, translate;
+  var $, HSVtoRGB, ages, background, canvas, circle, context, convertTo2DigitHex, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, randomGrid, randomizeGrid, rules, translate;
+
+  $ = jQuery;
 
   canvas = document.getElementById("myCanvas");
 
@@ -28,14 +30,6 @@ Author Rafael Cosman
     var bigNum;
     bigNum = 100000;
     return context.fillRect(-bigNum, -bigNum, 2 * bigNum, 2 * bigNum);
-  };
-
-  fillStyle = function(string) {
-    return context.fillStyle = string;
-  };
-
-  println = function(obj) {
-    return console.log(obj);
   };
 
   makeNewGrid = function() {
@@ -154,7 +148,7 @@ Author Rafael Cosman
   };
 
   draw = function() {
-    var age, ageTillLoop, border, numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
+    var age, ageTillLoop, border, buttonHeight, buttonWidth, numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _o, _p, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
     numNeighbors = makeNewGrid();
     for (x = _i = 0, _ref = gridWidth - 1; 0 <= _ref ? _i < _ref : _i > _ref; x = 0 <= _ref ? ++_i : --_i) {
       for (y = _j = 0, _ref1 = gridHeight - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
@@ -181,8 +175,16 @@ Author Rafael Cosman
     }
     fillStyle("#000000");
     background();
-    for (x = _m = 0, _ref4 = gridWidth - 1; 0 <= _ref4 ? _m < _ref4 : _m > _ref4; x = 0 <= _ref4 ? ++_m : --_m) {
-      for (y = _n = 0, _ref5 = gridHeight - 1; 0 <= _ref5 ? _n <= _ref5 : _n >= _ref5; y = 0 <= _ref5 ? ++_n : --_n) {
+    buttonWidth = 100;
+    buttonHeight = canvas.height / 9;
+    for (x = _m = 0; _m < 1; x = ++_m) {
+      for (y = _n = 0; _n < 8; y = ++_n) {
+        context.fillStyle = rules[x][y];
+        context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight);
+      }
+    }
+    for (x = _o = 0, _ref4 = gridWidth - 1; 0 <= _ref4 ? _o < _ref4 : _o > _ref4; x = 0 <= _ref4 ? ++_o : --_o) {
+      for (y = _p = 0, _ref5 = gridHeight - 1; 0 <= _ref5 ? _p <= _ref5 : _p >= _ref5; y = 0 <= _ref5 ? ++_p : --_p) {
         age = ages[x][y];
         if (age !== 0) {
           ageTillLoop = 50;
