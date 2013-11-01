@@ -7,7 +7,7 @@ Maddy approved.
 
 
 (function() {
-  var HSVtoRGB, ages, background, canvas, circle, context, convertTo2DigitHex, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, randomGrid, randomizeGrid, rules, translate;
+  var HSVtoRGB, ages, background, canvas, circle, context, convertTo2DigitHex, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, randomGrid, randomizeGrid, rules, translate, zero;
 
   canvas = document.getElementById("myCanvas");
 
@@ -79,6 +79,12 @@ Maddy approved.
   inc = function(arr, x, y) {
     if (x >= 0 && y >= 0 && x < arr.length && y < arr[0].length) {
       return arr[x][y]++;
+    }
+  };
+
+  zero = function(arr, x, y) {
+    if (x >= 0 && y >= 0 && x < arr.length && y < arr[0].length) {
+      return arr[x][y] = 0;
     }
   };
 
@@ -260,7 +266,7 @@ Maddy approved.
           var _l, _ref6, _ref7, _results1;
           _results1 = [];
           for (y = _l = _ref6 = gridY - 1, _ref7 = gridY + 1; _ref6 <= _ref7 ? _l < _ref7 : _l > _ref7; y = _ref6 <= _ref7 ? ++_l : --_l) {
-            _results1.push(ages[x][y] = 0);
+            _results1.push(zero(ages, x, y));
           }
           return _results1;
         })());
