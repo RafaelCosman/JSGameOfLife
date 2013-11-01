@@ -200,7 +200,8 @@ Author Rafael Cosman
         }
       }
     }
-    background(0);
+    fillStyle("#000000");
+    background();
     for (x = _m = 0, _ref4 = gridWidth - 1; 0 <= _ref4 ? _m < _ref4 : _m > _ref4; x = 0 <= _ref4 ? ++_m : --_m) {
       for (y = _n = 0, _ref5 = gridHeight - 1; 0 <= _ref5 ? _n <= _ref5 : _n >= _ref5; y = 0 <= _ref5 ? ++_n : --_n) {
         age = ages[x][y];
