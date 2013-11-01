@@ -231,22 +231,22 @@ Author Rafael Cosman
 
   mouseDownCount = 0;
 
-  document.body.onmousedown = function(evt) {
-    ++mouseDown[evt.button];
+  document.body.onmousedown = function(event) {
+    ++mouseDown[event.button];
     ++mouseDownCount;
-    if (evt.button === 0) {
+    if (event.button === 0) {
       return console.log("left mouse button clicked!");
     }
   };
 
-  document.body.onmouseup = function(evt) {
-    --mouseDown[evt.button];
+  document.body.onmouseup = function(event) {
+    --mouseDown[event.button];
     return --mouseDownCount;
   };
 
-  document.body.onmousemove = function(evt) {
+  document.body.onmousemove = function(event) {
     if (mouseDown[0]) {
-      return console.log("Drawing cells");
+      return ages[event.clientX / spacing][event.clientY / spacing]++;
     }
   };
 
