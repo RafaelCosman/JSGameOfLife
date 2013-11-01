@@ -1,7 +1,10 @@
 ###
 This is Game Of Life
 Author Rafael Cosman
+Maddy approved.
 ###
+
+#$ = jQuery
 
 #Get the canvas
 #---------------
@@ -22,12 +25,6 @@ circle = (radius) ->
 background = () ->
 	bigNum = 100000
 	context.fillRect(-bigNum, -bigNum, 2*bigNum, 2*bigNum)
-
-fillStyle = (string) ->
-	context.fillStyle = string
-	
-println = (obj) ->
-	console.log(obj)
 
 #More serious functions
 #------------------------
@@ -53,6 +50,9 @@ getBinaryThingey = (num) ->
 inc = (arr, x, y) ->
 	if x >= 0 and y >= 0 and x < arr.length and y < arr[0].length
 		arr[x][y]++
+zero = (arr, x, y) ->
+	if x >= 0 and y >= 0 and x < arr.length and y < arr[0].length
+		arr[x][y] = 0
 
 HSVtoRGB = (h, s, v) ->
   r = undefined
@@ -136,7 +136,7 @@ draw = () ->
 				ages[x][y] = 0
 			
 	#Clear the background
-	fillStyle("#000000")
+	context.fillStyle = "rgb(0, 0, 0)"
 	background()
 	
 	#Display the cells to the screen
@@ -151,17 +151,29 @@ draw = () ->
 				context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border)
 
 	setTimeout(draw, 0)
+	
+	#Draw the buttons
+	buttonWidth = 50
+	buttonHeight = canvas.height / 9
+	for x in [0...2] #this corresponds to life or death
+		for y in [0...8] #this is the number of neighbors
+			if rules[x][y]
+				context.fillStyle = "rgba(255, 255, 255, .6)"
+			else
+				context.fillStyle = "rgba(0, 0, 0, .5)"
+				
+			context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight)
 			
 #Setup
 #----------
-gridSpacing = 15
 canvas.width = window.innerWidth
-gridWidth = canvas.width / gridSpacing
-
 canvas.height = window.innerHeight
+
+gridSpacing = 15
+gridWidth = canvas.width / gridSpacing
 gridHeight = canvas.width / gridSpacing
 
-context.shadowBlur = 20
+#context.shadowBlur = 20
 
 ages = randomGrid()
 rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]]
@@ -191,6 +203,14 @@ document.body.onmousemove = (event) ->
 		for x in [gridX-1...gridX+1]
 			for y in [gridY-1...gridY+1]
 				inc(ages, x, y)
+				
+	#If dragging with the right mouse button, kill cells
+	if mouseDown[2]
+		gridX = Math.floor(event.clientX / gridSpacing)
+		gridY = Math.floor(event.clientY / gridSpacing)
+		for x in [gridX-1...gridX+1]
+			for y in [gridY-1...gridY+1]
+				zero(ages, x, y)
 				
 #Keyboard io
 #------------------------
