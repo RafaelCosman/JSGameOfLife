@@ -26,11 +26,6 @@ background = () ->
 fillStyle = (string) ->
 	context.fillStyle = string
 	
-save = () ->
-	context.save()
-restore = () ->
-	context.restore()
-	
 println = (obj) ->
 	console.log(obj)
 
@@ -123,6 +118,8 @@ convertTo2DigitHex = (number) ->
 #Run
 #----------------
 draw = () -> 
+	console.log(mouseDown)
+
 	numNeighbors = makeNewGrid()
 	
 	#Count up the number of neighbors each cell has
@@ -180,3 +177,15 @@ ages = randomGrid()
 rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]]
 
 draw()
+
+#Mouse IO
+#-------------------
+mouseDown = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+mouseDownCount = 0
+document.body.onmousedown = (evt) ->
+  ++mouseDown[evt.button]
+  ++mouseDownCount
+
+document.body.onmouseup = (evt) ->
+  --mouseDown[evt.button]
+  --mouseDownCount
