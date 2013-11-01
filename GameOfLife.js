@@ -146,7 +146,7 @@ Author Rafael Cosman
   };
 
   draw = function() {
-    var age, ageTillLoop, border, buttonHeight, buttonWidth, numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _o, _p, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
+    var age, ageTillLoop, border, buttonHeight, buttonWidth, numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _o, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _results;
     numNeighbors = makeNewGrid();
     for (x = _i = 0, _ref = gridWidth - 1; 0 <= _ref ? _i < _ref : _i > _ref; x = 0 <= _ref ? ++_i : --_i) {
       for (y = _j = 0, _ref1 = gridHeight - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
@@ -173,20 +173,8 @@ Author Rafael Cosman
     }
     context.fillStyle = "#000000";
     background();
-    buttonWidth = 100;
-    buttonHeight = canvas.height / 9;
-    for (x = _m = 0; _m < 1; x = ++_m) {
-      for (y = _n = 0; _n < 8; y = ++_n) {
-        if (rules[x][y]) {
-          context.fillStyle = "#000000";
-        } else {
-          context.fillStyle = "#FFFFFF";
-        }
-        context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight);
-      }
-    }
-    for (x = _o = 0, _ref4 = gridWidth - 1; 0 <= _ref4 ? _o < _ref4 : _o > _ref4; x = 0 <= _ref4 ? ++_o : --_o) {
-      for (y = _p = 0, _ref5 = gridHeight - 1; 0 <= _ref5 ? _p <= _ref5 : _p >= _ref5; y = 0 <= _ref5 ? ++_p : --_p) {
+    for (x = _m = 0, _ref4 = gridWidth - 1; 0 <= _ref4 ? _m < _ref4 : _m > _ref4; x = 0 <= _ref4 ? ++_m : --_m) {
+      for (y = _n = 0, _ref5 = gridHeight - 1; 0 <= _ref5 ? _n <= _ref5 : _n >= _ref5; y = 0 <= _ref5 ? ++_n : --_n) {
         age = ages[x][y];
         if (age !== 0) {
           ageTillLoop = 50;
@@ -196,7 +184,26 @@ Author Rafael Cosman
         }
       }
     }
-    return setTimeout(draw, 0);
+    setTimeout(draw, 0);
+    buttonWidth = 100;
+    buttonHeight = canvas.height / 9;
+    _results = [];
+    for (x = _o = 0; _o < 1; x = ++_o) {
+      _results.push((function() {
+        var _p, _results1;
+        _results1 = [];
+        for (y = _p = 0; _p < 8; y = ++_p) {
+          if (rules[x][y]) {
+            context.fillStyle = "#00000044";
+          } else {
+            context.fillStyle = "#FFFFFF44";
+          }
+          _results1.push(context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight));
+        }
+        return _results1;
+      })());
+    }
+    return _results;
   };
 
   canvas.width = window.innerWidth;
