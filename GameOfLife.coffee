@@ -164,7 +164,7 @@ draw = () ->
 			
 #Setup
 #----------
-gridSpacing = 10
+gridSpacing = 15
 canvas.width = window.innerWidth
 gridWidth = canvas.width / gridSpacing
 
@@ -183,9 +183,16 @@ draw()
 mouseDown = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
 mouseDownCount = 0
 document.body.onmousedown = (evt) ->
-  ++mouseDown[evt.button]
-  ++mouseDownCount
+	++mouseDown[evt.button]
+	++mouseDownCount
+  
+	if evt.button is 0
+		console.log("left mouse button clicked!")
 
 document.body.onmouseup = (evt) ->
-  --mouseDown[evt.button]
-  --mouseDownCount
+	--mouseDown[evt.button]
+	--mouseDownCount
+  
+document.body.onmousemove = (evt) ->
+	if mouseDown[0]
+		console.log("Drawing cells")
