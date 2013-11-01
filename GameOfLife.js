@@ -7,7 +7,7 @@ Maddy approved.
 
 
 (function() {
-  var HSVtoRGB, ages, background, canvas, circle, context, convertTo2DigitHex, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, randomGrid, randomizeGrid, rules, translate, zero;
+  var HSVtoRGB, ages, background, buttonHeight, buttonWidth, canvas, circle, context, convertTo2DigitHex, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, randomGrid, randomizeGrid, rules, translate, zero;
 
   canvas = document.getElementById("myCanvas");
 
@@ -153,7 +153,7 @@ Maddy approved.
   };
 
   draw = function() {
-    var age, ageTillLoop, border, buttonHeight, buttonWidth, numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _o, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _results;
+    var age, ageTillLoop, border, numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _o, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _results;
     numNeighbors = makeNewGrid();
     for (x = _i = 0, _ref = gridWidth - 1; 0 <= _ref ? _i < _ref : _i > _ref; x = 0 <= _ref ? ++_i : --_i) {
       for (y = _j = 0, _ref1 = gridHeight - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
@@ -192,8 +192,6 @@ Maddy approved.
       }
     }
     setTimeout(draw, 0);
-    buttonWidth = 50;
-    buttonHeight = canvas.height / 9;
     _results = [];
     for (x = _o = 0; _o < 2; x = ++_o) {
       _results.push((function() {
@@ -217,6 +215,10 @@ Maddy approved.
 
   canvas.height = window.innerHeight;
 
+  buttonWidth = 50;
+
+  buttonHeight = canvas.height / 9;
+
   gridSpacing = 15;
 
   gridWidth = canvas.width / gridSpacing;
@@ -234,10 +236,15 @@ Maddy approved.
   mouseDownCount = 0;
 
   document.body.onmousedown = function(event) {
+    var buttonGridX, buttonGridY;
     ++mouseDown[event.button];
     ++mouseDownCount;
     if (event.button === 0) {
-      return console.log("left mouse button clicked!");
+      if (event.clientX < 2 * buttonWidth) {
+        buttonGridX = Math.floor(event.clientX / buttonWidth);
+        buttonGridY = Math.floor(event.clientY / buttonHeight);
+        return rules[buttonGridX][buttonGridY] = !rules[buttonGridX][buttonGridY];
+      }
     }
   };
 
