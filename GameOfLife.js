@@ -171,7 +171,7 @@ Author Rafael Cosman
         }
       }
     }
-    fillStyle("#000000");
+    context.fillStyle = "#000000";
     background();
     buttonWidth = 100;
     buttonHeight = canvas.height / 9;
