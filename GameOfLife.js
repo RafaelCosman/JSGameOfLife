@@ -189,7 +189,7 @@ Maddy approved.
     buttonWidth = 100;
     buttonHeight = canvas.height / 9;
     _results = [];
-    for (x = _o = 0; _o < 1; x = ++_o) {
+    for (x = _o = 0; _o < 2; x = ++_o) {
       _results.push((function() {
         var _p, _results1;
         _results1 = [];
