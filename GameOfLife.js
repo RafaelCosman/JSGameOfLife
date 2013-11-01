@@ -179,6 +179,7 @@ Author Rafael Cosman
         if (age !== 0) {
           ageTillLoop = 50;
           context.fillStyle = "hsl(" + age % ageTillLoop / ageTillLoop + ", 255, 255)";
+          console.log(context.fillStyle);
           border = 3;
           context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border);
         }
