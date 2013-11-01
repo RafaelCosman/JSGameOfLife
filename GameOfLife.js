@@ -186,7 +186,7 @@ Maddy approved.
       }
     }
     setTimeout(draw, 0);
-    buttonWidth = 100;
+    buttonWidth = 50;
     buttonHeight = canvas.height / 9;
     _results = [];
     for (x = _o = 0; _o < 2; x = ++_o) {
@@ -195,9 +195,9 @@ Maddy approved.
         _results1 = [];
         for (y = _p = 0; _p < 8; y = ++_p) {
           if (rules[x][y]) {
-            context.fillStyle = "rgba(0, 0, 0, .5)";
-          } else {
             context.fillStyle = "rgba(255, 255, 255, .6)";
+          } else {
+            context.fillStyle = "rgba(0, 0, 0, .5)";
           }
           _results1.push(context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight));
         }
