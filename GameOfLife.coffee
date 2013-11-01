@@ -5,8 +5,8 @@ Author Rafael Cosman
 
 #Get the canvas
 #---------------
-c=document.getElementById("myCanvas");
-context=c.getContext("2d");
+canvas = document.getElementById("myCanvas");
+context = canvas.getContext("2d");
 
 #Wrappers
 #---------------
@@ -148,36 +148,35 @@ draw = () ->
 			else
 				ages[x][y] = 0
 			
+	#Clear the background
+	fillStyle("#000000")
+	background()
+	
 	#Display the cells to the screen
-	background(0)
-
 	for x in [0...gridWidth-1]
 		for y in [0..gridHeight-1]
 			age = ages[x][y]
 			
-			save()
-
-			translate(10 * x, 10 * y)
-			
 			if age != 0
-				context.fillStyle = HSVtoRGB(age/100, 1, 1)
-				fillRect(5, 5)
+				ageTillLoop = 50
+				context.fillStyle = HSVtoRGB(age%ageTillLoop / ageTillLoop, 1, 1)
+				border = 3
+				context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border)
 
-			restore()
-
-	setTimeout(draw, 1)
+	setTimeout(draw, 0)
 			
 #Setup
 #----------
-gridWidth = 300
-gridHeight = 300
+gridSpacing = 10
+canvas.width = window.innerWidth
+gridWidth = canvas.width / gridSpacing
+
+canvas.height = window.innerHeight
+gridHeight = canvas.width / gridSpacing
 
 context.shadowBlur = 20
 
-ages = makeNewGrid()
 ages = randomGrid()
-println(ages[0])
 rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]]
 
 draw()
-println(HSVtoRGB(0, 1, 1))
