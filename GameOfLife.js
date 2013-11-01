@@ -6,7 +6,7 @@ Author Rafael Cosman
 
 
 (function() {
-  var HSVtoRGB, ages, background, canvas, circle, context, convertTo2DigitHex, createArray, draw, fillRect, fillStyle, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, println, randomGrid, randomizeGrid, rules, translate;
+  var HSVtoRGB, ages, background, canvas, circle, context, convertTo2DigitHex, draw, fillRect, fillStyle, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, println, randomGrid, randomizeGrid, rules, translate;
 
   canvas = document.getElementById("myCanvas");
 
@@ -36,19 +36,6 @@ Author Rafael Cosman
 
   println = function(obj) {
     return console.log(obj);
-  };
-
-  createArray = function(length) {
-    var args, arr, i;
-    arr = new Array(length || 0);
-    i = length;
-    if (arguments_.length > 1) {
-      args = Array.prototype.slice.call(arguments_, 1);
-      while (i--) {
-        arr[length - 1 - i] = createArray.apply(this, args);
-      }
-    }
-    return arr;
   };
 
   makeNewGrid = function() {
