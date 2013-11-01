@@ -197,7 +197,7 @@ Maddy approved.
           if (rules[x][y]) {
             context.fillStyle = "rgba(0, 0, 0, .5)";
           } else {
-            context.fillStyle = "rgba(255, 255, 255, .3)";
+            context.fillStyle = "rgba(255, 255, 255, .6)";
           }
           _results1.push(context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight));
         }
