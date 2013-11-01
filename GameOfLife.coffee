@@ -30,15 +30,7 @@ println = (obj) ->
 	console.log(obj)
 
 #More serious functions
-#------------------------	
-createArray = (length) ->
-  arr = new Array(length or 0)
-  i = length
-  if arguments_.length > 1
-    args = Array::slice.call(arguments_, 1)
-    arr[length - 1 - i] = createArray.apply(this, args)  while i--
-  arr
-
+#------------------------
 makeNewGrid = () ->
 	for x in [0...gridWidth]
 		for y in [0...gridHeight]
@@ -114,12 +106,10 @@ convertTo2DigitHex = (number) ->
 		return "0" + string
 	else
 		return string
-			
+		
 #Run
 #----------------
 draw = () -> 
-	console.log(mouseDown)
-
 	numNeighbors = makeNewGrid()
 	
 	#Count up the number of neighbors each cell has
@@ -182,17 +172,25 @@ draw()
 #-------------------
 mouseDown = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
 mouseDownCount = 0
-document.body.onmousedown = (evt) ->
-	++mouseDown[evt.button]
+document.body.onmousedown = (event) ->
+	++mouseDown[event.button]
 	++mouseDownCount
   
-	if evt.button is 0
+	if event.button is 0
 		console.log("left mouse button clicked!")
 
-document.body.onmouseup = (evt) ->
-	--mouseDown[evt.button]
+document.body.onmouseup = (event) ->
+	--mouseDown[event.button]
 	--mouseDownCount
   
-document.body.onmousemove = (evt) ->
+document.body.onmousemove = (event) ->
+	#If dragging with the left mouse button, create cells
 	if mouseDown[0]
-		console.log("Drawing cells")
+		gridX = Math.floor(event.clientX / gridSpacing)
+		gridY = Math.floor(event.clientY / gridSpacing)
+		for x in [gridX-1...gridX+1]
+			for y in [gridY-1...gridY+1]
+				inc(ages, x, y)
+				
+#Keyboard io
+#------------------------
