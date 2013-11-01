@@ -6,11 +6,11 @@ Author Rafael Cosman
 
 
 (function() {
-  var HSVtoRGB, ages, background, c, circle, context, convertTo2DigitHex, createArray, draw, fillRect, fillStyle, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, println, randomGrid, randomizeGrid, restore, rules, save, translate;
+  var HSVtoRGB, ages, background, canvas, circle, context, convertTo2DigitHex, createArray, draw, fillRect, fillStyle, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, println, randomGrid, randomizeGrid, restore, rules, save, translate;
 
-  c = document.getElementById("myCanvas");
+  canvas = document.getElementById("myCanvas");
 
-  context = c.getContext("2d");
+  context = canvas.getContext("2d");
 
   translate = function(x, y) {
     return context.translate(x, y);
@@ -219,26 +219,20 @@ Author Rafael Cosman
 
   gridSpacing = 10;
 
-  gridWidth = context.getImageData().width / gridSpacing;
+  gridWidth = canvas.width / gridSpacing;
 
   console.log(gridWidth);
 
-  gridHeight = context.getImageData().height / gridSpacing;
+  gridHeight = canvas.width / gridSpacing;
 
   console.log(gridHeight);
 
   context.shadowBlur = 20;
 
-  ages = makeNewGrid();
-
   ages = randomGrid();
-
-  println(ages[0]);
 
   rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]];
 
   draw();
-
-  println(HSVtoRGB(0, 1, 1));
 
 }).call(this);
