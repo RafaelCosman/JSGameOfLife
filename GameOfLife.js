@@ -2,6 +2,7 @@
 /*
 This is Game Of Life
 Author Rafael Cosman
+Maddy approved.
 */
 
 
@@ -178,8 +179,7 @@ Author Rafael Cosman
         age = ages[x][y];
         if (age !== 0) {
           ageTillLoop = 50;
-          context.fillStyle = "hsl(" + age % ageTillLoop / ageTillLoop + ", 255, 255)";
-          context.fillStyle = "#FFFFFF";
+          context.fillStyle = "hsla(" + age % ageTillLoop / ageTillLoop + ", 255, 255, 255)";
           console.log(context.fillStyle);
           border = 3;
           context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border);
