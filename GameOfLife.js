@@ -6,7 +6,7 @@ Author Rafael Cosman
 
 
 (function() {
-  var HSVtoRGB, ages, background, c, circle, context, convertTo2DigitHex, createArray, draw, fillRect, fillStyle, getBinaryThingey, gridHeight, gridWidth, inc, makeNewGrid, println, randomGrid, randomizeGrid, restore, rules, save, translate;
+  var HSVtoRGB, ages, background, c, circle, context, convertTo2DigitHex, createArray, draw, fillRect, fillStyle, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, println, randomGrid, randomizeGrid, restore, rules, save, translate;
 
   c = document.getElementById("myCanvas");
 
@@ -205,7 +205,7 @@ Author Rafael Cosman
       for (y = _n = 0, _ref5 = gridHeight - 1; 0 <= _ref5 ? _n <= _ref5 : _n >= _ref5; y = 0 <= _ref5 ? ++_n : --_n) {
         age = ages[x][y];
         save();
-        translate(10 * x, 10 * y);
+        translate(gridSpacing * x, gridSpacing * y);
         if (age !== 0) {
           ageTillLoop = 50;
           context.fillStyle = HSVtoRGB(age % ageTillLoop / ageTillLoop, 1, 1);
@@ -217,9 +217,11 @@ Author Rafael Cosman
     return setTimeout(draw, 1);
   };
 
-  gridWidth = 300;
+  gridSpacing = 10;
 
-  gridHeight = 300;
+  gridWidth = context.width / gridSpacing;
+
+  gridHeight = context.width / gridSpacing;
 
   context.shadowBlur = 20;
 
