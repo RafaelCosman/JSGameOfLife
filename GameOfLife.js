@@ -175,7 +175,7 @@ Author Rafael Cosman
   };
 
   draw = function() {
-    var age, ageTillLoop, numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
+    var age, ageTillLoop, border, numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
     numNeighbors = makeNewGrid();
     for (x = _i = 0, _ref = gridWidth - 1; 0 <= _ref ? _i < _ref : _i > _ref; x = 0 <= _ref ? ++_i : --_i) {
       for (y = _j = 0, _ref1 = gridHeight - 1; 0 <= _ref1 ? _j <= _ref1 : _j >= _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
@@ -209,7 +209,8 @@ Author Rafael Cosman
         if (age !== 0) {
           ageTillLoop = 50;
           context.fillStyle = HSVtoRGB(age % ageTillLoop / ageTillLoop, 1, 1);
-          fillRect(gridSpacing, gridSpacing);
+          border = 3;
+          fillRect(gridSpacing - border, gridSpacing - border);
         }
         restore();
       }
