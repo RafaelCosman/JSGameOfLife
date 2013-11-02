@@ -254,12 +254,13 @@ Maddy approved.
   };
 
   document.body.onmousemove = function(event) {
-    var gridX, gridY, x, y, _i, _j, _k, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _results;
+    var d, gridX, gridY, x, y, _i, _j, _k, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _results;
+    d = 2;
     if (mouseDown[0]) {
       gridX = Math.floor(event.clientX / gridSpacing);
       gridY = Math.floor(event.clientY / gridSpacing);
-      for (x = _i = _ref = gridX - 1, _ref1 = gridX + 1; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; x = _ref <= _ref1 ? ++_i : --_i) {
-        for (y = _j = _ref2 = gridY - 1, _ref3 = gridY + 1; _ref2 <= _ref3 ? _j < _ref3 : _j > _ref3; y = _ref2 <= _ref3 ? ++_j : --_j) {
+      for (x = _i = _ref = gridX - d, _ref1 = gridX + 1 + d; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; x = _ref <= _ref1 ? ++_i : --_i) {
+        for (y = _j = _ref2 = gridY - d, _ref3 = gridY + 1 + d; _ref2 <= _ref3 ? _j < _ref3 : _j > _ref3; y = _ref2 <= _ref3 ? ++_j : --_j) {
           inc(ages, x, y);
         }
       }
@@ -268,11 +269,11 @@ Maddy approved.
       gridX = Math.floor(event.clientX / gridSpacing);
       gridY = Math.floor(event.clientY / gridSpacing);
       _results = [];
-      for (x = _k = _ref4 = gridX - 1, _ref5 = gridX + 1; _ref4 <= _ref5 ? _k < _ref5 : _k > _ref5; x = _ref4 <= _ref5 ? ++_k : --_k) {
+      for (x = _k = _ref4 = gridX - d, _ref5 = gridX + 1 + d; _ref4 <= _ref5 ? _k < _ref5 : _k > _ref5; x = _ref4 <= _ref5 ? ++_k : --_k) {
         _results.push((function() {
           var _l, _ref6, _ref7, _results1;
           _results1 = [];
-          for (y = _l = _ref6 = gridY - 1, _ref7 = gridY + 1; _ref6 <= _ref7 ? _l < _ref7 : _l > _ref7; y = _ref6 <= _ref7 ? ++_l : --_l) {
+          for (y = _l = _ref6 = gridY - d, _ref7 = gridY + 1 + d; _ref6 <= _ref7 ? _l < _ref7 : _l > _ref7; y = _ref6 <= _ref7 ? ++_l : --_l) {
             _results1.push(zero(ages, x, y));
           }
           return _results1;
