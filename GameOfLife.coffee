@@ -201,20 +201,22 @@ document.body.onmouseup = (event) ->
 	--mouseDownCount
   
 document.body.onmousemove = (event) ->
+	d = 2
+
 	#If dragging with the left mouse button, create cells
 	if mouseDown[0]
 		gridX = Math.floor(event.clientX / gridSpacing)
 		gridY = Math.floor(event.clientY / gridSpacing)
-		for x in [gridX-1...gridX+1]
-			for y in [gridY-1...gridY+1]
+		for x in [gridX-d...gridX+1+d]
+			for y in [gridY-d...gridY+1+d]
 				inc(ages, x, y)
 				
 	#If dragging with the right mouse button, kill cells
 	if mouseDown[2]
 		gridX = Math.floor(event.clientX / gridSpacing)
 		gridY = Math.floor(event.clientY / gridSpacing)
-		for x in [gridX-1...gridX+1]
-			for y in [gridY-1...gridY+1]
+		for x in [gridX-d...gridX+1+d]
+			for y in [gridY-d...gridY+1+d]
 				zero(ages, x, y)
 				
 #Keyboard io
