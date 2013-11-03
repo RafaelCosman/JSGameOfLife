@@ -139,7 +139,7 @@ Maddy approved.
         g = p;
         b = q;
     }
-    return "rgb(" + r * 255 + "," + g * 255 + "," + b * 255 + ")";
+    return "rgb(" + Math.floor(r * 255) + "," + Math.floor(g * 255) + "," + Math.floor(b * 255) + ")";
   };
 
   convertTo2DigitHex = function(number) {
