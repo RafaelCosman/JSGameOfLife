@@ -214,7 +214,7 @@ This code is Maddy approved.
         context.fillStyle = rgb(100, 100, 100);
         context.fillRect(-10, -20, 200, 50);
         context.fillStyle = rgb(255, 255, 255);
-        context.fillText("Click and drag", 0, 0);
+        context.fillText("Left-click and drag", 0, 0);
         return context.fillText("to create new cells", 0, 20);
       case 2:
         break;
