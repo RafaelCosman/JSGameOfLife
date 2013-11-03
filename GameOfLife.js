@@ -7,7 +7,7 @@ Maddy approved.
 
 
 (function() {
-  var HSVtoRGB, ages, background, buttonHeight, buttonWidth, canvas, circle, context, convertTo2DigitHex, createTutorialBox, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, randomGrid, randomizeGrid, rules, translate, zero;
+  var HSVtoRGB, ages, background, buttonHeight, buttonWidth, canvas, circle, context, createTutorialBox, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, randomGrid, randomizeGrid, rgb, rgba, rules, translate, zero;
 
   canvas = document.getElementById("myCanvas");
 
@@ -88,6 +88,14 @@ Maddy approved.
     }
   };
 
+  rgb = function(r, g, b) {
+    return "rgb(" + r + "," + g + "," + b + ")";
+  };
+
+  rgba = function(r, g, b, a) {
+    return "rgba(" + r + "," + g + "," + b + "," + a + ")";
+  };
+
   HSVtoRGB = function(h, s, v) {
     var b, f, g, i, p, q, r, t;
     r = void 0;
@@ -139,17 +147,7 @@ Maddy approved.
         g = p;
         b = q;
     }
-    return "rgb(" + Math.floor(r * 255) + "," + Math.floor(g * 255) + "," + Math.floor(b * 255) + ")";
-  };
-
-  convertTo2DigitHex = function(number) {
-    var string;
-    string = "" + Math.floor(number).toString(16);
-    if (string.length === 1) {
-      return "0" + string;
-    } else {
-      return string;
-    }
+    return rgb(Math.floor(r * 255), Math.floor(g * 255), Math.floor(b * 255));
   };
 
   draw = function() {
