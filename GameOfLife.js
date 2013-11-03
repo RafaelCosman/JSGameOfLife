@@ -7,7 +7,7 @@ Maddy approved.
 
 
 (function() {
-  var HSVtoRGB, ages, background, buttonHeight, buttonWidth, canvas, circle, context, convertTo2DigitHex, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, randomGrid, randomizeGrid, rules, translate, zero;
+  var HSVtoRGB, ages, background, buttonHeight, buttonWidth, canvas, circle, context, convertTo2DigitHex, createTutorialBox, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, randomGrid, randomizeGrid, rules, translate, zero;
 
   canvas = document.getElementById("myCanvas");
 
@@ -60,7 +60,7 @@ Maddy approved.
         var _j, _results1;
         _results1 = [];
         for (y = _j = 0; 0 <= gridHeight ? _j < gridHeight : _j > gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
-          _results1.push(Math.floor(Math.random() + .5));
+          _results1.push(Math.floor(Math.random() + .4));
         }
         return _results1;
       })());
@@ -139,7 +139,7 @@ Maddy approved.
         g = p;
         b = q;
     }
-    return convertTo2DigitHex(r * 255) + convertTo2DigitHex(g * 255) + convertTo2DigitHex(b * 255);
+    return "rgb(" + r * 255 + "," + g * 255 + "," + b * 255 + ")";
   };
 
   convertTo2DigitHex = function(number) {
@@ -211,6 +211,11 @@ Maddy approved.
     return _results;
   };
 
+  createTutorialBox = function() {
+    context.fillStyle = "#FFFFFF";
+    return context.fillRect(100, 100, 100, 100);
+  };
+
   canvas.width = window.innerWidth;
 
   canvas.height = window.innerHeight;
@@ -228,6 +233,8 @@ Maddy approved.
   ages = randomGrid();
 
   rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]];
+
+  setTimeout(createTutorialBox, 2000);
 
   draw();
 
