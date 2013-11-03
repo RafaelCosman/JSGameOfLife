@@ -200,7 +200,9 @@ This code is Maddy approved.
         context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight);
       }
     }
-    return tutorial();
+    context.save();
+    tutorial();
+    return context.restore();
   };
 
   tutorial = function() {
@@ -208,11 +210,12 @@ This code is Maddy approved.
       case 0:
         break;
       case 1:
+        context.translate(canvas.width - 200, 90);
         context.fillStyle = rgb(100, 100, 100);
-        context.fillRect(canvas.width - 210, 90, 200, 50);
+        context.fillRect(-10, -10, 200, 50);
         context.fillStyle = rgb(255, 255, 255);
-        context.fillText("Click and drag", canvas.width - 200, 100);
-        return context.fillText("to create new cells", canvas.width - 200, 110);
+        context.fillText("Click and drag", 0, 0);
+        return context.fillText("to create new cells", 0, 10);
       case 2:
         break;
       case 3:
