@@ -1,7 +1,7 @@
 ###
 This is Game Of Life
 Author Rafael Cosman
-Maddy approved.
+This code is Maddy approved.
 ###
 
 #$ = jQuery
@@ -39,7 +39,7 @@ randomizeGrid = () ->
 randomGrid = () ->
 	for x in [0...gridWidth]
 		for y in [0...gridHeight]
-			Math.floor(Math.random() + .5)
+			Math.floor(Math.random() + .4)
 			
 getBinaryThingey = (num) ->
 	if num == 0
@@ -54,6 +54,12 @@ zero = (arr, x, y) ->
 	if x >= 0 and y >= 0 and x < arr.length and y < arr[0].length
 		arr[x][y] = 0
 
+#hsl doesn't seem to work :(
+rgb = (r, g, b) ->
+	"rgb(" + r + "," + g + "," + b + ")"
+rgba = (r, g, b, a) ->
+	"rgba(" + r + "," + g + "," + b + "," + a + ")"
+		
 HSVtoRGB = (h, s, v) ->
   r = undefined
   g = undefined
@@ -98,15 +104,8 @@ HSVtoRGB = (h, s, v) ->
       g = p
       b = q
   
-  convertTo2DigitHex(r * 255) + convertTo2DigitHex(g * 255) + convertTo2DigitHex(b * 255)
+  rgb(Math.floor(r*255), Math.floor(g*255), Math.floor(b*255))
 			
-convertTo2DigitHex = (number) ->
-	string = "" + Math.floor(number).toString(16)
-	if string.length == 1
-		return "0" + string
-	else
-		return string
-		
 #Run
 #----------------
 draw = () -> 
@@ -136,7 +135,7 @@ draw = () ->
 				ages[x][y] = 0
 			
 	#Clear the background
-	context.fillStyle = "rgb(0, 0, 0)"
+	context.fillStyle = rgb(0, 0, 0)
 	background()
 	
 	#Display the cells to the screen
@@ -156,12 +155,28 @@ draw = () ->
 	for x in [0...1+1] #this corresponds to life or death
 		for y in [0...8+1] #this is the number of neighbors
 			if rules[x][y]
-				context.fillStyle = "rgba(255, 255, 255, .6)"
+				context.fillStyle = rgba(255, 255, 255, .6)
 			else
-				context.fillStyle = "rgba(0, 0, 0, .5)"
+				context.fillStyle = rgba(0, 0, 0, .5)
 				
 			context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight)
-			
+		
+createTutorialBox = () ->
+	context.fillStyle = "#FFFFFF"
+	context.fillRect(100, 100, 100, 100)
+		
+###
+0: Nothing on screen -- 2 seconds
+1: "click and drag to create new cells" -- wait until the user has created new cells
+2: Nothing on screen -- 1 second
+3: "click on these buttons to change the rules" -- wait until the user has changed the rules
+4: Now explain the rules :D
+###
+tutorialLevel = 0
+
+advanceTutorial = () ->
+	tutorialLevel++
+		
 #Setup
 #----------
 canvas.width = window.innerWidth
@@ -179,6 +194,7 @@ gridHeight = canvas.width / gridSpacing
 ages = randomGrid()
 rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]]
 
+setTimeout(createTutorialBox, 2000)
 draw()
 
 #Mouse IO
@@ -205,6 +221,10 @@ document.body.onmousemove = (event) ->
 
 	#If dragging with the left mouse button, create cells
 	if mouseDown[0]
+		if tutorialLevel == 1
+			tutorialLevel++
+			setTimeOut(advanceTutorial, 1000)
+	
 		gridX = Math.floor(event.clientX / gridSpacing)
 		gridY = Math.floor(event.clientY / gridSpacing)
 		for x in [gridX-d...gridX+1+d]

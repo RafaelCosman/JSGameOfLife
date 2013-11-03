@@ -20,35 +20,36 @@ olark.identify('2271-458-10-8073');/*]]>*/</script><noscript><a href="https://ww
 <!-- end olark code -->
 
 
+<body>
+	<canvas id="myCanvas" oncontextmenu="return false;"></canvas>
 
-<canvas id="myCanvas" oncontextmenu="return false;"></canvas>
+	<script type="text/javascript">
+	function requestFullScreen(element) {
+	//This is a failed script intended to have the page ask to be fullscreen
+		// Supports most browsers and their versions.
+		var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
 
-<script type="text/javascript">
-function requestFullScreen(element) {
-//This is a failed script intended to have the page ask to be fullscreen
-    // Supports most browsers and their versions.
-    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+		if (requestMethod) { // Native full screen.
+			requestMethod.call(element);
+		} else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+			var wscript = new ActiveXObject("WScript.Shell");
+			if (wscript !== null) {
+				wscript.SendKeys("{F11}");
+			}
+		}
+	}
 
-    if (requestMethod) { // Native full screen.
-        requestMethod.call(element);
-    } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
-        var wscript = new ActiveXObject("WScript.Shell");
-        if (wscript !== null) {
-            wscript.SendKeys("{F11}");
-        }
-    }
-}
+	var elem = document.body; // Make the body go full screen.
+	requestFullScreen(elem);
+	</script>
 
-var elem = document.body; // Make the body go full screen.
-requestFullScreen(elem);
-</script>
+	<style>
+	* { margin:0; padding:0; } /* to remove the top and left whitespace */
+	html, body { width:100%; height:100%; } /* just to be sure these are full screen*/
+	canvas { display:block; } /* To remove the scrollbars */
+	</style>
 
-<style>
-* { margin:0; padding:0; } /* to remove the top and left whitespace */
-html, body { width:100%; height:100%; } /* just to be sure these are full screen*/
-canvas { display:block; } /* To remove the scrollbars */
-</style>
+	<!--<script type="text/javascript" src="ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>-->
 
-<!--<script type="text/javascript" src="ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>-->
-
-<script type="text/javascript" src="GameOfLife.js"></script>
+	<script type="text/javascript" src="GameOfLife.js"></script>
+</body>
