@@ -206,15 +206,14 @@ This code is Maddy approved.
   tutorial = function() {
     switch (tutorialLevel) {
       case 0:
-        return pass;
+        break;
       case 1:
-        return fillText("Click and drag to create new calls", width - 100, 100);
+        return fillText("Click and drag to create new calls", canvas.width - 100, 100);
       case 2:
-        return pass;
+        break;
       case 3:
         return fillText("Click on these buttons to change the rules", 100, 500);
       case 4:
-        return pass;
     }
   };
 
