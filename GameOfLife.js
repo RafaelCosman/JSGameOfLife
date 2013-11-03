@@ -288,7 +288,7 @@ This code is Maddy approved.
     if (mouseDown[0]) {
       if (tutorialLevel === 1) {
         tutorialLevel++;
-        setTimeOut(advanceTutorial, 0);
+        setTimeout(advanceTutorial, 0);
       }
       gridX = Math.floor(event.clientX / gridSpacing);
       gridY = Math.floor(event.clientY / gridSpacing);
