@@ -7,7 +7,7 @@ This code is Maddy approved.
 
 
 (function() {
-  var HSVtoRGB, advanceTutorial, ages, background, buttonHeight, buttonWidth, canvas, circle, context, createTutorialBox, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, randomGrid, randomizeGrid, rgb, rgba, rules, translate, tutorial, tutorialLevel, zero;
+  var HSVtoRGB, advanceTutorial, ages, background, buttonHeight, buttonWidth, canvas, circle, context, createTutorialBox, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, mouseX, mouseY, randomGrid, randomizeGrid, rgb, rgba, rules, translate, tutorial, tutorialLevel, zero;
 
   canvas = document.getElementById("myCanvas");
 
@@ -252,6 +252,10 @@ This code is Maddy approved.
 
   gridHeight = canvas.width / gridSpacing;
 
+  mouseX = 0;
+
+  mouseY = 0;
+
   ages = randomGrid();
 
   rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]];
@@ -272,7 +276,11 @@ This code is Maddy approved.
       if (event.clientX < 2 * buttonWidth) {
         buttonGridX = Math.floor(event.clientX / buttonWidth);
         buttonGridY = Math.floor(event.clientY / buttonHeight);
-        return rules[buttonGridX][buttonGridY] = !rules[buttonGridX][buttonGridY];
+        rules[buttonGridX][buttonGridY] = !rules[buttonGridX][buttonGridY];
+        if (tutorialLevel === 1) {
+          tutorialLevel++;
+          return setTimeout(advanceTutorial, 0);
+        }
       }
     }
   };
