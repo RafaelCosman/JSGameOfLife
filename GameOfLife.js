@@ -277,7 +277,7 @@ This code is Maddy approved.
         buttonGridX = Math.floor(event.clientX / buttonWidth);
         buttonGridY = Math.floor(event.clientY / buttonHeight);
         rules[buttonGridX][buttonGridY] = !rules[buttonGridX][buttonGridY];
-        if (tutorialLevel === 1) {
+        if (tutorialLevel === 3) {
           tutorialLevel++;
           return setTimeout(advanceTutorial, 0);
         }
