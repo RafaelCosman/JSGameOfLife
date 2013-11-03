@@ -2,12 +2,12 @@
 /*
 This is Game Of Life
 Author Rafael Cosman
-Maddy approved.
+This code is Maddy approved.
 */
 
 
 (function() {
-  var HSVtoRGB, ages, background, buttonHeight, buttonWidth, canvas, circle, context, createTutorialBox, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, randomGrid, randomizeGrid, rgb, rgba, rules, translate, zero;
+  var HSVtoRGB, advanceTutorial, ages, background, buttonHeight, buttonWidth, canvas, circle, context, createTutorialBox, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, randomGrid, randomizeGrid, rgb, rgba, rules, translate, tutorial, tutorialLevel, zero;
 
   canvas = document.getElementById("myCanvas");
 
@@ -151,7 +151,7 @@ Maddy approved.
   };
 
   draw = function() {
-    var age, ageTillLoop, border, numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _o, _ref, _results;
+    var age, ageTillLoop, border, numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _o, _p, _ref, _ref1;
     numNeighbors = makeNewGrid();
     for (x = _i = 0; 0 <= gridWidth ? _i < gridWidth : _i > gridWidth; x = 0 <= gridWidth ? ++_i : --_i) {
       for (y = _j = 0; 0 <= gridHeight ? _j < gridHeight : _j > gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
@@ -176,7 +176,7 @@ Maddy approved.
         }
       }
     }
-    context.fillStyle = "rgb(0, 0, 0)";
+    context.fillStyle = rgb(0, 0, 0);
     background();
     for (x = _m = 0; 0 <= gridWidth ? _m < gridWidth : _m > gridWidth; x = 0 <= gridWidth ? ++_m : --_m) {
       for (y = _n = 0; 0 <= gridHeight ? _n < gridHeight : _n > gridHeight; y = 0 <= gridHeight ? ++_n : --_n) {
@@ -190,29 +190,46 @@ Maddy approved.
       }
     }
     setTimeout(draw, 0);
-    _results = [];
     for (x = _o = 0, _ref = 1 + 1; 0 <= _ref ? _o < _ref : _o > _ref; x = 0 <= _ref ? ++_o : --_o) {
-      _results.push((function() {
-        var _p, _ref1, _results1;
-        _results1 = [];
-        for (y = _p = 0, _ref1 = 8 + 1; 0 <= _ref1 ? _p < _ref1 : _p > _ref1; y = 0 <= _ref1 ? ++_p : --_p) {
-          if (rules[x][y]) {
-            context.fillStyle = "rgba(255, 255, 255, .6)";
-          } else {
-            context.fillStyle = "rgba(0, 0, 0, .5)";
-          }
-          _results1.push(context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight));
+      for (y = _p = 0, _ref1 = 8 + 1; 0 <= _ref1 ? _p < _ref1 : _p > _ref1; y = 0 <= _ref1 ? ++_p : --_p) {
+        if (rules[x][y]) {
+          context.fillStyle = rgba(255, 255, 255, .6);
+        } else {
+          context.fillStyle = rgba(0, 0, 0, .5);
         }
-        return _results1;
-      })());
+        context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight);
+      }
     }
-    return _results;
+    return tutorial();
+  };
+
+  tutorial = function() {
+    switch (tutorialLevel) {
+      case 0:
+        return pass;
+      case 1:
+        return fillText("Click and drag to create new calls", width - 100, 100);
+      case 2:
+        return pass;
+      case 3:
+        return fillText("Click on these buttons to change the rules", 100, 500);
+      case 4:
+        return pass;
+    }
   };
 
   createTutorialBox = function() {
     context.fillStyle = "#FFFFFF";
     return context.fillRect(100, 100, 100, 100);
   };
+
+  advanceTutorial = function() {
+    return tutorialLevel++;
+  };
+
+  tutorialLevel = 0;
+
+  setTimeout(advanceTutorial, 2000);
 
   canvas.width = window.innerWidth;
 
@@ -232,7 +249,7 @@ Maddy approved.
 
   rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]];
 
-  setTimeout(createTutorialBox, 2000);
+  ctx.font = "20px Georgia";
 
   draw();
 
@@ -262,6 +279,10 @@ Maddy approved.
     var d, gridX, gridY, x, y, _i, _j, _k, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _results;
     d = 2;
     if (mouseDown[0]) {
+      if (tutorialLevel === 1) {
+        tutorialLevel++;
+        setTimeOut(advanceTutorial, 1000);
+      }
       gridX = Math.floor(event.clientX / gridSpacing);
       gridY = Math.floor(event.clientY / gridSpacing);
       for (x = _i = _ref = gridX - d, _ref1 = gridX + 1 + d; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; x = _ref <= _ref1 ? ++_i : --_i) {
