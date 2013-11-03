@@ -249,7 +249,7 @@ This code is Maddy approved.
 
   rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]];
 
-  ctx.font = "20px Georgia";
+  context.font = "20px Georgia";
 
   draw();
 
