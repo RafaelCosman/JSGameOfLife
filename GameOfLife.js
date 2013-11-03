@@ -209,7 +209,7 @@ This code is Maddy approved.
         break;
       case 1:
         context.fillStyle = rgb(255, 255, 255);
-        return context.fillText("Click and drag to create new cells", canvas.width - 200, 100);
+        return context.fillText("Click and drag\nto create new cells", canvas.width - 200, 100);
       case 2:
         break;
       case 3:
