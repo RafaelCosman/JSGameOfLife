@@ -210,7 +210,7 @@ This code is Maddy approved.
       case 0:
         break;
       case 1:
-        context.translate(canvas.width - 300, 50);
+        context.translate(canvas.width - 250, 70);
         context.fillStyle = rgb(100, 100, 100);
         context.fillRect(-10, -20, 200, 50);
         context.fillStyle = rgb(255, 255, 255);
