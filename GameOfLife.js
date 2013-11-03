@@ -233,7 +233,7 @@ This code is Maddy approved.
 
   tutorialLevel = 0;
 
-  setTimeout(advanceTutorial, 2000);
+  setTimeout(advanceTutorial, 0);
 
   canvas.width = window.innerWidth;
 
@@ -285,7 +285,7 @@ This code is Maddy approved.
     if (mouseDown[0]) {
       if (tutorialLevel === 1) {
         tutorialLevel++;
-        setTimeOut(advanceTutorial, 1000);
+        setTimeOut(advanceTutorial, 0);
       }
       gridX = Math.floor(event.clientX / gridSpacing);
       gridY = Math.floor(event.clientY / gridSpacing);
