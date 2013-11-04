@@ -219,8 +219,12 @@ This code is Maddy approved.
       case 2:
         break;
       case 3:
+        context.translate(200, 70);
+        context.fillStyle = rgb(100, 100, 100);
+        context.fillRect(-10, -20, 200, 50);
         context.fillStyle = rgb(255, 255, 255);
-        return context.fillText("Click on these buttons to change the rules", 200, 500);
+        context.fillText("Click on these buttons", 0, 0);
+        return context.fillText("to change the rules", 0, 20);
       case 4:
     }
   };
