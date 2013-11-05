@@ -7,7 +7,9 @@ This code is Maddy approved.
 
 
 (function() {
-  var HSVtoRGB, advanceTutorial, ages, background, buttonHeight, buttonWidth, canvas, circle, context, createTutorialBox, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, mouseX, mouseY, randomGrid, randomizeGrid, rgb, rgba, rules, translate, tutorial, tutorialLevel, zero;
+  var $, HSVtoRGB, advanceTutorial, ages, background, buttonHeight, buttonWidth, canvas, circle, context, createTutorialBox, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, mouseX, mouseY, randomGrid, randomizeGrid, rgb, rgba, rules, translate, tutorial, tutorialLevel, zero;
+
+  $ = jQuery;
 
   canvas = document.getElementById("myCanvas");
 
