@@ -330,7 +330,7 @@ This code is Maddy approved.
     }
   };
 
-  $("#target").mousemove(function(event) {
+  $("#document.body").mousemove(function(event) {
     var msg;
     msg = "Handler for .mousemove() called at ";
     msg += event.pageX + ", " + event.pageY;
