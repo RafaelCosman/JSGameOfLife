@@ -296,7 +296,7 @@ This code is Maddy approved.
     return --mouseDownCount;
   };
 
-  $("#document.body").mousemove(function(event) {
+  $("document.body").mousemove(function(event) {
     var d, gridX, gridY, x, y, _i, _j, _k, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _results;
     d = 2;
     if (mouseDown[0]) {
