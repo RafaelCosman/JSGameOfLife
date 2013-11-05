@@ -160,22 +160,49 @@ draw = () ->
 				context.fillStyle = rgba(0, 0, 0, .5)
 				
 			context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight)
+	
+	context.save()
+	tutorial()
+	context.restore()
+	
+tutorial = () ->
+	switch tutorialLevel
+		when 0 then
+			#2 seconds
+		when 1
+			context.translate(canvas.width-250, 70)
+			
+			context.fillStyle = rgb(100, 100, 100)
+			context.fillRect(-10, -20, 200, 50)
+			
+			context.fillStyle = rgb(255, 255, 255) 
+			context.fillText("Left-click and drag", 0, 0)
+			context.fillText("to create new cells", 0, 20)
+			#We'll wait until the user makes some cells
+		when 2 then
+			#1 second
+		when 3
+			context.translate(200, 70)
+			
+			context.fillStyle = rgb(100, 100, 100)
+			context.fillRect(-10, -20, 220, 50)
 		
+			context.fillStyle = rgb(255, 255, 255)
+			context.fillText("Click on these buttons", 0, 0)
+			context.fillText("to change the rules", 0, 20)
+			#We'll wait until the user changes the rules
+		when 4 then
+			#now we need to explain the rules!
+	
 createTutorialBox = () ->
 	context.fillStyle = "#FFFFFF"
 	context.fillRect(100, 100, 100, 100)
 		
-###
-0: Nothing on screen -- 2 seconds
-1: "click and drag to create new cells" -- wait until the user has created new cells
-2: Nothing on screen -- 1 second
-3: "click on these buttons to change the rules" -- wait until the user has changed the rules
-4: Now explain the rules :D
-###
-tutorialLevel = 0
-
 advanceTutorial = () ->
 	tutorialLevel++
+	
+tutorialLevel = 0
+setTimeout(advanceTutorial, 0)
 		
 #Setup
 #----------
@@ -189,12 +216,15 @@ gridSpacing = 15
 gridWidth = canvas.width / gridSpacing
 gridHeight = canvas.width / gridSpacing
 
+mouseX = 0
+mouseY = 0
+
 #context.shadowBlur = 20
 
 ages = randomGrid()
 rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]]
 
-setTimeout(createTutorialBox, 2000)
+context.font="20px Georgia";
 draw()
 
 #Mouse IO
@@ -211,6 +241,10 @@ document.body.onmousedown = (event) ->
 			buttonGridY = Math.floor(event.clientY / buttonHeight)
 			
 			rules[buttonGridX][buttonGridY] = !rules[buttonGridX][buttonGridY]
+			
+			if tutorialLevel == 3
+				tutorialLevel++
+				setTimeout(advanceTutorial, 0)
 
 document.body.onmouseup = (event) ->
 	--mouseDown[event.button]
@@ -223,7 +257,7 @@ document.body.onmousemove = (event) ->
 	if mouseDown[0]
 		if tutorialLevel == 1
 			tutorialLevel++
-			setTimeOut(advanceTutorial, 1000)
+			setTimeout(advanceTutorial, 0)
 	
 		gridX = Math.floor(event.clientX / gridSpacing)
 		gridY = Math.floor(event.clientY / gridSpacing)
