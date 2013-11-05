@@ -4,7 +4,7 @@ Author Rafael Cosman
 This code is Maddy approved.
 ###
 
-#$ = jQuery
+$ = jQuery
 
 #Get the canvas
 #---------------
@@ -231,11 +231,12 @@ draw()
 #-------------------
 mouseDown = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
 mouseDownCount = 0
-document.body.onmousedown = (event) ->
-	++mouseDown[event.button]
+
+$("#myCanvas").mousedown (event) ->
+	++mouseDown[event.which]
 	++mouseDownCount
   
-	if event.button is 0
+	if event.which is 1
 		if event.clientX < 2 * buttonWidth
 			buttonGridX = Math.floor(event.clientX / buttonWidth)
 			buttonGridY = Math.floor(event.clientY / buttonHeight)
@@ -246,15 +247,15 @@ document.body.onmousedown = (event) ->
 				tutorialLevel++
 				setTimeout(advanceTutorial, 0)
 
-document.body.onmouseup = (event) ->
-	--mouseDown[event.button]
+$("#myCanvas").mouseup (event) ->
+	--mouseDown[event.which]
 	--mouseDownCount
-  
-document.body.onmousemove = (event) ->
+
+$("#myCanvas").mousemove (event) ->
 	d = 2
 
 	#If dragging with the left mouse button, create cells
-	if mouseDown[0]
+	if mouseDown[1]
 		if tutorialLevel == 1
 			tutorialLevel++
 			setTimeout(advanceTutorial, 0)
@@ -266,13 +267,15 @@ document.body.onmousemove = (event) ->
 				inc(ages, x, y)
 				
 	#If dragging with the right mouse button, kill cells
-	if mouseDown[2]
+	if mouseDown[3]
 		gridX = Math.floor(event.clientX / gridSpacing)
 		gridY = Math.floor(event.clientY / gridSpacing)
 		for x in [gridX-d...gridX+1+d]
 			for y in [gridY-d...gridY+1+d]
 				zero(ages, x, y)
-				
+  
 #Keyboard io
 #------------------------
 #I want to add space clears board
+$("#myCanvas").keypress (event) ->
+	console.log(event.which)

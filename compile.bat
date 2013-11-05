@@ -1,0 +1,1 @@
+call coffee --compile GameOfLife.coffee	

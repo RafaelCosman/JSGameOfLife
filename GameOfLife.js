@@ -274,11 +274,11 @@ This code is Maddy approved.
 
   mouseDownCount = 0;
 
-  document.body.onmousedown = function(event) {
+  $("#myCanvas").mousedown(function(event) {
     var buttonGridX, buttonGridY;
-    ++mouseDown[event.button];
+    ++mouseDown[event.which];
     ++mouseDownCount;
-    if (event.button === 0) {
+    if (event.which === 0) {
       if (event.clientX < 2 * buttonWidth) {
         buttonGridX = Math.floor(event.clientX / buttonWidth);
         buttonGridY = Math.floor(event.clientY / buttonHeight);
@@ -289,17 +289,17 @@ This code is Maddy approved.
         }
       }
     }
-  };
+  });
 
-  document.body.onmouseup = function(event) {
-    --mouseDown[event.button];
+  $("#myCanvas").mouseup(function(event) {
+    --mouseDown[event.which];
     return --mouseDownCount;
-  };
+  });
 
   $("#myCanvas").mousemove(function(event) {
     var d, gridX, gridY, x, y, _i, _j, _k, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _results;
     d = 2;
-    if (mouseDown[0]) {
+    if (mouseDown[1]) {
       if (tutorialLevel === 1) {
         tutorialLevel++;
         setTimeout(advanceTutorial, 0);
@@ -312,7 +312,7 @@ This code is Maddy approved.
         }
       }
     }
-    if (mouseDown[2]) {
+    if (mouseDown[3]) {
       gridX = Math.floor(event.clientX / gridSpacing);
       gridY = Math.floor(event.clientY / gridSpacing);
       _results = [];
@@ -328,6 +328,10 @@ This code is Maddy approved.
       }
       return _results;
     }
+  });
+
+  $("#myCanvas").keypress(function(event) {
+    return console.log(event.which);
   });
 
 }).call(this);
