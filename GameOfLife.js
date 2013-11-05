@@ -274,7 +274,7 @@ This code is Maddy approved.
 
   mouseDownCount = 0;
 
-  $("#myCanvas").onmousedown = function(event) {
+  document.body.onmousedown = function(event) {
     var buttonGridX, buttonGridY;
     ++mouseDown[event.button];
     ++mouseDownCount;
@@ -291,7 +291,7 @@ This code is Maddy approved.
     }
   };
 
-  $("#myCanvas").onmouseup = function(event) {
+  document.body.onmouseup = function(event) {
     --mouseDown[event.button];
     return --mouseDownCount;
   };
