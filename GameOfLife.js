@@ -11,7 +11,7 @@ This code is Maddy approved.
 
   $ = jQuery;
 
-  canvas = document.getElementById("myCanvas");
+  canvas = $("#myCanvas");
 
   context = canvas.getContext("2d");
 
@@ -274,7 +274,7 @@ This code is Maddy approved.
 
   mouseDownCount = 0;
 
-  document.body.onmousedown = function(event) {
+  canvas.onmousedown = function(event) {
     var buttonGridX, buttonGridY;
     ++mouseDown[event.button];
     ++mouseDownCount;
@@ -291,12 +291,12 @@ This code is Maddy approved.
     }
   };
 
-  document.body.onmouseup = function(event) {
+  canvas.onmouseup = function(event) {
     --mouseDown[event.button];
     return --mouseDownCount;
   };
 
-  $("#myCanvas").mousemove(function(event) {
+  canvas.mousemove(function(event) {
     var d, gridX, gridY, x, y, _i, _j, _k, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _results;
     d = 2;
     if (mouseDown[0]) {
