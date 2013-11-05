@@ -138,14 +138,18 @@ draw = () ->
 	context.fillStyle = rgb(0, 0, 0)
 	background()
 	
+	
 	#Display the cells to the screen
+	timeModifier = new Date().getTime()/10000
+	
 	for x in [0...gridWidth]
 		for y in [0...gridHeight]
 			age = ages[x][y]
 			
 			if age != 0
-				ageTillLoop = 50
-				context.fillStyle = HSVtoRGB(age%ageTillLoop / ageTillLoop, 1, 1)
+				hue = Math.sqrt(age)
+				hue *= .2
+				context.fillStyle = HSVtoRGB((hue + timeModifier) % 1, 1, 1)
 				border = 3
 				context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border)
 
@@ -230,16 +234,14 @@ draw()
 #Mouse IO
 #-------------------
 mouseDown = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
-mouseDownCount = 0
 
 $("#myCanvas").mousedown (event) ->
 	++mouseDown[event.which]
-	++mouseDownCount
   
 	if event.which is 1
 		if event.clientX < 2 * buttonWidth
-			buttonGridX = Math.floor(event.clientX / buttonWidth)
-			buttonGridY = Math.floor(event.clientY / buttonHeight)
+			buttonGridX = Math.floor(event.pageX / buttonWidth)
+			buttonGridY = Math.floor(event.pageY / buttonHeight)
 			
 			rules[buttonGridX][buttonGridY] = !rules[buttonGridX][buttonGridY]
 			
@@ -249,27 +251,25 @@ $("#myCanvas").mousedown (event) ->
 
 $("#myCanvas").mouseup (event) ->
 	--mouseDown[event.which]
-	--mouseDownCount
 
 $("#myCanvas").mousemove (event) ->
 	d = 2
 
+	gridX = Math.floor(event.pageX / gridSpacing)
+	gridY = Math.floor(event.pageY / gridSpacing)
+	
 	#If dragging with the left mouse button, create cells
 	if mouseDown[1]
 		if tutorialLevel == 1
 			tutorialLevel++
 			setTimeout(advanceTutorial, 0)
 	
-		gridX = Math.floor(event.clientX / gridSpacing)
-		gridY = Math.floor(event.clientY / gridSpacing)
 		for x in [gridX-d...gridX+1+d]
 			for y in [gridY-d...gridY+1+d]
 				inc(ages, x, y)
 				
 	#If dragging with the right mouse button, kill cells
 	if mouseDown[3]
-		gridX = Math.floor(event.clientX / gridSpacing)
-		gridY = Math.floor(event.clientY / gridSpacing)
 		for x in [gridX-d...gridX+1+d]
 			for y in [gridY-d...gridY+1+d]
 				zero(ages, x, y)
@@ -277,5 +277,5 @@ $("#myCanvas").mousemove (event) ->
 #Keyboard io
 #------------------------
 #I want to add space clears board
-$("#myCanvas").keypress (event) ->
-	console.log(event.which)
+$("document").on("keydown", (event) ->
+	console.log(event.which))

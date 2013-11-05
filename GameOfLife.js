@@ -7,7 +7,7 @@ This code is Maddy approved.
 
 
 (function() {
-  var $, HSVtoRGB, advanceTutorial, ages, background, buttonHeight, buttonWidth, canvas, circle, context, createTutorialBox, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseDownCount, mouseX, mouseY, randomGrid, randomizeGrid, rgb, rgba, rules, translate, tutorial, tutorialLevel, zero;
+  var $, HSVtoRGB, advanceTutorial, ages, background, buttonHeight, buttonWidth, canvas, circle, context, createTutorialBox, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseX, mouseY, randomGrid, randomizeGrid, rgb, rgba, rules, translate, tutorial, tutorialLevel, zero;
 
   $ = jQuery;
 
@@ -153,7 +153,7 @@ This code is Maddy approved.
   };
 
   draw = function() {
-    var age, ageTillLoop, border, numNeighbors, x, y, _i, _j, _k, _l, _m, _n, _o, _p, _ref, _ref1;
+    var age, border, hue, numNeighbors, timeModifier, x, y, _i, _j, _k, _l, _m, _n, _o, _p, _ref, _ref1;
     numNeighbors = makeNewGrid();
     for (x = _i = 0; 0 <= gridWidth ? _i < gridWidth : _i > gridWidth; x = 0 <= gridWidth ? ++_i : --_i) {
       for (y = _j = 0; 0 <= gridHeight ? _j < gridHeight : _j > gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
@@ -180,12 +180,14 @@ This code is Maddy approved.
     }
     context.fillStyle = rgb(0, 0, 0);
     background();
+    timeModifier = new Date().getTime() / 10000;
     for (x = _m = 0; 0 <= gridWidth ? _m < gridWidth : _m > gridWidth; x = 0 <= gridWidth ? ++_m : --_m) {
       for (y = _n = 0; 0 <= gridHeight ? _n < gridHeight : _n > gridHeight; y = 0 <= gridHeight ? ++_n : --_n) {
         age = ages[x][y];
         if (age !== 0) {
-          ageTillLoop = 50;
-          context.fillStyle = HSVtoRGB(age % ageTillLoop / ageTillLoop, 1, 1);
+          hue = Math.sqrt(age);
+          hue *= .2;
+          context.fillStyle = HSVtoRGB((hue + timeModifier) % 1, 1, 1);
           border = 3;
           context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border);
         }
@@ -272,16 +274,13 @@ This code is Maddy approved.
 
   mouseDown = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-  mouseDownCount = 0;
-
   $("#myCanvas").mousedown(function(event) {
     var buttonGridX, buttonGridY;
     ++mouseDown[event.which];
-    ++mouseDownCount;
-    if (event.which === 0) {
+    if (event.which === 1) {
       if (event.clientX < 2 * buttonWidth) {
-        buttonGridX = Math.floor(event.clientX / buttonWidth);
-        buttonGridY = Math.floor(event.clientY / buttonHeight);
+        buttonGridX = Math.floor(event.pageX / buttonWidth);
+        buttonGridY = Math.floor(event.pageY / buttonHeight);
         rules[buttonGridX][buttonGridY] = !rules[buttonGridX][buttonGridY];
         if (tutorialLevel === 3) {
           tutorialLevel++;
@@ -292,20 +291,19 @@ This code is Maddy approved.
   });
 
   $("#myCanvas").mouseup(function(event) {
-    --mouseDown[event.which];
-    return --mouseDownCount;
+    return --mouseDown[event.which];
   });
 
   $("#myCanvas").mousemove(function(event) {
     var d, gridX, gridY, x, y, _i, _j, _k, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _results;
     d = 2;
+    gridX = Math.floor(event.pageX / gridSpacing);
+    gridY = Math.floor(event.pageY / gridSpacing);
     if (mouseDown[1]) {
       if (tutorialLevel === 1) {
         tutorialLevel++;
         setTimeout(advanceTutorial, 0);
       }
-      gridX = Math.floor(event.clientX / gridSpacing);
-      gridY = Math.floor(event.clientY / gridSpacing);
       for (x = _i = _ref = gridX - d, _ref1 = gridX + 1 + d; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; x = _ref <= _ref1 ? ++_i : --_i) {
         for (y = _j = _ref2 = gridY - d, _ref3 = gridY + 1 + d; _ref2 <= _ref3 ? _j < _ref3 : _j > _ref3; y = _ref2 <= _ref3 ? ++_j : --_j) {
           inc(ages, x, y);
@@ -313,8 +311,6 @@ This code is Maddy approved.
       }
     }
     if (mouseDown[3]) {
-      gridX = Math.floor(event.clientX / gridSpacing);
-      gridY = Math.floor(event.clientY / gridSpacing);
       _results = [];
       for (x = _k = _ref4 = gridX - d, _ref5 = gridX + 1 + d; _ref4 <= _ref5 ? _k < _ref5 : _k > _ref5; x = _ref4 <= _ref5 ? ++_k : --_k) {
         _results.push((function() {
@@ -330,7 +326,7 @@ This code is Maddy approved.
     }
   });
 
-  $("#myCanvas").keypress(function(event) {
+  $("document").on("keydown", function(event) {
     return console.log(event.which);
   });
 
