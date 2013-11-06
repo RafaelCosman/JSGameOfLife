@@ -7,7 +7,7 @@ This code is Maddy approved.
 
 
 (function() {
-  var $, HSVtoRGB, advanceTutorial, ages, background, buttonHeight, buttonWidth, canvas, circle, context, createTutorialBox, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouse, mouseX, mouseY, randomGrid, randomizeGrid, rgb, rgba, rules, translate, tutorial, tutorialLevel, zero;
+  var $, HSVtoRGB, advanceTutorial, ages, background, buttonHeight, buttonWidth, canvas, circle, computeNextGeneration, context, draw, drawButtons, drawCells, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouse, mouseX, mouseY, randomGrid, randomizeGrid, rgb, rgba, rules, translate, tutorial, tutorialLevel, zero;
 
   $ = jQuery;
 
@@ -139,8 +139,89 @@ This code is Maddy approved.
     return rgb(Math.floor(r * 255), Math.floor(g * 255), Math.floor(b * 255));
   };
 
-  draw = function() {
-    var age, alpha, border, hue, numNeighbors, timeModifier, x, y, _i, _j, _k, _l, _m, _n, _o, _p, _ref, _ref1;
+  mouse = {
+    x: 0,
+    y: 0,
+    down: [false, false, false, false, false, false, false, false, false],
+    getX: function() {
+      return this.x;
+    },
+    getY: function() {
+      return this.y;
+    },
+    getButtonX: function() {
+      return Math.floor(this.x / buttonWidth);
+    },
+    getButtonY: function() {
+      return Math.floor(this.y / buttonHeight);
+    },
+    getGridX: function() {
+      return Math.floor(this.x / gridSpacing);
+    },
+    getGridY: function() {
+      return Math.floor(this.y / gridSpacing);
+    },
+    distanceTo: function(otherX, otherY) {
+      return Math.sqrt(Math.pow(otherX - this.x, 2) + Math.pow(otherY - this.y, 2));
+    }
+  };
+
+  $("#myCanvas").mousedown(function(event) {
+    mouse.down[event.which] = true;
+    if (event.which === 1) {
+      if (mouse.x < 2 * buttonWidth) {
+        rules[mouse.getButtonX()][mouse.getButtonY()] = !rules[mouse.getButtonX()][mouse.getButtonY()];
+        if (tutorialLevel === 3) {
+          tutorialLevel++;
+          setTimeout(advanceTutorial, 1000);
+          setTimeout(advanceTutorial, 3000);
+          setTimeout(advanceTutorial, 4000);
+          return setTimeout(advanceTutorial, 6000);
+        }
+      }
+    }
+  });
+
+  $("#myCanvas").mouseup(function(event) {
+    return mouse.down[event.which] = false;
+  });
+
+  $("#myCanvas").mousemove(function(event) {
+    var d, gridX, gridY, x, y, _i, _j, _k, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _results;
+    mouse.x = event.pageX;
+    mouse.y = event.pageY;
+    gridX = mouse.getGridX();
+    gridY = mouse.getGridY();
+    d = 2;
+    if (mouse.down[1]) {
+      if (tutorialLevel === 1) {
+        tutorialLevel++;
+        setTimeout(advanceTutorial, 1000);
+      }
+      for (x = _i = _ref = gridX - d, _ref1 = gridX + 1 + d; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; x = _ref <= _ref1 ? ++_i : --_i) {
+        for (y = _j = _ref2 = gridY - d, _ref3 = gridY + 1 + d; _ref2 <= _ref3 ? _j < _ref3 : _j > _ref3; y = _ref2 <= _ref3 ? ++_j : --_j) {
+          inc(ages, x, y);
+        }
+      }
+    }
+    if (mouse.down[3]) {
+      _results = [];
+      for (x = _k = _ref4 = gridX - d, _ref5 = gridX + 1 + d; _ref4 <= _ref5 ? _k < _ref5 : _k > _ref5; x = _ref4 <= _ref5 ? ++_k : --_k) {
+        _results.push((function() {
+          var _l, _ref6, _ref7, _results1;
+          _results1 = [];
+          for (y = _l = _ref6 = gridY - d, _ref7 = gridY + 1 + d; _ref6 <= _ref7 ? _l < _ref7 : _l > _ref7; y = _ref6 <= _ref7 ? ++_l : --_l) {
+            _results1.push(zero(ages, x, y));
+          }
+          return _results1;
+        })());
+      }
+      return _results;
+    }
+  });
+
+  computeNextGeneration = function() {
+    var numNeighbors, x, y, _i, _j, _k, _results;
     numNeighbors = makeNewGrid();
     for (x = _i = 0; 0 <= gridWidth ? _i < gridWidth : _i > gridWidth; x = 0 <= gridWidth ? ++_i : --_i) {
       for (y = _j = 0; 0 <= gridHeight ? _j < gridHeight : _j > gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
@@ -156,49 +237,87 @@ This code is Maddy approved.
         }
       }
     }
+    _results = [];
     for (x = _k = 0; 0 <= gridWidth ? _k < gridWidth : _k > gridWidth; x = 0 <= gridWidth ? ++_k : --_k) {
-      for (y = _l = 0; 0 <= gridHeight ? _l < gridHeight : _l > gridHeight; y = 0 <= gridHeight ? ++_l : --_l) {
-        if (rules[getBinaryThingey(ages[x][y])][numNeighbors[x][y]]) {
-          ages[x][y]++;
-        } else {
-          ages[x][y] = 0;
+      _results.push((function() {
+        var _l, _results1;
+        _results1 = [];
+        for (y = _l = 0; 0 <= gridHeight ? _l < gridHeight : _l > gridHeight; y = 0 <= gridHeight ? ++_l : --_l) {
+          if (rules[getBinaryThingey(ages[x][y])][numNeighbors[x][y]]) {
+            _results1.push(ages[x][y]++);
+          } else {
+            _results1.push(ages[x][y] = 0);
+          }
         }
-      }
+        return _results1;
+      })());
     }
+    return _results;
+  };
+
+  drawCells = function() {
+    var age, border, hue, mouseDistance, timeModifier, x, y, _i, _results;
+    timeModifier = new Date().getTime() / 10000;
+    _results = [];
+    for (x = _i = 0; 0 <= gridWidth ? _i < gridWidth : _i > gridWidth; x = 0 <= gridWidth ? ++_i : --_i) {
+      _results.push((function() {
+        var _j, _results1;
+        _results1 = [];
+        for (y = _j = 0; 0 <= gridHeight ? _j < gridHeight : _j > gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
+          age = ages[x][y];
+          if (age !== 0) {
+            mouseDistance = mouse.distanceTo(x * gridSpacing, y * gridSpacing) / 10;
+            hue = Math.sqrt(age);
+            hue *= .2;
+            context.fillStyle = HSVtoRGB((hue + timeModifier) % 1, 1 - 1 / mouseDistance, 1);
+            border = 3;
+            _results1.push(context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border));
+          } else {
+            _results1.push(void 0);
+          }
+        }
+        return _results1;
+      })());
+    }
+    return _results;
+  };
+
+  drawButtons = function() {
+    var alpha, x, y, _i, _ref, _results;
+    _results = [];
+    for (x = _i = 0, _ref = 1 + 1; 0 <= _ref ? _i < _ref : _i > _ref; x = 0 <= _ref ? ++_i : --_i) {
+      _results.push((function() {
+        var _j, _ref1, _results1;
+        _results1 = [];
+        for (y = _j = 0, _ref1 = 8 + 1; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
+          if (x === mouse.getButtonX() && y === mouse.getButtonY()) {
+            alpha = 1;
+          } else {
+            alpha = .5;
+          }
+          if (rules[x][y]) {
+            context.fillStyle = rgba(255, 255, 255, alpha);
+          } else {
+            context.fillStyle = rgba(0, 0, 0, alpha);
+          }
+          _results1.push(context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight));
+        }
+        return _results1;
+      })());
+    }
+    return _results;
+  };
+
+  draw = function() {
+    computeNextGeneration();
     context.fillStyle = rgb(0, 0, 0);
     background();
-    timeModifier = new Date().getTime() / 10000;
-    for (x = _m = 0; 0 <= gridWidth ? _m < gridWidth : _m > gridWidth; x = 0 <= gridWidth ? ++_m : --_m) {
-      for (y = _n = 0; 0 <= gridHeight ? _n < gridHeight : _n > gridHeight; y = 0 <= gridHeight ? ++_n : --_n) {
-        age = ages[x][y];
-        if (age !== 0) {
-          hue = Math.sqrt(age);
-          hue *= .2;
-          context.fillStyle = HSVtoRGB((hue + timeModifier) % 1, 1, 1);
-          border = 3;
-          context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border);
-        }
-      }
-    }
-    setTimeout(draw, 0);
-    for (x = _o = 0, _ref = 1 + 1; 0 <= _ref ? _o < _ref : _o > _ref; x = 0 <= _ref ? ++_o : --_o) {
-      for (y = _p = 0, _ref1 = 8 + 1; 0 <= _ref1 ? _p < _ref1 : _p > _ref1; y = 0 <= _ref1 ? ++_p : --_p) {
-        if (x === mouse.getButtonX() && y === mouse.getButtonY()) {
-          alpha = 1;
-        } else {
-          alpha = .5;
-        }
-        if (rules[x][y]) {
-          context.fillStyle = rgba(255, 255, 255, alpha);
-        } else {
-          context.fillStyle = rgba(0, 0, 0, alpha);
-        }
-        context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight);
-      }
-    }
+    drawCells();
+    drawButtons();
     context.save();
     tutorial();
-    return context.restore();
+    context.restore();
+    return setTimeout(draw, 0);
   };
 
   tutorial = function() {
@@ -222,12 +341,26 @@ This code is Maddy approved.
         context.fillText("Click on these buttons", 0, 0);
         return context.fillText("to change the rules", 0, 20);
       case 4:
+        break;
+      case 5:
+        context.translate(200, 70);
+        context.fillStyle = rgb(100, 100, 100);
+        context.fillRect(-10, -20, 320, 70);
+        context.fillStyle = rgb(255, 255, 255);
+        context.fillText("The left column tells", 0, 0);
+        context.fillText("how many neighbours a dead cell", 0, 20);
+        return context.fillText("needs in order to come to life", 0, 40);
+      case 6:
+        break;
+      case 7:
+        context.translate(200, 70);
+        context.fillStyle = rgb(100, 100, 100);
+        context.fillRect(-10, -20, 320, 70);
+        context.fillStyle = rgb(255, 255, 255);
+        context.fillText("The right column tells", 0, 0);
+        context.fillText("how many neighbours a live cell", 0, 20);
+        return context.fillText("needs in order to stay alive", 0, 40);
     }
-  };
-
-  createTutorialBox = function() {
-    context.fillStyle = "#FFFFFF";
-    return context.fillRect(100, 100, 100, 100);
   };
 
   advanceTutorial = function() {
@@ -236,19 +369,7 @@ This code is Maddy approved.
 
   tutorialLevel = 0;
 
-  setTimeout(advanceTutorial, 0);
-
-  mouse = {
-    x: 0,
-    y: 0,
-    down: [false, false, false, false, false, false, false, false, false],
-    getButtonX: function() {
-      return Math.floor(this.x / buttonWidth);
-    },
-    getButtonY: function() {
-      return Math.floor(this.y / buttonHeight);
-    }
-  };
+  setTimeout(advanceTutorial, 2000);
 
   canvas.width = window.innerWidth;
 
@@ -275,59 +396,5 @@ This code is Maddy approved.
   context.font = "20px Georgia";
 
   draw();
-
-  $("#myCanvas").mousedown(function(event) {
-    var buttonGridX, buttonGridY;
-    mouse.down[event.which] = true;
-    if (event.which === 1) {
-      if (mouse.x < 2 * buttonWidth) {
-        buttonGridX = Math.floor(mouse.x / buttonWidth);
-        buttonGridY = Math.floor(mouse.y / buttonHeight);
-        rules[buttonGridX][buttonGridY] = !rules[buttonGridX][buttonGridY];
-        if (tutorialLevel === 3) {
-          tutorialLevel++;
-          return setTimeout(advanceTutorial, 0);
-        }
-      }
-    }
-  });
-
-  $("#myCanvas").mouseup(function(event) {
-    return mouse.down[event.which] = false;
-  });
-
-  $("#myCanvas").mousemove(function(event) {
-    var d, gridX, gridY, x, y, _i, _j, _k, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _results;
-    mouse.x = event.pageX;
-    mouse.y = event.pageY;
-    gridX = Math.floor(mouse.x / gridSpacing);
-    gridY = Math.floor(mouse.y / gridSpacing);
-    d = 2;
-    if (mouse.down[1]) {
-      if (tutorialLevel === 1) {
-        tutorialLevel++;
-        setTimeout(advanceTutorial, 0);
-      }
-      for (x = _i = _ref = gridX - d, _ref1 = gridX + 1 + d; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; x = _ref <= _ref1 ? ++_i : --_i) {
-        for (y = _j = _ref2 = gridY - d, _ref3 = gridY + 1 + d; _ref2 <= _ref3 ? _j < _ref3 : _j > _ref3; y = _ref2 <= _ref3 ? ++_j : --_j) {
-          inc(ages, x, y);
-        }
-      }
-    }
-    if (mouse.down[3]) {
-      _results = [];
-      for (x = _k = _ref4 = gridX - d, _ref5 = gridX + 1 + d; _ref4 <= _ref5 ? _k < _ref5 : _k > _ref5; x = _ref4 <= _ref5 ? ++_k : --_k) {
-        _results.push((function() {
-          var _l, _ref6, _ref7, _results1;
-          _results1 = [];
-          for (y = _l = _ref6 = gridY - d, _ref7 = gridY + 1 + d; _ref6 <= _ref7 ? _l < _ref7 : _l > _ref7; y = _ref6 <= _ref7 ? ++_l : --_l) {
-            _results1.push(zero(ages, x, y));
-          }
-          return _results1;
-        })());
-      }
-      return _results;
-    }
-  });
 
 }).call(this);
