@@ -94,14 +94,78 @@ HSVtoRGB = (h, s, v) ->
 		  b = q
 
 	rgb(Math.floor(r*255), Math.floor(g*255), Math.floor(b*255))
+
+#Mouse IO
+#-------------------
+mouse = {
+	x: 0
+	y: 0
+	down: [ false, false, false, false, false, false, false, false, false ]
+	
+	getX: -> @x
+	getY: -> @y
+	
+	getButtonX: -> Math.floor(@x / buttonWidth)
+	getButtonY: -> Math.floor(@y / buttonHeight)
+	
+	getGridX: -> Math.floor(@x / gridSpacing)
+	getGridY: -> Math.floor(@y / gridSpacing)
+	
+	distanceTo: (otherX, otherY) -> Math.sqrt(Math.pow(otherX - @x, 2) + Math.pow(otherY - @y, 2))
+	}
+	
+$("#myCanvas").mousedown (event) ->
+	mouse.down[event.which] = true
   
+	if event.which is 1
+		if mouse.x < 2 * buttonWidth
+			rules[mouse.getButtonX()][mouse.getButtonY()] = !rules[mouse.getButtonX()][mouse.getButtonY()]
+			
+			if tutorialLevel == 3
+				tutorialLevel++
+				setTimeout(advanceTutorial, 1000)
+				setTimeout(advanceTutorial, 3000)
+				setTimeout(advanceTutorial, 4000)
+				setTimeout(advanceTutorial, 6000)
+
+$("#myCanvas").mouseup (event) ->
+	mouse.down[event.which] = false
+
+$("#myCanvas").mousemove (event) ->
+	mouse.x = event.pageX
+	mouse.y = event.pageY
+
+	gridX = mouse.getGridX()
+	gridY = mouse.getGridY()
+	
+	d = 2 #this is the size of the users brush to kill or create cells
+	
+	#If dragging with the left mouse button, create cells
+	if mouse.down[1]
+		if tutorialLevel == 1
+			tutorialLevel++
+			setTimeout(advanceTutorial, 1000)
+	
+		for x in [gridX-d...gridX+1+d]
+			for y in [gridY-d...gridY+1+d]
+				inc(ages, x, y)
+				
+	#If dragging with the right mouse button, kill cells
+	if mouse.down[3]
+		for x in [gridX-d...gridX+1+d]
+			for y in [gridY-d...gridY+1+d]
+				zero(ages, x, y)
+
+#Keyboard io
+#------------------------
+#I want to add space clears board
 
 #Run
 #----------------
-draw = () -> 
+computeNextGeneration = ->
 	numNeighbors = makeNewGrid()
 	
-	#Count up the number of neighbors each cell has
+	#Count up the number of neighbours each cell has
 	for x in [0...gridWidth]
 		for y in [0...gridHeight]
 			if ages[x][y] != 0
@@ -123,12 +187,8 @@ draw = () ->
 				ages[x][y]++
 			else
 				ages[x][y] = 0
-			
-	#Clear the background
-	context.fillStyle = rgb(0, 0, 0)
-	background()
-	
-	
+
+drawCells = ->
 	#Display the cells to the screen
 	timeModifier = new Date().getTime()/10000
 	
@@ -137,14 +197,15 @@ draw = () ->
 			age = ages[x][y]
 			
 			if age != 0
+				mouseDistance = mouse.distanceTo(x * gridSpacing, y * gridSpacing) / 10
+			
 				hue = Math.sqrt(age)
 				hue *= .2
-				context.fillStyle = HSVtoRGB((hue + timeModifier) % 1, 1, 1)
+				context.fillStyle = HSVtoRGB((hue + timeModifier) % 1, 1 - 1/mouseDistance, 1)
 				border = 3
 				context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border)
-
-	setTimeout(draw, 0)
-	
+				
+drawButtons = ->
 	#Draw the buttons
 	for x in [0...1+1] #this corresponds to life or death
 		for y in [0...8+1] #this is the number of neighbours
@@ -159,10 +220,23 @@ draw = () ->
 				context.fillStyle = rgba(0, 0, 0, alpha)
 				
 			context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight)
+				
+draw = -> 
+	computeNextGeneration()
+			
+	#Clear the background
+	context.fillStyle = rgb(0, 0, 0)
+	background()
+	
+	drawCells()
+	
+	drawButtons()
 	
 	context.save()
 	tutorial()
 	context.restore()
+	
+	setTimeout(draw, 0)
 	
 tutorial = () ->
 	switch tutorialLevel
@@ -191,29 +265,40 @@ tutorial = () ->
 			context.fillText("to change the rules", 0, 20)
 			#We'll wait until the user changes the rules
 		when 4 then
-			#now we need to explain the rules!
-	
-createTutorialBox = () ->
-	context.fillStyle = "#FFFFFF"
-	context.fillRect(100, 100, 100, 100)
+			#1 second
+		when 5
+			context.translate(200, 70)
+			
+			context.fillStyle = rgb(100, 100, 100)
+			context.fillRect(-10, -20, 320, 70)
+		
+			context.fillStyle = rgb(255, 255, 255)
+			context.fillText("The left column tells", 0, 0)
+			context.fillText("how many neighbours a dead cell", 0, 20)
+			context.fillText("needs in order to come to life", 0, 40)
+			#2 seconds
+		when 6 then
+			#half a second
+		when 7
+			context.translate(200, 70)
+			
+			context.fillStyle = rgb(100, 100, 100)
+			context.fillRect(-10, -20, 320, 70)
+		
+			context.fillStyle = rgb(255, 255, 255)
+			context.fillText("The right column tells", 0, 0)
+			context.fillText("how many neighbours a live cell", 0, 20)
+			context.fillText("needs in order to stay alive", 0, 40)
+			#2 seconds
 		
 advanceTutorial = () ->
 	tutorialLevel++
 	
 tutorialLevel = 0
-setTimeout(advanceTutorial, 0)
-		
+setTimeout(advanceTutorial, 2000)
+
 #Setup
 #----------
-mouse = {
-	x: 0,
-	y: 0,
-	down: [ false, false, false, false, false, false, false, false, false ]
-	
-	getButtonX: () -> return Math.floor(@x / buttonWidth)
-	getButtonY: () -> return Math.floor(@y / buttonHeight)
-	}
-
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
@@ -234,51 +319,3 @@ rules = [[false, false, false, true, false, false, false, false, false], [false,
 
 context.font="20px Georgia";
 draw()
-
-#Mouse IO
-#-------------------
-$("#myCanvas").mousedown (event) ->
-	mouse.down[event.which] = true
-  
-	if event.which is 1
-		if mouse.x < 2 * buttonWidth
-			buttonGridX = Math.floor(mouse.x / buttonWidth)
-			buttonGridY = Math.floor(mouse.y / buttonHeight)
-			
-			rules[buttonGridX][buttonGridY] = !rules[buttonGridX][buttonGridY]
-			
-			if tutorialLevel == 3
-				tutorialLevel++
-				setTimeout(advanceTutorial, 0)
-
-$("#myCanvas").mouseup (event) ->
-	mouse.down[event.which] = false
-
-$("#myCanvas").mousemove (event) ->
-	mouse.x = event.pageX
-	mouse.y = event.pageY
-
-	gridX = Math.floor(mouse.x / gridSpacing)
-	gridY = Math.floor(mouse.y / gridSpacing)
-	
-	d = 2 #this is the size of the users brush to kill or create cells
-	
-	#If dragging with the left mouse button, create cells
-	if mouse.down[1]
-		if tutorialLevel == 1
-			tutorialLevel++
-			setTimeout(advanceTutorial, 0)
-	
-		for x in [gridX-d...gridX+1+d]
-			for y in [gridY-d...gridY+1+d]
-				inc(ages, x, y)
-				
-	#If dragging with the right mouse button, kill cells
-	if mouse.down[3]
-		for x in [gridX-d...gridX+1+d]
-			for y in [gridY-d...gridY+1+d]
-				zero(ages, x, y)
-
-#Keyboard io
-#------------------------
-#I want to add space clears board
