@@ -53,7 +53,7 @@ inc = (arr, x, y) ->
 zero = (arr, x, y) ->
 	if x >= 0 and y >= 0 and x < arr.length and y < arr[0].length
 		arr[x][y] = 0
-
+		
 #hsl doesn't seem to work :(
 rgb = (r, g, b) ->
 	"rgb(" + r + "," + g + "," + b + ")"
@@ -61,51 +61,41 @@ rgba = (r, g, b, a) ->
 	"rgba(" + r + "," + g + "," + b + "," + a + ")"
 		
 HSVtoRGB = (h, s, v) ->
-  r = undefined
-  g = undefined
-  b = undefined
-  i = undefined
-  f = undefined
-  p = undefined
-  q = undefined
-  t = undefined
-  if h and s is `undefined` and v is `undefined`
-    s = h.s
-    v = h.v
-    h = h.h
-  i = Math.floor(h * 6)
-  f = h * 6 - i
-  p = v * (1 - s)
-  q = v * (1 - f * s)
-  t = v * (1 - (1 - f) * s)
-  switch i % 6
-    when 0
-      r = v
-      g = t
-      b = p
-    when 1
-      r = q
-      g = v
-      b = p
-    when 2
-      r = p
-      g = v
-      b = t
-    when 3
-      r = p
-      g = q
-      b = v
-    when 4
-      r = t
-      g = p
-      b = v
-    when 5
-      r = v
-      g = p
-      b = q
+	i = Math.floor(h * 6)
+	f = h * 6 - i
+	p = v * (1 - s)
+	q = v * (1 - f * s)
+	t = v * (1 - (1 - f) * s)
+	
+	switch i % 6
+		when 0
+		  r = v
+		  g = t
+		  b = p
+		when 1
+		  r = q
+		  g = v
+		  b = p
+		when 2
+		  r = p
+		  g = v
+		  b = t
+		when 3
+		  r = p
+		  g = q
+		  b = v
+		when 4
+		  r = t
+		  g = p
+		  b = v
+		when 5
+		  r = v
+		  g = p
+		  b = q
+
+	rgb(Math.floor(r*255), Math.floor(g*255), Math.floor(b*255))
   
-  rgb(Math.floor(r*255), Math.floor(g*255), Math.floor(b*255))
-			
+
 #Run
 #----------------
 draw = () -> 
@@ -157,11 +147,16 @@ draw = () ->
 	
 	#Draw the buttons
 	for x in [0...1+1] #this corresponds to life or death
-		for y in [0...8+1] #this is the number of neighbors
-			if rules[x][y]
-				context.fillStyle = rgba(255, 255, 255, .6)
+		for y in [0...8+1] #this is the number of neighbours
+			if x == mouse.getButtonX() and y == mouse.getButtonY()
+				alpha = 1
 			else
-				context.fillStyle = rgba(0, 0, 0, .5)
+				alpha = .5
+			
+			if rules[x][y]
+				context.fillStyle = rgba(255, 255, 255, alpha)
+			else
+				context.fillStyle = rgba(0, 0, 0, alpha)
 				
 			context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight)
 	
@@ -210,6 +205,15 @@ setTimeout(advanceTutorial, 0)
 		
 #Setup
 #----------
+mouse = {
+	x: 0,
+	y: 0,
+	down: [ false, false, false, false, false, false, false, false, false ]
+	
+	getButtonX: () -> return Math.floor(@x / buttonWidth)
+	getButtonY: () -> return Math.floor(@y / buttonHeight)
+	}
+
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
@@ -233,15 +237,13 @@ draw()
 
 #Mouse IO
 #-------------------
-mouseDown = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
-
 $("#myCanvas").mousedown (event) ->
-	++mouseDown[event.which]
+	mouse.down[event.which] = true
   
 	if event.which is 1
-		if event.clientX < 2 * buttonWidth
-			buttonGridX = Math.floor(event.pageX / buttonWidth)
-			buttonGridY = Math.floor(event.pageY / buttonHeight)
+		if mouse.x < 2 * buttonWidth
+			buttonGridX = Math.floor(mouse.x / buttonWidth)
+			buttonGridY = Math.floor(mouse.y / buttonHeight)
 			
 			rules[buttonGridX][buttonGridY] = !rules[buttonGridX][buttonGridY]
 			
@@ -250,16 +252,19 @@ $("#myCanvas").mousedown (event) ->
 				setTimeout(advanceTutorial, 0)
 
 $("#myCanvas").mouseup (event) ->
-	--mouseDown[event.which]
+	mouse.down[event.which] = false
 
 $("#myCanvas").mousemove (event) ->
-	d = 2
+	mouse.x = event.pageX
+	mouse.y = event.pageY
 
-	gridX = Math.floor(event.pageX / gridSpacing)
-	gridY = Math.floor(event.pageY / gridSpacing)
+	gridX = Math.floor(mouse.x / gridSpacing)
+	gridY = Math.floor(mouse.y / gridSpacing)
+	
+	d = 2 #this is the size of the users brush to kill or create cells
 	
 	#If dragging with the left mouse button, create cells
-	if mouseDown[1]
+	if mouse.down[1]
 		if tutorialLevel == 1
 			tutorialLevel++
 			setTimeout(advanceTutorial, 0)
@@ -269,13 +274,11 @@ $("#myCanvas").mousemove (event) ->
 				inc(ages, x, y)
 				
 	#If dragging with the right mouse button, kill cells
-	if mouseDown[3]
+	if mouse.down[3]
 		for x in [gridX-d...gridX+1+d]
 			for y in [gridY-d...gridY+1+d]
 				zero(ages, x, y)
-  
+
 #Keyboard io
 #------------------------
 #I want to add space clears board
-$("document").on("keydown", (event) ->
-	console.log(event.which))

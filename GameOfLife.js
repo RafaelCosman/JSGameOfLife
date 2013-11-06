@@ -7,7 +7,7 @@ This code is Maddy approved.
 
 
 (function() {
-  var $, HSVtoRGB, advanceTutorial, ages, background, buttonHeight, buttonWidth, canvas, circle, context, createTutorialBox, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouseDown, mouseX, mouseY, randomGrid, randomizeGrid, rgb, rgba, rules, translate, tutorial, tutorialLevel, zero;
+  var $, HSVtoRGB, advanceTutorial, ages, background, buttonHeight, buttonWidth, canvas, circle, context, createTutorialBox, draw, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouse, mouseX, mouseY, randomGrid, randomizeGrid, rgb, rgba, rules, translate, tutorial, tutorialLevel, zero;
 
   $ = jQuery;
 
@@ -100,19 +100,6 @@ This code is Maddy approved.
 
   HSVtoRGB = function(h, s, v) {
     var b, f, g, i, p, q, r, t;
-    r = void 0;
-    g = void 0;
-    b = void 0;
-    i = void 0;
-    f = void 0;
-    p = void 0;
-    q = void 0;
-    t = void 0;
-    if (h && s === undefined && v === undefined) {
-      s = h.s;
-      v = h.v;
-      h = h.h;
-    }
     i = Math.floor(h * 6);
     f = h * 6 - i;
     p = v * (1 - s);
@@ -153,7 +140,7 @@ This code is Maddy approved.
   };
 
   draw = function() {
-    var age, border, hue, numNeighbors, timeModifier, x, y, _i, _j, _k, _l, _m, _n, _o, _p, _ref, _ref1;
+    var age, alpha, border, hue, numNeighbors, timeModifier, x, y, _i, _j, _k, _l, _m, _n, _o, _p, _ref, _ref1;
     numNeighbors = makeNewGrid();
     for (x = _i = 0; 0 <= gridWidth ? _i < gridWidth : _i > gridWidth; x = 0 <= gridWidth ? ++_i : --_i) {
       for (y = _j = 0; 0 <= gridHeight ? _j < gridHeight : _j > gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
@@ -196,10 +183,15 @@ This code is Maddy approved.
     setTimeout(draw, 0);
     for (x = _o = 0, _ref = 1 + 1; 0 <= _ref ? _o < _ref : _o > _ref; x = 0 <= _ref ? ++_o : --_o) {
       for (y = _p = 0, _ref1 = 8 + 1; 0 <= _ref1 ? _p < _ref1 : _p > _ref1; y = 0 <= _ref1 ? ++_p : --_p) {
-        if (rules[x][y]) {
-          context.fillStyle = rgba(255, 255, 255, .6);
+        if (x === mouse.getButtonX() && y === mouse.getButtonY()) {
+          alpha = 1;
         } else {
-          context.fillStyle = rgba(0, 0, 0, .5);
+          alpha = .5;
+        }
+        if (rules[x][y]) {
+          context.fillStyle = rgba(255, 255, 255, alpha);
+        } else {
+          context.fillStyle = rgba(0, 0, 0, alpha);
         }
         context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight);
       }
@@ -246,6 +238,18 @@ This code is Maddy approved.
 
   setTimeout(advanceTutorial, 0);
 
+  mouse = {
+    x: 0,
+    y: 0,
+    down: [false, false, false, false, false, false, false, false, false],
+    getButtonX: function() {
+      return Math.floor(this.x / buttonWidth);
+    },
+    getButtonY: function() {
+      return Math.floor(this.y / buttonHeight);
+    }
+  };
+
   canvas.width = window.innerWidth;
 
   canvas.height = window.innerHeight;
@@ -272,15 +276,13 @@ This code is Maddy approved.
 
   draw();
 
-  mouseDown = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-
   $("#myCanvas").mousedown(function(event) {
     var buttonGridX, buttonGridY;
-    ++mouseDown[event.which];
+    mouse.down[event.which] = true;
     if (event.which === 1) {
-      if (event.clientX < 2 * buttonWidth) {
-        buttonGridX = Math.floor(event.pageX / buttonWidth);
-        buttonGridY = Math.floor(event.pageY / buttonHeight);
+      if (mouse.x < 2 * buttonWidth) {
+        buttonGridX = Math.floor(mouse.x / buttonWidth);
+        buttonGridY = Math.floor(mouse.y / buttonHeight);
         rules[buttonGridX][buttonGridY] = !rules[buttonGridX][buttonGridY];
         if (tutorialLevel === 3) {
           tutorialLevel++;
@@ -291,15 +293,17 @@ This code is Maddy approved.
   });
 
   $("#myCanvas").mouseup(function(event) {
-    return --mouseDown[event.which];
+    return mouse.down[event.which] = false;
   });
 
   $("#myCanvas").mousemove(function(event) {
     var d, gridX, gridY, x, y, _i, _j, _k, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _results;
+    mouse.x = event.pageX;
+    mouse.y = event.pageY;
+    gridX = Math.floor(mouse.x / gridSpacing);
+    gridY = Math.floor(mouse.y / gridSpacing);
     d = 2;
-    gridX = Math.floor(event.pageX / gridSpacing);
-    gridY = Math.floor(event.pageY / gridSpacing);
-    if (mouseDown[1]) {
+    if (mouse.down[1]) {
       if (tutorialLevel === 1) {
         tutorialLevel++;
         setTimeout(advanceTutorial, 0);
@@ -310,7 +314,7 @@ This code is Maddy approved.
         }
       }
     }
-    if (mouseDown[3]) {
+    if (mouse.down[3]) {
       _results = [];
       for (x = _k = _ref4 = gridX - d, _ref5 = gridX + 1 + d; _ref4 <= _ref5 ? _k < _ref5 : _k > _ref5; x = _ref4 <= _ref5 ? ++_k : --_k) {
         _results.push((function() {
@@ -324,10 +328,6 @@ This code is Maddy approved.
       }
       return _results;
     }
-  });
-
-  $("document").on("keydown", function(event) {
-    return console.log(event.which);
   });
 
 }).call(this);
