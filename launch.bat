@@ -1,6 +1,4 @@
-call coffee --compile GameOfLife.coffee
+call compile
 
 git add *.js
 git commit -m "compiled coffeescript to javascript"
-
-pause

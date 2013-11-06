@@ -13,12 +13,6 @@ context = canvas.getContext("2d");
 
 #Wrappers
 #---------------
-translate = (x, y) ->
-	context.translate(x, y)
-
-fillRect = (width, height) ->
-	context.fillRect(0, 0, width, height)
-
 circle = (radius) ->
 	context.arc(0, 0, radius, 0, 2 * Math.PI, false);
 
@@ -124,9 +118,9 @@ $("#myCanvas").mousedown (event) ->
 			if tutorialLevel == 3
 				tutorialLevel++
 				setTimeout(advanceTutorial, 1000)
-				setTimeout(advanceTutorial, 3000)
 				setTimeout(advanceTutorial, 4000)
-				setTimeout(advanceTutorial, 6000)
+				setTimeout(advanceTutorial, 5000)
+				setTimeout(advanceTutorial, 8000)
 
 $("#myCanvas").mouseup (event) ->
 	mouse.down[event.which] = false
@@ -159,6 +153,27 @@ $("#myCanvas").mousemove (event) ->
 #Keyboard io
 #------------------------
 #I want to add space clears board
+
+#Window Resize event
+$(window).resize ->
+	canvas.width = window.innerWidth
+	canvas.height = window.innerHeight
+
+	buttonWidth = 50
+	buttonHeight = canvas.height / 9
+
+	gridSpacing = 15
+	border = 3
+
+	gridWidth = canvas.width / gridSpacing
+	gridHeight = canvas.width / gridSpacing
+
+	mouseX = 0
+	mouseY = 0
+
+	#context.shadowBlur = 20
+
+	ages = randomGrid()
 
 #Run
 #----------------
@@ -197,12 +212,9 @@ drawCells = ->
 			age = ages[x][y]
 			
 			if age != 0
-				mouseDistance = mouse.distanceTo(x * gridSpacing, y * gridSpacing) / 10
-			
 				hue = Math.sqrt(age)
 				hue *= .2
-				context.fillStyle = HSVtoRGB((hue + timeModifier) % 1, 1 - 1/mouseDistance, 1)
-				border = 3
+				context.fillStyle = HSVtoRGB((hue + timeModifier) % 1, 1, 1)
 				context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border)
 				
 drawButtons = ->
@@ -229,6 +241,11 @@ draw = ->
 	background()
 	
 	drawCells()
+	
+	#Highlight the current cell
+	if ages[mouse.getGridX()][mouse.getGridY()] != 0
+		context.fillStyle = rgba(255, 255, 255, .7)
+		context.fillRect(mouse.getGridX() * gridSpacing, mouse.getGridY() * gridSpacing, gridSpacing-border, gridSpacing-border)
 	
 	drawButtons()
 	
@@ -306,6 +323,8 @@ buttonWidth = 50
 buttonHeight = canvas.height / 9
 
 gridSpacing = 15
+border = 3
+
 gridWidth = canvas.width / gridSpacing
 gridHeight = canvas.width / gridSpacing
 

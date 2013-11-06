@@ -7,21 +7,13 @@ This code is Maddy approved.
 
 
 (function() {
-  var $, HSVtoRGB, advanceTutorial, ages, background, buttonHeight, buttonWidth, canvas, circle, computeNextGeneration, context, draw, drawButtons, drawCells, fillRect, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouse, mouseX, mouseY, randomGrid, randomizeGrid, rgb, rgba, rules, translate, tutorial, tutorialLevel, zero;
+  var $, HSVtoRGB, advanceTutorial, ages, background, border, buttonHeight, buttonWidth, canvas, circle, computeNextGeneration, context, draw, drawButtons, drawCells, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouse, mouseX, mouseY, randomGrid, randomizeGrid, rgb, rgba, rules, tutorial, tutorialLevel, zero;
 
   $ = jQuery;
 
   canvas = document.getElementById("myCanvas");
 
   context = canvas.getContext("2d");
-
-  translate = function(x, y) {
-    return context.translate(x, y);
-  };
-
-  fillRect = function(width, height) {
-    return context.fillRect(0, 0, width, height);
-  };
 
   circle = function(radius) {
     return context.arc(0, 0, radius, 0, 2 * Math.PI, false);
@@ -174,9 +166,9 @@ This code is Maddy approved.
         if (tutorialLevel === 3) {
           tutorialLevel++;
           setTimeout(advanceTutorial, 1000);
-          setTimeout(advanceTutorial, 3000);
           setTimeout(advanceTutorial, 4000);
-          return setTimeout(advanceTutorial, 6000);
+          setTimeout(advanceTutorial, 5000);
+          return setTimeout(advanceTutorial, 8000);
         }
       }
     }
@@ -220,6 +212,21 @@ This code is Maddy approved.
     }
   });
 
+  $(window).resize(function() {
+    var ages, border, buttonHeight, buttonWidth, gridHeight, gridSpacing, gridWidth, mouseX, mouseY;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    buttonWidth = 50;
+    buttonHeight = canvas.height / 9;
+    gridSpacing = 15;
+    border = 3;
+    gridWidth = canvas.width / gridSpacing;
+    gridHeight = canvas.width / gridSpacing;
+    mouseX = 0;
+    mouseY = 0;
+    return ages = randomGrid();
+  });
+
   computeNextGeneration = function() {
     var numNeighbors, x, y, _i, _j, _k, _results;
     numNeighbors = makeNewGrid();
@@ -256,7 +263,7 @@ This code is Maddy approved.
   };
 
   drawCells = function() {
-    var age, border, hue, mouseDistance, timeModifier, x, y, _i, _results;
+    var age, hue, timeModifier, x, y, _i, _results;
     timeModifier = new Date().getTime() / 10000;
     _results = [];
     for (x = _i = 0; 0 <= gridWidth ? _i < gridWidth : _i > gridWidth; x = 0 <= gridWidth ? ++_i : --_i) {
@@ -266,11 +273,9 @@ This code is Maddy approved.
         for (y = _j = 0; 0 <= gridHeight ? _j < gridHeight : _j > gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
           age = ages[x][y];
           if (age !== 0) {
-            mouseDistance = mouse.distanceTo(x * gridSpacing, y * gridSpacing) / 10;
             hue = Math.sqrt(age);
             hue *= .2;
-            context.fillStyle = HSVtoRGB((hue + timeModifier) % 1, 1 - 1 / mouseDistance, 1);
-            border = 3;
+            context.fillStyle = HSVtoRGB((hue + timeModifier) % 1, 1, 1);
             _results1.push(context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border));
           } else {
             _results1.push(void 0);
@@ -313,6 +318,10 @@ This code is Maddy approved.
     context.fillStyle = rgb(0, 0, 0);
     background();
     drawCells();
+    if (ages[mouse.getGridX()][mouse.getGridY()] !== 0) {
+      context.fillStyle = rgba(255, 255, 255, .7);
+      context.fillRect(mouse.getGridX() * gridSpacing, mouse.getGridY() * gridSpacing, gridSpacing - border, gridSpacing - border);
+    }
     drawButtons();
     context.save();
     tutorial();
@@ -380,6 +389,8 @@ This code is Maddy approved.
   buttonHeight = canvas.height / 9;
 
   gridSpacing = 15;
+
+  border = 3;
 
   gridWidth = canvas.width / gridSpacing;
 
