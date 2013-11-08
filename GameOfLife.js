@@ -7,9 +7,11 @@ This code is Maddy approved.
 
 
 (function() {
-  var $, HSVtoRGB, advanceTutorial, ages, background, border, buttonHeight, buttonWidth, canvas, circle, computeNextGeneration, context, draw, drawButtons, drawCells, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouse, mouseX, mouseY, randomGrid, randomizeGrid, rgb, rgba, rules, tutorial, tutorialLevel, zero;
+  var $, HSVtoRGB, advanceTutorial, ages, background, border, buttonHeight, buttonWidth, canvas, circle, computeNextGeneration, context, draw, drawButtons, drawCells, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouse, mouseX, mouseY, randomGrid, randomizeGrid, rgb, rgba, root, rules, tutorial, tutorialLevel, zero;
 
   $ = jQuery;
+
+  root = typeof exports !== "undefined" && exports !== null ? exports : this;
 
   canvas = document.getElementById("myCanvas");
 
@@ -41,9 +43,20 @@ This code is Maddy approved.
     return _results;
   };
 
-  randomizeGrid = function() {
-    var ages;
-    return ages = randomGrid;
+  this.clearGrid = function() {
+    var x, y, _i, _results;
+    _results = [];
+    for (x = _i = 0; 0 <= gridWidth ? _i < gridWidth : _i > gridWidth; x = 0 <= gridWidth ? ++_i : --_i) {
+      _results.push((function() {
+        var _j, _results1;
+        _results1 = [];
+        for (y = _j = 0; 0 <= gridHeight ? _j < gridHeight : _j > gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
+          _results1.push(ages[x][y] = 0);
+        }
+        return _results1;
+      })());
+    }
+    return _results;
   };
 
   randomGrid = function() {
@@ -55,6 +68,22 @@ This code is Maddy approved.
         _results1 = [];
         for (y = _j = 0; 0 <= gridHeight ? _j < gridHeight : _j > gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
           _results1.push(Math.floor(Math.random() + .4));
+        }
+        return _results1;
+      })());
+    }
+    return _results;
+  };
+
+  randomizeGrid = function() {
+    var x, y, _i, _results;
+    _results = [];
+    for (x = _i = 0; 0 <= gridWidth ? _i < gridWidth : _i > gridWidth; x = 0 <= gridWidth ? ++_i : --_i) {
+      _results.push((function() {
+        var _j, _results1;
+        _results1 = [];
+        for (y = _j = 0; 0 <= gridHeight ? _j < gridHeight : _j > gridHeight; y = 0 <= gridHeight ? ++_j : --_j) {
+          _results1.push(ages[x][y] = Math.floor(Math.random() + .4));
         }
         return _results1;
       })());
@@ -129,6 +158,15 @@ This code is Maddy approved.
         b = q;
     }
     return rgb(Math.floor(r * 255), Math.floor(g * 255), Math.floor(b * 255));
+  };
+
+  this.help = function() {
+    root.helpShown = !root.helpShown;
+    return root.paused = root.helpShown;
+  };
+
+  this.pause = function() {
+    return root.paused = !root.paused;
   };
 
   mouse = {
@@ -213,18 +251,13 @@ This code is Maddy approved.
   });
 
   $(window).resize(function() {
-    var ages, border, buttonHeight, buttonWidth, gridHeight, gridSpacing, gridWidth, mouseX, mouseY;
+    var buttonHeight, buttonWidth, gridHeight, gridWidth;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     buttonWidth = 50;
     buttonHeight = canvas.height / 9;
-    gridSpacing = 15;
-    border = 3;
     gridWidth = canvas.width / gridSpacing;
-    gridHeight = canvas.width / gridSpacing;
-    mouseX = 0;
-    mouseY = 0;
-    return ages = randomGrid();
+    return gridHeight = canvas.width / gridSpacing;
   });
 
   computeNextGeneration = function() {
@@ -314,7 +347,9 @@ This code is Maddy approved.
   };
 
   draw = function() {
-    computeNextGeneration();
+    if (!root.paused) {
+      computeNextGeneration();
+    }
     context.fillStyle = rgb(0, 0, 0);
     background();
     drawCells();
@@ -403,6 +438,10 @@ This code is Maddy approved.
   ages = randomGrid();
 
   rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]];
+
+  root.helpShown = false;
+
+  root.paused = false;
 
   context.font = "20px Georgia";
 

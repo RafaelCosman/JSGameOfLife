@@ -5,6 +5,7 @@ This code is Maddy approved.
 ###
 
 $ = jQuery
+root = exports ? this
 
 #Get the canvas
 #---------------
@@ -22,18 +23,23 @@ background = () ->
 
 #More serious functions
 #------------------------
-makeNewGrid = () ->
+makeNewGrid = ->
 	for x in [0...gridWidth]
 		for y in [0...gridHeight]
 			0
-			
-randomizeGrid = () ->
-	ages = randomGrid
-			
-randomGrid = () ->
+@clearGrid = ->
+	for x in [0...gridWidth]
+		for y in [0...gridHeight]
+			ages[x][y] = 0
+	
+randomGrid = ->
 	for x in [0...gridWidth]
 		for y in [0...gridHeight]
 			Math.floor(Math.random() + .4)
+randomizeGrid = ->
+	for x in [0...gridWidth]
+		for y in [0...gridHeight]
+			ages[x][y] = Math.floor(Math.random() + .4)
 			
 getBinaryThingey = (num) ->
 	if num == 0
@@ -89,6 +95,14 @@ HSVtoRGB = (h, s, v) ->
 
 	rgb(Math.floor(r*255), Math.floor(g*255), Math.floor(b*255))
 
+#Button presses
+@help = ->
+	root.helpShown = !root.helpShown
+	root.paused = root.helpShown
+	
+@pause = ->
+	root.paused = !root.paused
+	
 #Mouse IO
 #-------------------
 mouse = {
@@ -162,18 +176,9 @@ $(window).resize ->
 	buttonWidth = 50
 	buttonHeight = canvas.height / 9
 
-	gridSpacing = 15
-	border = 3
-
 	gridWidth = canvas.width / gridSpacing
 	gridHeight = canvas.width / gridSpacing
 
-	mouseX = 0
-	mouseY = 0
-
-	#context.shadowBlur = 20
-
-	ages = randomGrid()
 
 #Run
 #----------------
@@ -234,7 +239,8 @@ drawButtons = ->
 			context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight)
 				
 draw = -> 
-	computeNextGeneration()
+	if !root.paused
+		computeNextGeneration()
 			
 	#Clear the background
 	context.fillStyle = rgb(0, 0, 0)
@@ -242,7 +248,7 @@ draw = ->
 	
 	drawCells()
 	
-	#Highlight the current cell
+	#Highlight the cell the mouse is over
 	if ages[mouse.getGridX()][mouse.getGridY()] != 0
 		context.fillStyle = rgba(255, 255, 255, .7)
 		context.fillRect(mouse.getGridX() * gridSpacing, mouse.getGridY() * gridSpacing, gridSpacing-border, gridSpacing-border)
@@ -331,10 +337,14 @@ gridHeight = canvas.width / gridSpacing
 mouseX = 0
 mouseY = 0
 
-#context.shadowBlur = 20
-
 ages = randomGrid()
 rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]]
+
+root.helpShown = false
+root.paused = false
+
+#Arrange rule buttons
+$("#ruleButton00").offset({position:absolute, top:0, left:0})
 
 context.font="20px Georgia";
 draw()

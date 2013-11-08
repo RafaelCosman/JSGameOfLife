@@ -22,43 +22,28 @@
 		olark.identify('2271-458-10-8073');/*]]>*/</script><noscript><a href="https://www.olark.com/site/2271-458-10-8073/contact" title="Contact us" target="_blank">Questions? Feedback?</a> powered by <a href="http://www.olark.com?welcome" title="Olark live chat software">Olark live chat software</a></noscript>
 		<!-- end olark code -->
 
-		<link rel="stylesheet" type="text/css" href="mystyle.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 
 	<body>
-		<canvas id="myCanvas" oncontextmenu="return false;"></canvas>
+		<canvas id="myCanvas" style="left:100px" oncontextmenu="return false;"></canvas>
 		
-		<button type="button">Click Me!</button>
+		<button type="button" style="right:500px;" class="unselectable actionButton" onclick="clearGrid()">Clear</button>
+		<button type="button" style="right:400px;" class="unselectable actionButton" onclick="help()">Help</button>
+		<button type="button" style="right:300px;" class="unselectable actionButton" onclick="pause()">Pause</button>
 
-		<script type="text/javascript">
-		function requestFullScreen(element) {
-		//This is a failed script intended to have the page ask to be fullscreen
-			// Supports most browsers and their versions.
-			var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+		<!-- Here are the help elements -->
+		<button type="button" style="top:200px; right:100px" class="helpBox">Left click and drag to create new cells</button>
+		<button type="button" style="top:100px; left:100px" class="helpBox">Click on these buttons to change the rules</button>
 
-			if (requestMethod) { // Native full screen.
-				requestMethod.call(element);
-			} else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
-				var wscript = new ActiveXObject("WScript.Shell");
-				if (wscript !== null) {
-					wscript.SendKeys("{F11}");
-				}
-			}
-		}
+		<!-- Here are the buttons to change the rules -->
+		<button id="ruleButton00" type="button" class="ruleButton">0</button>	
 
-		var elem = document.body; // Make the body go full screen.
-		requestFullScreen(elem);
-		</script>
-
-		<style>
-		* { margin:0; padding:0; } /* to remove the top and left whitespace */
-		html, body { width:100%; height:100%; } /* just to be sure these are full screen*/
-		canvas { display:block; } /* To remove the scrollbars */
-		</style>
-
+		<!-- Now we'll load JQuery -->
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 		<!--<script type="text/javascript" src="ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>-->
 
+		<!-- Now we'll load the game -->
 		<script type="text/javascript" src="GameOfLife.js"></script>
 	</body>
 </html>
