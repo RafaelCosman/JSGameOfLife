@@ -7,7 +7,7 @@ This code is Maddy approved.
 
 
 (function() {
-  var $, HSVtoRGB, advanceTutorial, ages, background, border, buttonHeight, buttonWidth, canvas, circle, computeNextGeneration, context, draw, drawButtons, drawCells, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouse, mouseX, mouseY, randomGrid, randomizeGrid, rgb, rgba, root, rules, tutorial, tutorialLevel, zero;
+  var $, HSVtoRGB, ages, background, border, buttonHeight, buttonWidth, canvas, circle, computeNextGeneration, context, draw, drawButtons, drawCells, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, makeNewGrid, mouse, mouseX, mouseY, randomGrid, randomizeGrid, rgb, rgba, root, rules, zero;
 
   $ = jQuery;
 
@@ -162,7 +162,12 @@ This code is Maddy approved.
 
   this.help = function() {
     root.helpShown = !root.helpShown;
-    return root.paused = root.helpShown;
+    root.paused = root.helpShown;
+    if (helpShown) {
+      return $(".helpBox").css("visibility", "visible");
+    } else {
+      return $(".helpBox").css("visibility", "hidden");
+    }
   };
 
   this.pause = function() {
@@ -200,14 +205,7 @@ This code is Maddy approved.
     mouse.down[event.which] = true;
     if (event.which === 1) {
       if (mouse.x < 2 * buttonWidth) {
-        rules[mouse.getButtonX()][mouse.getButtonY()] = !rules[mouse.getButtonX()][mouse.getButtonY()];
-        if (tutorialLevel === 3) {
-          tutorialLevel++;
-          setTimeout(advanceTutorial, 1000);
-          setTimeout(advanceTutorial, 4000);
-          setTimeout(advanceTutorial, 5000);
-          return setTimeout(advanceTutorial, 8000);
-        }
+        return rules[mouse.getButtonX()][mouse.getButtonY()] = !rules[mouse.getButtonX()][mouse.getButtonY()];
       }
     }
   });
@@ -224,10 +222,6 @@ This code is Maddy approved.
     gridY = mouse.getGridY();
     d = 2;
     if (mouse.down[1]) {
-      if (tutorialLevel === 1) {
-        tutorialLevel++;
-        setTimeout(advanceTutorial, 1000);
-      }
       for (x = _i = _ref = gridX - d, _ref1 = gridX + 1 + d; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; x = _ref <= _ref1 ? ++_i : --_i) {
         for (y = _j = _ref2 = gridY - d, _ref3 = gridY + 1 + d; _ref2 <= _ref3 ? _j < _ref3 : _j > _ref3; y = _ref2 <= _ref3 ? ++_j : --_j) {
           inc(ages, x, y);
@@ -338,7 +332,17 @@ This code is Maddy approved.
           } else {
             context.fillStyle = rgba(0, 0, 0, alpha);
           }
-          _results1.push(context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight));
+          context.save();
+          context.translate(buttonWidth * x, buttonHeight * y);
+          context.fillRect(0, 0, buttonWidth, buttonHeight);
+          context.fillStyle = rgb(0, 0, 200);
+          context.translate(buttonWidth / 2 - 12, buttonHeight / 2 + 5);
+          if (x === 0) {
+            context.fillText("D" + y, 0, 0);
+          } else {
+            context.fillText("A" + y, 0, 0);
+          }
+          _results1.push(context.restore());
         }
         return _results1;
       })());
@@ -358,62 +362,8 @@ This code is Maddy approved.
       context.fillRect(mouse.getGridX() * gridSpacing, mouse.getGridY() * gridSpacing, gridSpacing - border, gridSpacing - border);
     }
     drawButtons();
-    context.save();
-    tutorial();
-    context.restore();
     return setTimeout(draw, 0);
   };
-
-  tutorial = function() {
-    switch (tutorialLevel) {
-      case 0:
-        break;
-      case 1:
-        context.translate(canvas.width - 250, 70);
-        context.fillStyle = rgb(100, 100, 100);
-        context.fillRect(-10, -20, 200, 50);
-        context.fillStyle = rgb(255, 255, 255);
-        context.fillText("Left-click and drag", 0, 0);
-        return context.fillText("to create new cells", 0, 20);
-      case 2:
-        break;
-      case 3:
-        context.translate(200, 70);
-        context.fillStyle = rgb(100, 100, 100);
-        context.fillRect(-10, -20, 220, 50);
-        context.fillStyle = rgb(255, 255, 255);
-        context.fillText("Click on these buttons", 0, 0);
-        return context.fillText("to change the rules", 0, 20);
-      case 4:
-        break;
-      case 5:
-        context.translate(200, 70);
-        context.fillStyle = rgb(100, 100, 100);
-        context.fillRect(-10, -20, 320, 70);
-        context.fillStyle = rgb(255, 255, 255);
-        context.fillText("The left column tells", 0, 0);
-        context.fillText("how many neighbours a dead cell", 0, 20);
-        return context.fillText("needs in order to come to life", 0, 40);
-      case 6:
-        break;
-      case 7:
-        context.translate(200, 70);
-        context.fillStyle = rgb(100, 100, 100);
-        context.fillRect(-10, -20, 320, 70);
-        context.fillStyle = rgb(255, 255, 255);
-        context.fillText("The right column tells", 0, 0);
-        context.fillText("how many neighbours a live cell", 0, 20);
-        return context.fillText("needs in order to stay alive", 0, 40);
-    }
-  };
-
-  advanceTutorial = function() {
-    return tutorialLevel++;
-  };
-
-  tutorialLevel = 0;
-
-  setTimeout(advanceTutorial, 2000);
 
   canvas.width = window.innerWidth;
 
@@ -442,6 +392,8 @@ This code is Maddy approved.
   root.helpShown = false;
 
   root.paused = false;
+
+  $("#ruleButton00").css("position:absolute, top:0, left:0");
 
   context.font = "20px Georgia";
 
