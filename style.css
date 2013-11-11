@@ -61,14 +61,17 @@ canvas { display:block; } /* To remove the scrollbars */
 .helpBox {
 	position:absolute;
 	visibility:hidden;
+	border:100px;
 
 	-moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
 	box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );
 	background:-moz-linear-gradient( center top, #79bbff 5%, #378de5 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#378de5');
 	background-color:#79bbff;
+	
 	-webkit-border-top-left-radius:20px;
 	-moz-border-radius-topleft:20px;
 	border-top-left-radius:20px;
@@ -93,4 +96,38 @@ canvas { display:block; } /* To remove the scrollbars */
 	text-decoration:none;
 	text-align:center;
 	text-shadow:1px 1px 0px #528ecc;
+}
+
+.tableHeader {
+	color:rgb(255, 255, 255	);
+	text-align:center;
+
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );
+	background:-moz-linear-gradient( center top, #79bbff 5%, #378de5 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#378de5');
+	background-color:#79bbff;
+}
+
+.ruleButton {
+	color:rgb(255, 255, 255	);
+	text-align:center;
+
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );
+	background:-moz-linear-gradient( center top, #79bbff 5%, #378de5 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#378de5');
+	background-color:#79bbff;
+}
+.ruleButton:hover {
+	color:rgb(255, 0, 0);
+}
+.ruleButton:active {
+	color:rgb(0, 0, 255);
+}
+.ruleButton.down {
+	color:rbg(0, 255, 255);
+
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #09bbff), color-stop(1, #078de5) );
+	background:-moz-linear-gradient( center top, #09bbff 5%, #078de5 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#09bbff', endColorstr='#078de5');
+	background-color:#09bbff;
 }

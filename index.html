@@ -33,11 +33,55 @@
 		<button type="button" style="right:300px;" class="unselectable actionButton" onclick="pause()">Pause</button>
 
 		<!-- Here are the help elements -->
-		<button type="button" style="top:200px; right:100px" class="helpBox">Left click and drag to create new cells</button>
-		<button type="button" style="top:100px; left:100px" class="helpBox">Click on these buttons to change the rules</button>
+		<button id="tutorialCreateCells" type="button" style="top:200px; right:100px" class="helpBox">Left click and drag to create new cells</button>
+		<button id="tutorialChangeRules" type="button" style="top:100px; left:100px" class="helpBox">Click on these buttons to change the rules</button>
+		<button id="tutorialRulesLeft" type="button" style="top:200px; left:100px" class="helpBox">The left column determines if dead cells will come to life</button>
+		<button id="tutorialRulesRight" type="button" style="top:300px; left:100px" class="helpBox">The right column determines if live cells will stay alive</button>
+		<button id="tutorialRulesRight" type="button" style="top:400px; left:100px" class="helpBox">The row correscponds to how many neighbors a cell has</button>
 
-		<!-- Here are the buttons to change the rules -->
-		<!--<button id="ruleButton00" type="button" class="ruleButton">0</button>-->
+
+		<table border="1" style="position:absolute; top:0px; left:0px; height:100%;">
+		  <tr>
+		    <th style="height:50px;" class="tableHeader">Dead</th>
+		    <th style="height:50px;" class="tableHeader">Alive</th>
+		  </tr>
+		  <tr>
+		    <td type="button" class="ruleButton" onclick="toggleRule(0, 0)">0</td>
+		    <td type="button" class="ruleButton" onclick="toggleRule(1, 0)">0</td>
+		  </tr>
+		  <tr>
+		    <td type="button" class="ruleButton" onclick="toggleRule(0, 1)">1</td>
+		    <td type="button" class="ruleButton" onclick="toggleRule(1, 1)">1</td>
+		  </tr>
+		  <tr>
+		    <td type="button" class="ruleButton" onclick="toggleRule(0, 2)">2</td>
+		    <td type="button" class="ruleButton" onclick="toggleRule(1, 2)">2</td>
+		  </tr>
+		  <tr>
+		    <td type="button" class="ruleButton" onclick="toggleRule(0, 3)">3</td>
+		    <td type="button" class="ruleButton" onclick="toggleRule(1, 3)">3</td>
+		  </tr>
+		  <tr>
+		    <td type="button" class="ruleButton" onclick="toggleRule(0, 4)">4</td>
+		    <td type="button" class="ruleButton" onclick="toggleRule(1, 4)">4</td>
+		  </tr>
+		  <tr>
+		    <td type="button" class="ruleButton" onclick="toggleRule(0, 5)">5</td>
+		    <td type="button" class="ruleButton" onclick="toggleRule(1, 5)">5</td>
+		  </tr>
+		  <tr>
+		    <td type="button" class="ruleButton" onclick="toggleRule(0, 6)">6</td>
+		    <td type="button" class="ruleButton" onclick="toggleRule(1, 6)">6</td>
+		  </tr>
+		  <tr>
+		    <td type="button" class="ruleButton" onclick="toggleRule(0, 7)">7</td>
+		    <td type="button" class="ruleButton" onclick="toggleRule(1, 7)">7</td>
+		  </tr>
+		  <tr>
+		    <td type="button" class="ruleButton" onclick="toggleRule(0, 8)">8</td>
+		    <td type="button" class="ruleButton" onclick="toggleRule(1, 8)">8</td>
+		  </tr>
+		</table>
 
 		<!-- Now we'll load JQuery -->
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>

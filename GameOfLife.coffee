@@ -14,12 +14,18 @@ context = canvas.getContext("2d");
 
 #Wrappers
 #---------------
-circle = (radius) ->
-	context.arc(0, 0, radius, 0, 2 * Math.PI, false);
-
-background = () ->
+background = ->
 	bigNum = 100000
 	context.fillRect(-bigNum, -bigNum, 2*bigNum, 2*bigNum)
+
+"""
+jQueryKey should be a string like
+#myID
+"""
+setVisible = (jQueryKey) ->
+	$(jQueryKey).css("visibility", "visible")
+setHidden = (jQueryKey) ->
+	$(jQueryKey).css("visibility", "hidden")
 
 #More serious functions
 #------------------------
@@ -107,6 +113,9 @@ HSVtoRGB = (h, s, v) ->
 
 @pause = ->
 	root.paused = !root.paused
+
+@toggleRule = (x, y) ->
+	rules[x][y] = !rules[x][y]
 	
 #Mouse IO
 #-------------------
@@ -132,6 +141,8 @@ $("#myCanvas").mousedown (event) ->
   
 	if event.which is 1
 		if mouse.x < 2 * buttonWidth
+			userHasChangedRules = true
+
 			rules[mouse.getButtonX()][mouse.getButtonY()] = !rules[mouse.getButtonX()][mouse.getButtonY()]
 
 $("#myCanvas").mouseup (event) ->
@@ -148,12 +159,19 @@ $("#myCanvas").mousemove (event) ->
 	
 	#If dragging with the left mouse button, create cells
 	if mouse.down[1]
+		userHasCreatedCells = true
+		setHidden("#tutorialCreateCells")
+		if not userHasChangedRules
+			setVisible("#tutorialChangeRules")
+
 		for x in [gridX-d...gridX+1+d]
 			for y in [gridY-d...gridY+1+d]
 				inc(ages, x, y)
 				
 	#If dragging with the right mouse button, kill cells
 	if mouse.down[3]
+		userHasDeletedCells = true
+
 		for x in [gridX-d...gridX+1+d]
 			for y in [gridY-d...gridY+1+d]
 				zero(ages, x, y)
@@ -215,33 +233,7 @@ drawCells = ->
 				hue *= .2
 				context.fillStyle = HSVtoRGB((hue + timeModifier) % 1, 1, 1)
 				context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border)
-				
-drawButtons = ->
-	#Draw the buttons
-	for x in [0...1+1] #this corresponds to life or death
-		for y in [0...8+1] #this is the number of neighbours
-			if x == mouse.getButtonX() and y == mouse.getButtonY()
-				alpha = 1
-			else
-				alpha = .5
-			
-			if rules[x][y]
-				context.fillStyle = rgba(255, 255, 255, alpha)
-			else
-				context.fillStyle = rgba(0, 0, 0, alpha)
-			
-			context.save()
-			context.translate(buttonWidth * x, buttonHeight * y)
-			context.fillRect(0, 0, buttonWidth, buttonHeight)
 
-			context.fillStyle = rgb(0, 0, 200)
-			context.translate(buttonWidth/2 - 12, buttonHeight/2 + 5)
-			if x == 0
-				context.fillText("D" + y, 0, 0)
-			else
-				context.fillText("A" + y, 0, 0)
-
-			context.restore()
 draw = -> 
 	if !root.paused
 		computeNextGeneration()
@@ -257,12 +249,21 @@ draw = ->
 		context.fillStyle = rgba(255, 255, 255, .7)
 		context.fillRect(mouse.getGridX() * gridSpacing, mouse.getGridY() * gridSpacing, gridSpacing-border, gridSpacing-border)
 	
-	drawButtons()
-	
 	setTimeout(draw, 0)
 
 #Setup
 #----------
+$(document).ready ->
+  $("a#button").click ->
+    $(this).toggleClass "down"
+
+#Tutorial stuff
+userHasCreatedCells = false
+userHasChangedRules = false
+userHasDeletedCells = false
+
+setTimeout(setVisible("#tutorialCreateCells"), 1000)
+
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
@@ -285,7 +286,7 @@ root.helpShown = false
 root.paused = false
 
 #Arrange rule buttons
-$("#ruleButton00").css("position:absolute, top:0, left:0")
+$("#ruleButton00").css("position:absolute, top:0, right:0")
 
 context.font="20px Georgia";
 draw()
