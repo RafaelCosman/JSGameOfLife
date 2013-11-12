@@ -9,17 +9,23 @@ root = exports ? this
 
 #Get the canvas
 #---------------
-canvas = document.getElementById("myCanvas");
-context = canvas.getContext("2d");
+canvas = document.getElementById "myCanvas"
+context = canvas.getContext "2d"
 
 #Wrappers
 #---------------
-circle = (radius) ->
-	context.arc(0, 0, radius, 0, 2 * Math.PI, false);
-
-background = () ->
+background = ->
 	bigNum = 100000
-	context.fillRect(-bigNum, -bigNum, 2*bigNum, 2*bigNum)
+	context.fillRect -bigNum, -bigNum, 2*bigNum, 2*bigNum
+
+###
+jQueryKey should be a string like
+#myID
+###
+setVisible = (jQueryKey) ->
+	($ jQueryKey).css "visibility", "visible"
+setHidden = (jQueryKey) ->
+	($ jQueryKey).css "visibility", "hidden"
 
 #More serious functions
 #------------------------
@@ -35,11 +41,11 @@ makeNewGrid = ->
 randomGrid = ->
 	for x in [0...gridWidth]
 		for y in [0...gridHeight]
-			Math.floor(Math.random() + .4)
+			Math.floor(Math.random() + 0.4)
 randomizeGrid = ->
 	for x in [0...gridWidth]
 		for y in [0...gridHeight]
-			ages[x][y] = Math.floor(Math.random() + .4)
+			ages[x][y] = Math.floor(Math.random() + 0.4)
 			
 getBinaryThingey = (num) ->
 	if num == 0
@@ -100,8 +106,16 @@ HSVtoRGB = (h, s, v) ->
 	root.helpShown = !root.helpShown
 	root.paused = root.helpShown
 	
+	if helpShown
+		setVisible ".helpBox"
+	else
+		setHidden ".helpBox"
+
 @pause = ->
 	root.paused = !root.paused
+
+@toggleRule = (x, y) ->
+	rules[x][y] = !rules[x][y]
 	
 #Mouse IO
 #-------------------
@@ -124,18 +138,6 @@ mouse = {
 	
 $("#myCanvas").mousedown (event) ->
 	mouse.down[event.which] = true
-  
-	if event.which is 1
-		if mouse.x < 2 * buttonWidth
-			rules[mouse.getButtonX()][mouse.getButtonY()] = !rules[mouse.getButtonX()][mouse.getButtonY()]
-			
-			if tutorialLevel == 3
-				tutorialLevel++
-				setTimeout(advanceTutorial, 1000)
-				setTimeout(advanceTutorial, 4000)
-				setTimeout(advanceTutorial, 5000)
-				setTimeout(advanceTutorial, 8000)
-
 $("#myCanvas").mouseup (event) ->
 	mouse.down[event.which] = false
 
@@ -150,16 +152,19 @@ $("#myCanvas").mousemove (event) ->
 	
 	#If dragging with the left mouse button, create cells
 	if mouse.down[1]
-		if tutorialLevel == 1
-			tutorialLevel++
-			setTimeout(advanceTutorial, 1000)
-	
+		userHasCreatedCells = true
+		setHidden "#tutorialCreateCells"
+		if not userHasChangedRules
+			setVisible "#tutorialChangeRules"
+
 		for x in [gridX-d...gridX+1+d]
 			for y in [gridY-d...gridY+1+d]
 				inc(ages, x, y)
 				
 	#If dragging with the right mouse button, kill cells
 	if mouse.down[3]
+		userHasDeletedCells = true
+
 		for x in [gridX-d...gridX+1+d]
 			for y in [gridY-d...gridY+1+d]
 				zero(ages, x, y)
@@ -218,26 +223,10 @@ drawCells = ->
 			
 			if age != 0
 				hue = Math.sqrt(age)
-				hue *= .2
+				hue *= 0.2
 				context.fillStyle = HSVtoRGB((hue + timeModifier) % 1, 1, 1)
 				context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border)
-				
-drawButtons = ->
-	#Draw the buttons
-	for x in [0...1+1] #this corresponds to life or death
-		for y in [0...8+1] #this is the number of neighbours
-			if x == mouse.getButtonX() and y == mouse.getButtonY()
-				alpha = 1
-			else
-				alpha = .5
-			
-			if rules[x][y]
-				context.fillStyle = rgba(255, 255, 255, alpha)
-			else
-				context.fillStyle = rgba(0, 0, 0, alpha)
-				
-			context.fillRect(buttonWidth * x, buttonHeight * y, buttonWidth, buttonHeight)
-				
+
 draw = -> 
 	if !root.paused
 		computeNextGeneration()
@@ -250,78 +239,33 @@ draw = ->
 	
 	#Highlight the cell the mouse is over
 	if ages[mouse.getGridX()][mouse.getGridY()] != 0
-		context.fillStyle = rgba(255, 255, 255, .7)
+		context.fillStyle = rgba(255, 255, 255, 0.7)
 		context.fillRect(mouse.getGridX() * gridSpacing, mouse.getGridY() * gridSpacing, gridSpacing-border, gridSpacing-border)
 	
-	drawButtons()
-	
-	context.save()
-	tutorial()
-	context.restore()
-	
 	setTimeout(draw, 0)
-	
-tutorial = () ->
-	switch tutorialLevel
-		when 0 then
-			#2 seconds
-		when 1
-			context.translate(canvas.width-250, 70)
-			
-			context.fillStyle = rgb(100, 100, 100)
-			context.fillRect(-10, -20, 200, 50)
-			
-			context.fillStyle = rgb(255, 255, 255) 
-			context.fillText("Left-click and drag", 0, 0)
-			context.fillText("to create new cells", 0, 20)
-			#We'll wait until the user makes some cells
-		when 2 then
-			#1 second
-		when 3
-			context.translate(200, 70)
-			
-			context.fillStyle = rgb(100, 100, 100)
-			context.fillRect(-10, -20, 220, 50)
-		
-			context.fillStyle = rgb(255, 255, 255)
-			context.fillText("Click on these buttons", 0, 0)
-			context.fillText("to change the rules", 0, 20)
-			#We'll wait until the user changes the rules
-		when 4 then
-			#1 second
-		when 5
-			context.translate(200, 70)
-			
-			context.fillStyle = rgb(100, 100, 100)
-			context.fillRect(-10, -20, 320, 70)
-		
-			context.fillStyle = rgb(255, 255, 255)
-			context.fillText("The left column tells", 0, 0)
-			context.fillText("how many neighbours a dead cell", 0, 20)
-			context.fillText("needs in order to come to life", 0, 40)
-			#2 seconds
-		when 6 then
-			#half a second
-		when 7
-			context.translate(200, 70)
-			
-			context.fillStyle = rgb(100, 100, 100)
-			context.fillRect(-10, -20, 320, 70)
-		
-			context.fillStyle = rgb(255, 255, 255)
-			context.fillText("The right column tells", 0, 0)
-			context.fillText("how many neighbours a live cell", 0, 20)
-			context.fillText("needs in order to stay alive", 0, 40)
-			#2 seconds
-		
-advanceTutorial = () ->
-	tutorialLevel++
-	
-tutorialLevel = 0
-setTimeout(advanceTutorial, 2000)
 
 #Setup
 #----------
+($ ".ruleButton").click ->
+	($ this).toggleClass "down"
+
+	if not userHasChangedRules
+		userHasChangedRules = true
+		setHidden "#tutorialChangeRules"
+		
+		setTimeout (-> setVisible "#tutorialLeftCol"), 1000
+		setTimeout (-> setHidden "#tutorialLeftCol"), 5000
+		
+		setTimeout (-> setVisible "#tutorialRightCol"), 5000
+		setTimeout (-> setHidden "#tutorialRightCol"), 9000
+
+#Tutorial stuff
+userHasCreatedCells = false
+userHasChangedRules = false
+userHasDeletedCells = false
+
+setTimeout (-> setVisible "#tutorialCreateCells"), 1000
+
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
@@ -342,9 +286,6 @@ rules = [[false, false, false, true, false, false, false, false, false], [false,
 
 root.helpShown = false
 root.paused = false
-
-#Arrange rule buttons
-$("#ruleButton00").offset({position:absolute, top:0, left:0})
 
 context.font="20px Georgia";
 draw()

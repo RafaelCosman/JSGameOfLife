@@ -1,0 +1,152 @@
+//Regular buttons
+$buttonTop: #78a5ff;
+$buttonBottom: #63c1ff;
+
+$buttonTopHover: $buttonTop;
+$buttonBottomHover: #aaccff;
+
+//Rule buttons
+$ruleButtonTop: $buttonTop;
+$ruleButtonBottom: $buttonBottom;
+
+$ruleButtonTopHover: $buttonTopHover;
+$ruleButtonBottomHover: $buttonBottomHover;
+
+$ruleButtonTopDown: #000000;
+$ruleButtonBottomDown: #000000;
+
+//All curved buttons should use this
+$buttonBorderRadius: 20px;
+
+$shadowColor: #fce2c1;
+
+@mixin shadow($shadowColor) {
+	-moz-box-shadow:inset -1px 1px 0px -1px $shadowColor;
+	-webkit-box-shadow:inset -1px 1px 0px -1px $shadowColor;
+	box-shadow:inset -1px 1px 0px -1px $shadowColor;
+}
+
+@mixin borderRadius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+       -o-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin backgroundGradient($top, $bottom) {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, $top), color-stop(1, $bottom) );
+	background:-moz-linear-gradient( center top, $top 5%, $bottom 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
+	background-color:#000000;
+}
+
+* { margin:0; padding:0; } /* to remove the top and left whitespace */
+html, body { width:100%; height:100%; font-size:5} /* just to be sure these are full screen*/
+canvas { display:block; } /* To remove the scrollbars */
+
+.unselectable {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.actionButton {
+	position:absolute;
+	bottom:0px;
+
+	@include shadow($shadowColor);
+
+	@include backgroundGradient($buttonTop, $buttonBottom);
+	
+	-webkit-border-top-left-radius:$buttonBorderRadius;
+	-moz-border-radius-topleft:$buttonBorderRadius;
+	border-top-left-radius:$buttonBorderRadius;
+	-webkit-border-top-right-radius:$buttonBorderRadius;
+	-moz-border-radius-topright:$buttonBorderRadius;
+	border-top-right-radius:$buttonBorderRadius;
+
+	-webkit-border-bottom-right-radius:0px;
+	-moz-border-radius-bottomright:0px;
+	border-bottom-right-radius:0px;
+	-webkit-border-bottom-left-radius:0px;
+	-moz-border-radius-bottomleft:0px;
+	border-bottom-left-radius:0px;
+
+	text-indent:0px;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	font-weight:normal;
+	font-style:normal;
+	height:40px;
+	line-height:40px;
+	width:86px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #020214;
+}
+.actionButton:hover {
+	@include backgroundGradient($buttonTopHover, $buttonBottomHover);
+
+}.actionButton:active {
+	
+}
+
+.helpBox {
+	position:absolute;
+	visibility:hidden;
+	border:100px;
+
+	-moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	
+	@include backgroundGradient($buttonTop, $buttonBottom);
+	
+	@include borderRadius($buttonBorderRadius);
+
+	text-indent:0;
+	border:1px solid #84bbf3;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	line-height:50px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #528ecc;
+}
+
+.tableHeader {
+	color:rgb(255, 255, 255	);
+	text-align:center;
+
+	@include backgroundGradient($ruleButtonTop, $ruleButtonBottom);
+}
+
+.ruleButton {
+	color:rgb(255, 255, 255	);
+	text-align:center;
+
+	@include backgroundGradient($ruleButtonTop, $ruleButtonBottom);
+}
+.ruleButton:hover {
+	color:rgb(255, 0, 0);
+
+	@include backgroundGradient($ruleButtonTopHover, $ruleButtonBottomHover)
+}
+.ruleButton:active {
+	color:rgb(0, 0, 255);
+}
+.ruleButton.down {
+	color:rbg(0, 255, 255);
+
+	@include backgroundGradient($ruleButtonTopDown, $ruleButtonBottomDown);
+}
