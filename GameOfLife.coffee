@@ -9,23 +9,23 @@ root = exports ? this
 
 #Get the canvas
 #---------------
-canvas = document.getElementById("myCanvas");
-context = canvas.getContext("2d");
+canvas = document.getElementById "myCanvas"
+context = canvas.getContext "2d"
 
 #Wrappers
 #---------------
 background = ->
 	bigNum = 100000
-	context.fillRect(-bigNum, -bigNum, 2*bigNum, 2*bigNum)
+	context.fillRect -bigNum, -bigNum, 2*bigNum, 2*bigNum
 
-"""
+###
 jQueryKey should be a string like
 #myID
-"""
+###
 setVisible = (jQueryKey) ->
-	$(jQueryKey).css("visibility", "visible")
+	($ jQueryKey).css "visibility", "visible"
 setHidden = (jQueryKey) ->
-	$(jQueryKey).css("visibility", "hidden")
+	($ jQueryKey).css "visibility", "hidden"
 
 #More serious functions
 #------------------------
@@ -41,11 +41,11 @@ makeNewGrid = ->
 randomGrid = ->
 	for x in [0...gridWidth]
 		for y in [0...gridHeight]
-			Math.floor(Math.random() + .4)
+			Math.floor(Math.random() + 0.4)
 randomizeGrid = ->
 	for x in [0...gridWidth]
 		for y in [0...gridHeight]
-			ages[x][y] = Math.floor(Math.random() + .4)
+			ages[x][y] = Math.floor(Math.random() + 0.4)
 			
 getBinaryThingey = (num) ->
 	if num == 0
@@ -107,9 +107,9 @@ HSVtoRGB = (h, s, v) ->
 	root.paused = root.helpShown
 	
 	if helpShown
-		setVisible(".helpBox")
+		setVisible ".helpBox"
 	else
-		setHidden(".helpBox")
+		setHidden ".helpBox"
 
 @pause = ->
 	root.paused = !root.paused
@@ -138,23 +138,6 @@ mouse = {
 	
 $("#myCanvas").mousedown (event) ->
 	mouse.down[event.which] = true
-  
-	if event.which is 1
-		if mouse.x < 2 * buttonWidth
-			if not userHasChangedRules
-				userHasChangedRules = true
-				setHidden("#tutorialChangeRules")
-				
-				setTimeout(setVisible("#tutorialLeftCol"), 1000)
-				setTimeout(setHidden("#tutorialLeftCol"), 3000)
-				
-				setTimeout(setVisible("#tutorialRightCol"), 3000)
-				setTimeout(setHidden("#tutorialRightCol"), 5000)
-
-				setTimeout(setVisible("#tutorial"))
-
-			rules[mouse.getButtonX()][mouse.getButtonY()] = !rules[mouse.getButtonX()][mouse.getButtonY()]
-
 $("#myCanvas").mouseup (event) ->
 	mouse.down[event.which] = false
 
@@ -170,9 +153,9 @@ $("#myCanvas").mousemove (event) ->
 	#If dragging with the left mouse button, create cells
 	if mouse.down[1]
 		userHasCreatedCells = true
-		setHidden("#tutorialCreateCells")
+		setHidden "#tutorialCreateCells"
 		if not userHasChangedRules
-			setVisible("#tutorialChangeRules")
+			setVisible "#tutorialChangeRules"
 
 		for x in [gridX-d...gridX+1+d]
 			for y in [gridY-d...gridY+1+d]
@@ -240,7 +223,7 @@ drawCells = ->
 			
 			if age != 0
 				hue = Math.sqrt(age)
-				hue *= .2
+				hue *= 0.2
 				context.fillStyle = HSVtoRGB((hue + timeModifier) % 1, 1, 1)
 				context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border)
 
@@ -256,24 +239,32 @@ draw = ->
 	
 	#Highlight the cell the mouse is over
 	if ages[mouse.getGridX()][mouse.getGridY()] != 0
-		context.fillStyle = rgba(255, 255, 255, .7)
+		context.fillStyle = rgba(255, 255, 255, 0.7)
 		context.fillRect(mouse.getGridX() * gridSpacing, mouse.getGridY() * gridSpacing, gridSpacing-border, gridSpacing-border)
 	
 	setTimeout(draw, 0)
 
 #Setup
 #----------
-$ ->
-  $(".ruleButton").click ->
-    $(this).toggleClass "down"
-    console.log("TEST")
+($ ".ruleButton").click ->
+	($ this).toggleClass "down"
+
+	if not userHasChangedRules
+		userHasChangedRules = true
+		setHidden "#tutorialChangeRules"
+		
+		setTimeout (-> setVisible "#tutorialLeftCol"), 1000
+		setTimeout (-> setHidden "#tutorialLeftCol"), 5000
+		
+		setTimeout (-> setVisible "#tutorialRightCol"), 5000
+		setTimeout (-> setHidden "#tutorialRightCol"), 9000
 
 #Tutorial stuff
 userHasCreatedCells = false
 userHasChangedRules = false
 userHasDeletedCells = false
 
-setTimeout(setVisible("#tutorialCreateCells"), 1000)
+setTimeout (-> setVisible "#tutorialCreateCells"), 1000
 
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
@@ -292,14 +283,7 @@ mouseY = 0
 
 ages = randomGrid()
 rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]]
-$("#ruleTable").item(1 * 9 + 3).click()
-###
-for x in [0...1+1]
-	for y in [0...9+1]
-		if rules[x][y]
-			$("#ruleTable").cells[x * 9 + y]
-			console.log(x * 9 + y)
-###
+
 root.helpShown = false
 root.paused = false
 

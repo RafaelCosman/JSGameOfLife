@@ -5,7 +5,8 @@
 /* to remove the top and left whitespace */
 html, body {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  font-size: 5; }
 
 /* just to be sure these are full screen*/
 canvas {
