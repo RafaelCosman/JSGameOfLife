@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+/* to remove the top and left whitespace */
+html, body {
+  width: 100%;
+  height: 100%; }
+
+/* just to be sure these are full screen*/
+canvas {
+  display: block; }
+
+/* To remove the scrollbars */
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.actionButton {
+  position: absolute;
+  bottom: 0px;
+  -moz-box-shadow: inset -1px 1px 0px -1px #fce2c1;
+  -webkit-box-shadow: inset -1px 1px 0px -1px #fce2c1;
+  box-shadow: inset -1px 1px 0px -1px #fce2c1;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #78a5ff), color-stop(1, #63c1ff));
+  background: -moz-linear-gradient(center top, #78a5ff 5%, #63c1ff 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
+  background-color: #000000;
+  -webkit-border-top-left-radius: 20px;
+  -moz-border-radius-topleft: 20px;
+  border-top-left-radius: 20px;
+  -webkit-border-top-right-radius: 20px;
+  -moz-border-radius-topright: 20px;
+  border-top-right-radius: 20px;
+  -webkit-border-bottom-right-radius: 0px;
+  -moz-border-radius-bottomright: 0px;
+  border-bottom-right-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  border-bottom-left-radius: 0px;
+  text-indent: 0px;
+  display: inline-block;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 17px;
+  font-weight: normal;
+  font-style: normal;
+  height: 40px;
+  line-height: 40px;
+  width: 86px;
+  text-decoration: none;
+  text-align: center;
+  text-shadow: 1px 1px 0px #020214; }
+
+.actionButton:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #78a5ff), color-stop(1, #aaccff));
+  background: -moz-linear-gradient(center top, #78a5ff 5%, #aaccff 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
+  background-color: #000000; }
+
+.helpBox {
+  position: absolute;
+  visibility: hidden;
+  border: 100px;
+  -moz-box-shadow: inset 0px 1px 0px 0px #bbdaf7;
+  -webkit-box-shadow: inset 0px 1px 0px 0px #bbdaf7;
+  box-shadow: inset 0px 1px 0px 0px #bbdaf7;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #78a5ff), color-stop(1, #63c1ff));
+  background: -moz-linear-gradient(center top, #78a5ff 5%, #63c1ff 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
+  background-color: #000000;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  border-radius: 20px;
+  text-indent: 0;
+  border: 1px solid #84bbf3;
+  display: inline-block;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 50px;
+  text-decoration: none;
+  text-align: center;
+  text-shadow: 1px 1px 0px #528ecc; }
+
+.tableHeader {
+  color: white;
+  text-align: center;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #78a5ff), color-stop(1, #63c1ff));
+  background: -moz-linear-gradient(center top, #78a5ff 5%, #63c1ff 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
+  background-color: #000000; }
+
+.ruleButton {
+  color: white;
+  text-align: center;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #78a5ff), color-stop(1, #63c1ff));
+  background: -moz-linear-gradient(center top, #78a5ff 5%, #63c1ff 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
+  background-color: #000000; }
+
+.ruleButton:hover {
+  color: red;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #78a5ff), color-stop(1, #aaccff));
+  background: -moz-linear-gradient(center top, #78a5ff 5%, #aaccff 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
+  background-color: #000000; }
+
+.ruleButton:active {
+  color: blue; }
+
+.ruleButton.down {
+  color: rbg(0, 255, 255);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, black), color-stop(1, black));
+  background: -moz-linear-gradient(center top, black 5%, black 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
+  background-color: #000000; }

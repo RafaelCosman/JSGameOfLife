@@ -107,9 +107,9 @@ HSVtoRGB = (h, s, v) ->
 	root.paused = root.helpShown
 	
 	if helpShown
-		$(".helpBox").css("visibility","visible")
+		setVisible(".helpBox")
 	else
-		$(".helpBox").css("visibility","hidden")
+		setHidden(".helpBox")
 
 @pause = ->
 	root.paused = !root.paused
@@ -141,7 +141,17 @@ $("#myCanvas").mousedown (event) ->
   
 	if event.which is 1
 		if mouse.x < 2 * buttonWidth
-			userHasChangedRules = true
+			if not userHasChangedRules
+				userHasChangedRules = true
+				setHidden("#tutorialChangeRules")
+				
+				setTimeout(setVisible("#tutorialLeftCol"), 1000)
+				setTimeout(setHidden("#tutorialLeftCol"), 3000)
+				
+				setTimeout(setVisible("#tutorialRightCol"), 3000)
+				setTimeout(setHidden("#tutorialRightCol"), 5000)
+
+				setTimeout(setVisible("#tutorial"))
 
 			rules[mouse.getButtonX()][mouse.getButtonY()] = !rules[mouse.getButtonX()][mouse.getButtonY()]
 
@@ -253,9 +263,10 @@ draw = ->
 
 #Setup
 #----------
-$(document).ready ->
-  $("a#button").click ->
+$ ->
+  $(".ruleButton").click ->
     $(this).toggleClass "down"
+    console.log("TEST")
 
 #Tutorial stuff
 userHasCreatedCells = false
@@ -281,12 +292,16 @@ mouseY = 0
 
 ages = randomGrid()
 rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]]
-
+$("#ruleTable").item(1 * 9 + 3).click()
+###
+for x in [0...1+1]
+	for y in [0...9+1]
+		if rules[x][y]
+			$("#ruleTable").cells[x * 9 + y]
+			console.log(x * 9 + y)
+###
 root.helpShown = false
 root.paused = false
-
-#Arrange rule buttons
-$("#ruleButton00").css("position:absolute, top:0, right:0")
 
 context.font="20px Georgia";
 draw()

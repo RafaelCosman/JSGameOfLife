@@ -22,7 +22,7 @@
 		olark.identify('2271-458-10-8073');/*]]>*/</script><noscript><a href="https://www.olark.com/site/2271-458-10-8073/contact" title="Contact us" target="_blank">Questions? Feedback?</a> powered by <a href="http://www.olark.com?welcome" title="Olark live chat software">Olark live chat software</a></noscript>
 		<!-- end olark code -->
 
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 
 	<body>
@@ -35,12 +35,12 @@
 		<!-- Here are the help elements -->
 		<button id="tutorialCreateCells" type="button" style="top:200px; right:100px" class="helpBox">Left click and drag to create new cells</button>
 		<button id="tutorialChangeRules" type="button" style="top:100px; left:100px" class="helpBox">Click on these buttons to change the rules</button>
-		<button id="tutorialRulesLeft" type="button" style="top:200px; left:100px" class="helpBox">The left column determines if dead cells will come to life</button>
-		<button id="tutorialRulesRight" type="button" style="top:300px; left:100px" class="helpBox">The right column determines if live cells will stay alive</button>
-		<button id="tutorialRulesRight" type="button" style="top:400px; left:100px" class="helpBox">The row correscponds to how many neighbors a cell has</button>
+		<button id="tutorialLeftCol" type="button" style="top:200px; left:100px" class="helpBox">The left column determines if dead cells will come to life</button>
+		<button id="tutorialRightCol" type="button" style="top:300px; left:100px" class="helpBox">The right column determines if live cells will stay alive</button>
+		<button id="tutorialRow" type="button" style="top:400px; left:100px" class="helpBox">The row correscponds to how many neighbors a cell has</button>
 
 
-		<table border="1" style="position:absolute; top:0px; left:0px; height:100%;">
+		<table id="ruleTable" border="1" style="position:absolute; top:0px; left:0px; height:100%;">
 		  <tr>
 		    <th style="height:50px;" class="tableHeader">Dead</th>
 		    <th style="height:50px;" class="tableHeader">Alive</th>
@@ -55,11 +55,11 @@
 		  </tr>
 		  <tr>
 		    <td type="button" class="ruleButton" onclick="toggleRule(0, 2)">2</td>
-		    <td type="button" class="ruleButton" onclick="toggleRule(1, 2)">2</td>
+		    <td type="button" class="ruleButton down" onclick="toggleRule(1, 2)">2</td>
 		  </tr>
 		  <tr>
-		    <td type="button" class="ruleButton" onclick="toggleRule(0, 3)">3</td>
-		    <td type="button" class="ruleButton" onclick="toggleRule(1, 3)">3</td>
+		    <td type="button" class="ruleButton down" onclick="toggleRule(0, 3)">3</td>
+		    <td type="button" class="ruleButton down" onclick="toggleRule(1, 3)">3</td>
 		  </tr>
 		  <tr>
 		    <td type="button" class="ruleButton" onclick="toggleRule(0, 4)">4</td>
