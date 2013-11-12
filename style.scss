@@ -5,11 +5,22 @@ $button: #555555;
 $buttonHover: lighten($button, 5%);
 $buttonActive: lighten($button, 10%);
 
+$buttonTextColor: rgb(255, 255, 255);
+$buttonHoverTextColor: rgb(255, 255, 200);
+$buttonActiveTextColor: rgb(255, 255, 150);
+$buttonDownTextColor: rgb(255, 255, 255);
+
+
 //Rule buttons
 $ruleButton: #555555;
 $ruleButtonHover: lighten($ruleButton, 5%);
 $ruleButtonActive: lighten($ruleButton, 10%);
 $ruleButtonDown: invert($ruleButton);
+
+$ruleButtonTextColor: rgb(255, 255, 255);
+$ruleButtonHoverTextColor: rgb(255, 255, 200);
+$ruleButtonActiveTextColor: rgb(255, 255, 150);
+$ruleButtonDownTextColor: rgb(255, 255, 255);
 
 //All curved buttons should use this
 $buttonBorderRadius: 10px;
@@ -20,9 +31,8 @@ $shadowColor: #fce2c1;
 	#text-indent:0;
 	#border:1px solid #84bbf3;
 	#display:inline-block;
-	color:#ffffff;
 	font-family:Arial;
-	font-size:15px;
+	font-size:12px;
 	font-weight:bold;
 	font-style:normal;
 	line-height:30px;
@@ -60,15 +70,18 @@ canvas {
 	width:90px;
 
 	background-color: $button;
+	color: $buttonTextColor;
 
 	@include text();
 	@include unselectable();
 
 	&:hover {
 		background-color: $buttonHover;
+		color: $buttonHoverTextColor;
 	}
 	&:active {
 		background-color: $buttonActive;
+		color: $buttonActiveTextColor;
 	}
 }
 
@@ -77,6 +90,7 @@ canvas {
 	visibility:hidden;
 	
 	background-color: $button;
+	color: $buttonTextColor;
 
 	@include text();
 	@include unselectable();
@@ -89,32 +103,36 @@ canvas {
 }
 
 .ruleButton {
-	color:rgb(255, 255, 255);
+	color:$ruleButtonTextColor;
 	background-color: $ruleButton;
 
 	@include text();
 	@include unselectable();
 
 	&:hover {
-		color:rgb(255, 255, 200);
+		color:$ruleButtonHoverTextColor;
 		background-color: $ruleButtonHover;
 	}
 	&:active {
-		color:rgb(255, 255, 155);
-
+		color:$ruleButtonActiveTextColor;
 		background-color: $ruleButtonActive;
 	}
 	&.down {
-		color:rbg(0, 255, 255);
-
+		color:$ruleButtonDownTextColor;
 		background-color: $ruleButtonDown;
 	}
 }
 
 #ruleTable {
 	border:0px;
-	background:rgba(255, 255, 255, 0.5);
+	background:rgba(255, 255, 255, 0.7);
 
 	@include text();
 	@include unselectable();
+}
+
+#shareButtons {
+	visibility:hidden;
+	position:absolute;
+	bottom:0px;
 }

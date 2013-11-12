@@ -1,6 +1,33 @@
+###
+This file contains everything that uses JQuery
+###
+
 $ = jQuery
 
-($ "body").append "<p>test</p>"
+rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]]
+
+($ "#ruleTable").append """
+<tr>
+	<th title="This column determines how dead cells can come to life" style="height:30px;" class="tableHeader">Dead</th>
+	<th title="This column determines how live cells can stay alive" style="height:30px;" class="tableHeader">Alive</th>
+</tr>
+"""
+
+for numNeighbors in [0...8+1]
+	deadClasses = "ruleButton"
+	if rules[0][numNeighbors]
+		deadClasses += " down"
+
+	liveClasses = "ruleButton"
+	if rules[1][numNeighbors]
+		liveClasses += " down"
+
+	($ "#ruleTable").append """
+		<tr>
+			<td title="When this button is illuminated, dead cells with """ + numNeighbors + """ neighbors will come to life.\nWhen this button is dark, dead cells with """ + numNeighbors + """ neighbors will stay dead." type="button" class=" """ + deadClasses + """ " onclick="toggleRule(0, """ + numNeighbors + """)">""" + numNeighbors + """</td>
+			<td title="When this button is illuminated, live cells with """ + numNeighbors + """ neighbors will stay alive.\nWhen this button is dark, live cells with """ + numNeighbors + """ neighbors will die." type="button" class=" """ + liveClasses + """ " onclick="toggleRule(1, """ + numNeighbors + """)">""" + numNeighbors + """</td>
+		</tr>
+	"""
 
 ###
 jQueryKey should be a string like

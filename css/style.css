@@ -14,12 +14,12 @@ canvas {
   bottom: 0px;
   width: 90px;
   background-color: #555555;
+  color: white;
   #text-indent: 0;
   #border: 1px solid #84bbf3;
   #display: inline-block;
-  color: #ffffff;
   font-family: Arial;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: bold;
   font-style: normal;
   line-height: 30px;
@@ -33,20 +33,22 @@ canvas {
   -ms-user-select: none;
   user-select: none; }
   .actionButton:hover {
-    background-color: #626262; }
+    background-color: #626262;
+    color: #ffffc8; }
   .actionButton:active {
-    background-color: #6e6e6e; }
+    background-color: #6e6e6e;
+    color: #ffff96; }
 
 .helpBox {
   position: absolute;
   visibility: hidden;
   background-color: #555555;
+  color: white;
   #text-indent: 0;
   #border: 1px solid #84bbf3;
   #display: inline-block;
-  color: #ffffff;
   font-family: Arial;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: bold;
   font-style: normal;
   line-height: 30px;
@@ -70,9 +72,8 @@ canvas {
   #text-indent: 0;
   #border: 1px solid #84bbf3;
   #display: inline-block;
-  color: #ffffff;
   font-family: Arial;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: bold;
   font-style: normal;
   line-height: 30px;
@@ -89,21 +90,20 @@ canvas {
     color: #ffffc8;
     background-color: #626262; }
   .ruleButton:active {
-    color: #ffff9b;
+    color: #ffff96;
     background-color: #6e6e6e; }
   .ruleButton.down {
-    color: rbg(0, 255, 255);
+    color: white;
     background-color: #aaaaaa; }
 
 #ruleTable {
   border: 0px;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.7);
   #text-indent: 0;
   #border: 1px solid #84bbf3;
   #display: inline-block;
-  color: #ffffff;
   font-family: Arial;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: bold;
   font-style: normal;
   line-height: 30px;
@@ -116,3 +116,8 @@ canvas {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; }
+
+#shareButtons {
+  visibility: hidden;
+  position: absolute;
+  bottom: 0px; }
