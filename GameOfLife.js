@@ -145,7 +145,11 @@
   });
 
   $("#myCanvas").mouseup(function(event) {
-    return mouse.down[event.which] = false;
+    mouse.down[event.which] = false;
+    if (root.help) {
+      root.help = false;
+      return root.paused = false;
+    }
   });
 
   $("#myCanvas").mousemove(function(event) {

@@ -1,53 +1,20 @@
 @import "mixins.scss";
 
 //Regular buttons
-$buttonTop: #555555;
-$buttonBottom: #111111;
-
-$buttonTopHover: lighten($buttonTop, 5%);
-$buttonBottomHover: lighten($buttonBottom, 5%);
-
-$buttonTopActive: $buttonBottomHover;
-$buttonBottomActive: $buttonTopHover;
+$button: #555555;
+$buttonHover: lighten($button, 5%);
+$buttonActive: lighten($button, 10%);
 
 //Rule buttons
-$ruleButtonTop: $buttonTop;
-$ruleButtonBottom: $buttonBottom;
-
-$ruleButtonTopHover: lighten($ruleButtonTop, 5%);
-$ruleButtonBottomHover: lighten($ruleButtonBottom, 5%);
-
-$ruleButtonTopActive: $ruleButtonBottomHover;
-$ruleButtonBottomActive: $ruleButtonTopHover;
-
-$ruleButtonTopDown: #ffffff;
-$ruleButtonBottomDown: #aaaaaa;
+$ruleButton: #555555;
+$ruleButtonHover: lighten($ruleButton, 5%);
+$ruleButtonActive: lighten($ruleButton, 10%);
+$ruleButtonDown: invert($ruleButton);
 
 //All curved buttons should use this
 $buttonBorderRadius: 10px;
 
 $shadowColor: #fce2c1;
-
-@mixin shadow($shadowColor) {
-	-moz-box-shadow:inset -1px 1px 0px -1px $shadowColor;
-	-webkit-box-shadow:inset -1px 1px 0px -1px $shadowColor;
-	box-shadow:inset -1px 1px 0px -1px $shadowColor;
-}
-
-@mixin borderRadius($radius) {
-  -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-      -ms-border-radius: $radius;
-       -o-border-radius: $radius;
-          border-radius: $radius;
-}
-
-@mixin backgroundGradient($top, $bottom) {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, $top), color-stop(1, $bottom) );
-	background:-moz-linear-gradient( center top, $top 5%, $bottom 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
-	background-color:#000000;
-}
 
 @mixin text() {	
 	#text-indent:0;
@@ -77,7 +44,7 @@ canvas {
 	display:block;
 } /* To remove the scrollbars */
 
-.unselectable {
+@mixin unselectable {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -92,32 +59,16 @@ canvas {
 
 	width:90px;
 
-	@include shadow($shadowColor);
-
-	@include backgroundGradient($buttonTop, $buttonBottom);
+	background-color: $button;
 
 	@include text();
-	
-	-webkit-border-top-left-radius:$buttonBorderRadius;
-	-moz-border-radius-topleft:$buttonBorderRadius;
-	border-top-left-radius:$buttonBorderRadius;
-	-webkit-border-top-right-radius:$buttonBorderRadius;
-	-moz-border-radius-topright:$buttonBorderRadius;
-	border-top-right-radius:$buttonBorderRadius;
-
-	-webkit-border-bottom-right-radius:0px;
-	-moz-border-radius-bottomright:0px;
-	border-bottom-right-radius:0px;
-	-webkit-border-bottom-left-radius:0px;
-	-moz-border-radius-bottomleft:0px;
-	border-bottom-left-radius:0px;
+	@include unselectable();
 
 	&:hover {
-		@include backgroundGradient($buttonTopHover, $buttonBottomHover);
-
+		background-color: $buttonHover;
 	}
 	&:active {
-		@include backgroundGradient($buttonTopActive, $buttonBottomActive);
+		background-color: $buttonActive;
 	}
 }
 
@@ -125,42 +76,45 @@ canvas {
 	position:absolute;
 	visibility:hidden;
 	
-	@include backgroundGradient($buttonTop, $buttonBottom);
-	
-	@include borderRadius($buttonBorderRadius);
+	background-color: $button;
 
 	@include text();
+	@include unselectable();
 }
 
 .tableHeader {
 	color:rgb(255, 255, 255);
 
-	@include backgroundGradient($ruleButtonTop, $ruleButtonBottom);
+	background-color: $ruleButton;
 }
 
 .ruleButton {
 	color:rgb(255, 255, 255);
-	@include backgroundGradient($ruleButtonTop, $ruleButtonBottom);
+	background-color: $ruleButton;
+
 	@include text();
+	@include unselectable();
 
 	&:hover {
 		color:rgb(255, 255, 200);
-
-		@include backgroundGradient($ruleButtonTopHover, $ruleButtonBottomHover)
+		background-color: $ruleButtonHover;
 	}
 	&:active {
-		color:rgb(0, 0, 255);
+		color:rgb(255, 255, 155);
 
-		@include backgroundGradient($ruleButtonTopActive, $ruleButtonBottomActive)
+		background-color: $ruleButtonActive;
 	}
 	&.down {
 		color:rbg(0, 255, 255);
 
-		@include backgroundGradient($ruleButtonTopDown, $ruleButtonBottomDown);
+		background-color: $ruleButtonDown;
 	}
 }
 
 #ruleTable {
 	border:0px;
 	background:rgba(255, 255, 255, 0.5);
+
+	@include text();
+	@include unselectable();
 }

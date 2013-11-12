@@ -48,8 +48,13 @@ mouse = {
 	
 $("#myCanvas").mousedown (event) ->
 	mouse.down[event.which] = true
+	
 $("#myCanvas").mouseup (event) ->
 	mouse.down[event.which] = false
+
+	if root.help
+		root.help = false
+		root.paused = false
 
 $("#myCanvas").mousemove (event) ->
 	mouse.x = event.pageX

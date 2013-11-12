@@ -9,25 +9,11 @@ canvas {
   display: block; }
 
 /* To remove the scrollbars */
-.unselectable {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; }
-
 .actionButton {
   position: absolute;
   bottom: 0px;
   width: 90px;
-  -moz-box-shadow: inset -1px 1px 0px -1px #fce2c1;
-  -webkit-box-shadow: inset -1px 1px 0px -1px #fce2c1;
-  box-shadow: inset -1px 1px 0px -1px #fce2c1;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #555555), color-stop(1, #111111));
-  background: -moz-linear-gradient(center top, #555555 5%, #111111 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
-  background-color: #000000;
+  background-color: #555555;
   #text-indent: 0;
   #border: 1px solid #84bbf3;
   #display: inline-block;
@@ -40,41 +26,21 @@ canvas {
   text-decoration: none;
   text-align: center;
   #text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  -webkit-border-top-left-radius: 10px;
-  -moz-border-radius-topleft: 10px;
-  border-top-left-radius: 10px;
-  -webkit-border-top-right-radius: 10px;
-  -moz-border-radius-topright: 10px;
-  border-top-right-radius: 10px;
-  -webkit-border-bottom-right-radius: 0px;
-  -moz-border-radius-bottomright: 0px;
-  border-bottom-right-radius: 0px;
-  -webkit-border-bottom-left-radius: 0px;
-  -moz-border-radius-bottomleft: 0px;
-  border-bottom-left-radius: 0px; }
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
   .actionButton:hover {
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #626262), color-stop(1, #1e1e1e));
-    background: -moz-linear-gradient(center top, #626262 5%, #1e1e1e 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
-    background-color: #000000; }
+    background-color: #626262; }
   .actionButton:active {
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #1e1e1e), color-stop(1, #626262));
-    background: -moz-linear-gradient(center top, #1e1e1e 5%, #626262 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
-    background-color: #000000; }
+    background-color: #6e6e6e; }
 
 .helpBox {
   position: absolute;
   visibility: hidden;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #555555), color-stop(1, #111111));
-  background: -moz-linear-gradient(center top, #555555 5%, #111111 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
-  background-color: #000000;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
-  border-radius: 10px;
+  background-color: #555555;
   #text-indent: 0;
   #border: 1px solid #84bbf3;
   #display: inline-block;
@@ -86,21 +52,21 @@ canvas {
   line-height: 30px;
   text-decoration: none;
   text-align: center;
-  #text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; }
+  #text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
 
 .tableHeader {
   color: white;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #555555), color-stop(1, #111111));
-  background: -moz-linear-gradient(center top, #555555 5%, #111111 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
-  background-color: #000000; }
+  background-color: #555555; }
 
 .ruleButton {
   color: white;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #555555), color-stop(1, #111111));
-  background: -moz-linear-gradient(center top, #555555 5%, #111111 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
-  background-color: #000000;
+  background-color: #555555;
   #text-indent: 0;
   #border: 1px solid #84bbf3;
   #display: inline-block;
@@ -112,26 +78,41 @@ canvas {
   line-height: 30px;
   text-decoration: none;
   text-align: center;
-  #text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; }
+  #text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
   .ruleButton:hover {
     color: #ffffc8;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #626262), color-stop(1, #1e1e1e));
-    background: -moz-linear-gradient(center top, #626262 5%, #1e1e1e 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
-    background-color: #000000; }
+    background-color: #626262; }
   .ruleButton:active {
-    color: blue;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #1e1e1e), color-stop(1, #626262));
-    background: -moz-linear-gradient(center top, #1e1e1e 5%, #626262 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
-    background-color: #000000; }
+    color: #ffff9b;
+    background-color: #6e6e6e; }
   .ruleButton.down {
     color: rbg(0, 255, 255);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, white), color-stop(1, #aaaaaa));
-    background: -moz-linear-gradient(center top, white 5%, #aaaaaa 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$top, endColorstr=$bottom);
-    background-color: #000000; }
+    background-color: #aaaaaa; }
 
 #ruleTable {
   border: 0px;
-  background: rgba(255, 255, 255, 0.5); }
+  background: rgba(255, 255, 255, 0.5);
+  #text-indent: 0;
+  #border: 1px solid #84bbf3;
+  #display: inline-block;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 30px;
+  text-decoration: none;
+  text-align: center;
+  #text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
