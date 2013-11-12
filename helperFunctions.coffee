@@ -1,3 +1,8 @@
+###
+This file only contains little helper function that I probably shouldn't really need anyway.
+If these can all be replaced by builtins, that's be great.
+###
+
 getBinaryThingey = (num) ->
 	if num == 0
 		return 0

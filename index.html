@@ -43,50 +43,9 @@
 		<button id="tutorialRightCol" type="button" style="top:160px; left:100px" class="helpBox">The right column determines if live cells will stay alive</button>
 		<button id="tutorialRow" type="button" style="top:200px; left:100px" class="helpBox">The row correscponds to how many neighbors a cell has</button>
 
-		<table id="ruleTable" style="position:absolute; top:0px; left:0px; height:100%;">
-		  <tr>
-		    <th title="This column determines how dead cells can come to life" style="height:30px;" class="tableHeader">Dead</th>
-		    <th title="This column determines how life cells can stay alive" style="height:30px;" class="tableHeader">Alive</th>
-		  </tr>
-		  <tr>
-		    <td title="When this button is illumindated, dead cells with 0 neighbors will come to life. When this button is dark, dead cells with 0 neighbors will stay dead." type="button" class="ruleButton" onclick="toggleRule(0, 0)">0</td>
-		    <td type="button" class="ruleButton" onclick="toggleRule(1, 0)">0</td>
-		  </tr>
-		  <tr>
-		    <td title="When this button is illumindated, dead cells with 1 neighbors will come to life. When this button is dark, dead cells with 1 neighbors will stay dead." type="button" class="ruleButton" onclick="toggleRule(0, 1)">1</td>
-		    <td type="button" class="ruleButton" onclick="toggleRule(1, 1)">1</td>
-		  </tr>
-		  <tr>
-		    <td title="When this button is illumindated, dead cells with 2 neighbors will come to life. When this button is dark, dead cells with 2 neighbors will stay dead." type="button" class="ruleButton" onclick="toggleRule(0, 2)">2</td>
-		    <td type="button" class="ruleButton down" onclick="toggleRule(1, 2)">2</td>
-		  </tr>
-		  <tr>
-		    <td title="When this button is illumindated, dead cells with 3 neighbors will come to life. When this button is dark, dead cells with 3 neighbors will stay dead." type="button" class="ruleButton down" onclick="toggleRule(0, 3)">3</td>
-		    <td type="button" class="ruleButton down" onclick="toggleRule(1, 3)">3</td>
-		  </tr>
-		  <tr>
-		    <td title="When this button is illumindated, dead cells with 4 neighbors will come to life. When this button is dark, dead cells with 4 neighbors will stay dead." type="button" class="ruleButton" onclick="toggleRule(0, 4)">4</td>
-		    <td type="button" class="ruleButton" onclick="toggleRule(1, 4)">4</td>
-		  </tr>
-		  <tr>
-		    <td title="When this button is illumindated, dead cells with 5 neighbors will come to life. When this button is dark, dead cells with 5 neighbors will stay dead." type="button" class="ruleButton" onclick="toggleRule(0, 5)">5</td>
-		    <td type="button" class="ruleButton" onclick="toggleRule(1, 5)">5</td>
-		  </tr>
-		  <tr>
-		    <td title="When this button is illumindated, dead cells with 6 neighbors will come to life. When this button is dark, dead cells with 6 neighbors will stay dead." type="button" class="ruleButton" onclick="toggleRule(0, 6)">6</td>
-		    <td type="button" class="ruleButton" onclick="toggleRule(1, 6)">6</td>
-		  </tr>
-		  <tr>
-		    <td title="When this button is illumindated, dead cells with 7 neighbors will come to life. When this button is dark, dead cells with 7 neighbors will stay dead." type="button" class="ruleButton" onclick="toggleRule(0, 7)">7</td>
-		    <td type="button" class="ruleButton" onclick="toggleRule(1, 7)">7</td>
-		  </tr>
-		  <tr>
-		    <td title="When this button is illumindated, dead cells with 8 neighbors will come to life. When this button is dark, dead cells with 8 neighbors will stay dead." type="button" class="ruleButton" onclick="toggleRule(0, 8)">8</td>
-		    <td type="button" class="ruleButton" onclick="toggleRule(1, 8)">8</td>
-		  </tr>
-		</table>
+		<table id="ruleTable" style="position:absolute; top:0px; left:0px; height:100%;"></table>
 
-		<div id="share-buttons">
+		<div id="shareButtons">
 		
 			<!-- Facebook -->
 			<a href="http://www.facebook.com/sharer.php?u=http://conwaygame.tk" target="_blank"><img src="http://www.simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" /></a>
@@ -104,7 +63,7 @@
 			<a href="http://reddit.com/submit?url=http://conwaygame.tk&title=Simple Share Buttons" target="_blank"><img src="http://www.simplesharebuttons.com/images/somacro/reddit.png" alt="Reddit" /></a>
 			 
 			<!-- LinkedIn -->
-			<!--<a href="http://www.linkedin.com/shareArticle?mini=true&url=http://conwaygame.tk" target="_blank"><img src="http://www.simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" /></a>-->
+			<a href="http://www.linkedin.com/shareArticle?mini=true&url=http://conwaygame.tk" target="_blank"><img src="http://www.simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" /></a>
 			 
 			<!-- Pinterest -->
 			<a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());"><img src="http://www.simplesharebuttons.com/images/somacro/pinterest.png" alt="Pinterest" /></a>
