@@ -11,6 +11,10 @@ root = exports ? this
 canvas = document.getElementById "myCanvas"
 context = canvas.getContext "2d"
 
+
+@setDelay = (newDelay) ->
+	root.delay = newDelay
+
 #Wrappers
 #---------------
 background = ->
@@ -34,13 +38,10 @@ randomGrid = ->
 	for x in [0...gridWidth]
 		for y in [0...gridHeight]
 			Math.floor(Math.random() + 0.4)
-randomizeGrid = ->
+@randomizeGrid = ->
 	for x in [0...gridWidth]
 		for y in [0...gridHeight]
 			ages[x][y] = Math.floor(Math.random() + 0.4)
-
-
-
 
 #Run
 #----------------
@@ -99,10 +100,12 @@ draw = ->
 		context.fillStyle = rgba(255, 255, 255, 0.7)
 		context.fillRect(mouse.getGridX() * gridSpacing, mouse.getGridY() * gridSpacing, gridSpacing-border, gridSpacing-border)
 	
-	setTimeout(draw, 0)
+	setTimeout(draw, root.delay)
 
 #Setup
 #----------
+root.delay = 0
+
 #Tutorial stuff:
 root.userHasCreatedCells = false
 root.userHasChangedRules = false
@@ -126,7 +129,6 @@ mouseX = 0
 mouseY = 0
 
 ages = randomGrid()
-rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]]
 
 root.helpShown = false
 root.paused = false

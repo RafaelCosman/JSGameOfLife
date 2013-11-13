@@ -6,7 +6,7 @@ If these can all be replaced by builtins, that's be great.
 
 
 (function() {
-  var $, HSVtoRGB, ages, background, border, buttonHeight, buttonWidth, canvas, computeNextGeneration, context, deadClasses, draw, drawCells, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, liveClasses, makeNewGrid, mouse, mouseX, mouseY, numNeighbors, randomGrid, randomizeGrid, rgb, rgba, root, rules, setHidden, setVisible, zero, _i, _ref;
+  var $, HSVtoRGB, ages, background, border, buttonHeight, buttonWidth, canvas, computeNextGeneration, context, deadClasses, draw, drawCells, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, liveClasses, makeNewGrid, mouse, mouseX, mouseY, numNeighbors, randomGrid, rgb, rgba, root, rules, setHidden, setVisible, zero, _i, _ref;
 
   getBinaryThingey = function(num) {
     if (num === 0) {
@@ -123,7 +123,7 @@ If these can all be replaced by builtins, that's be great.
   this.help = function() {
     root.helpShown = !root.helpShown;
     root.paused = root.helpShown;
-    if (helpShown) {
+    if (root.helpShown) {
       return setVisible(".helpBox");
     } else {
       return setHidden(".helpBox");
@@ -264,6 +264,10 @@ If these can all be replaced by builtins, that's be great.
 
   context = canvas.getContext("2d");
 
+  this.setDelay = function(newDelay) {
+    return root.delay = newDelay;
+  };
+
   background = function() {
     var bigNum;
     bigNum = 100000;
@@ -318,7 +322,7 @@ If these can all be replaced by builtins, that's be great.
     return _results;
   };
 
-  randomizeGrid = function() {
+  this.randomizeGrid = function() {
     var x, y, _j, _results;
     _results = [];
     for (x = _j = 0; 0 <= gridWidth ? _j < gridWidth : _j > gridWidth; x = 0 <= gridWidth ? ++_j : --_j) {
@@ -405,8 +409,10 @@ If these can all be replaced by builtins, that's be great.
       context.fillStyle = rgba(255, 255, 255, 0.7);
       context.fillRect(mouse.getGridX() * gridSpacing, mouse.getGridY() * gridSpacing, gridSpacing - border, gridSpacing - border);
     }
-    return setTimeout(draw, 0);
+    return setTimeout(draw, root.delay);
   };
+
+  root.delay = 0;
 
   root.userHasCreatedCells = false;
 
@@ -439,8 +445,6 @@ If these can all be replaced by builtins, that's be great.
   mouseY = 0;
 
   ages = randomGrid();
-
-  rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]];
 
   root.helpShown = false;
 

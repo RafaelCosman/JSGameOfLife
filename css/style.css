@@ -13,10 +13,8 @@ canvas {
   position: absolute;
   bottom: 0px;
   width: 90px;
-  background-color: #555555;
+  background-color: rgba(60, 60, 60, 0.5);
   color: white;
-  #text-indent: 0;
-  #border: 1px solid #84bbf3;
   #display: inline-block;
   font-family: Arial;
   font-size: 12px;
@@ -25,7 +23,7 @@ canvas {
   line-height: 30px;
   text-decoration: none;
   text-align: center;
-  #text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  outline: 0px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -33,19 +31,17 @@ canvas {
   -ms-user-select: none;
   user-select: none; }
   .actionButton:hover {
-    background-color: #626262;
+    background-color: rgba(86, 86, 86, 0.5);
     color: #ffffc8; }
   .actionButton:active {
-    background-color: #6e6e6e;
+    background-color: rgba(111, 111, 111, 0.5);
     color: #ffff96; }
 
 .helpBox {
   position: absolute;
   visibility: hidden;
-  background-color: #555555;
+  background-color: rgba(60, 60, 60, 0.5);
   color: white;
-  #text-indent: 0;
-  #border: 1px solid #84bbf3;
   #display: inline-block;
   font-family: Arial;
   font-size: 12px;
@@ -54,7 +50,7 @@ canvas {
   line-height: 30px;
   text-decoration: none;
   text-align: center;
-  #text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  outline: 0px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -64,13 +60,11 @@ canvas {
 
 .tableHeader {
   color: white;
-  background-color: #555555; }
+  background-color: rgba(60, 60, 60, 0.5); }
 
 .ruleButton {
   color: white;
-  background-color: #555555;
-  #text-indent: 0;
-  #border: 1px solid #84bbf3;
+  background-color: rgba(60, 60, 60, 0.5);
   #display: inline-block;
   font-family: Arial;
   font-size: 12px;
@@ -79,7 +73,7 @@ canvas {
   line-height: 30px;
   text-decoration: none;
   text-align: center;
-  #text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  outline: 0px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -88,19 +82,16 @@ canvas {
   user-select: none; }
   .ruleButton:hover {
     color: #ffffc8;
-    background-color: #626262; }
+    background-color: rgba(86, 86, 86, 0.5); }
   .ruleButton:active {
     color: #ffff96;
-    background-color: #6e6e6e; }
+    background-color: rgba(111, 111, 111, 0.5); }
   .ruleButton.down {
     color: white;
-    background-color: #aaaaaa; }
+    background-color: rgba(195, 195, 195, 0.5); }
 
 #ruleTable {
-  border: 0px;
   background: rgba(255, 255, 255, 0.7);
-  #text-indent: 0;
-  #border: 1px solid #84bbf3;
   #display: inline-block;
   font-family: Arial;
   font-size: 12px;
@@ -109,7 +100,7 @@ canvas {
   line-height: 30px;
   text-decoration: none;
   text-align: center;
-  #text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  outline: 0px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;

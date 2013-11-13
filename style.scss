@@ -1,9 +1,9 @@
 @import "mixins.scss";
 
 //Regular buttons
-$button: #555555;
-$buttonHover: lighten($button, 5%);
-$buttonActive: lighten($button, 10%);
+$button: rgba(60, 60, 60, 0.5);
+$buttonHover: lighten($button, 10%);
+$buttonActive: lighten($button, 20%);
 
 $buttonTextColor: rgb(255, 255, 255);
 $buttonHoverTextColor: rgb(255, 255, 200);
@@ -12,9 +12,9 @@ $buttonDownTextColor: rgb(255, 255, 255);
 
 
 //Rule buttons
-$ruleButton: #555555;
-$ruleButtonHover: lighten($ruleButton, 5%);
-$ruleButtonActive: lighten($ruleButton, 10%);
+$ruleButton: $button;
+$ruleButtonHover: lighten($ruleButton, 10%);
+$ruleButtonActive: lighten($ruleButton, 20%);
 $ruleButtonDown: invert($ruleButton);
 
 $ruleButtonTextColor: rgb(255, 255, 255);
@@ -22,14 +22,7 @@ $ruleButtonHoverTextColor: rgb(255, 255, 200);
 $ruleButtonActiveTextColor: rgb(255, 255, 150);
 $ruleButtonDownTextColor: rgb(255, 255, 255);
 
-//All curved buttons should use this
-$buttonBorderRadius: 10px;
-
-$shadowColor: #fce2c1;
-
 @mixin text() {	
-	#text-indent:0;
-	#border:1px solid #84bbf3;
 	#display:inline-block;
 	font-family:Arial;
 	font-size:12px;
@@ -37,10 +30,9 @@ $shadowColor: #fce2c1;
 	font-style:normal;
 	line-height:30px;
 	text-decoration:none;
-	text-align:center;;
+	text-align:center;
 
-    #text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-
+	outline: 0px;
 }
 
 html, body {
@@ -124,7 +116,6 @@ canvas {
 }
 
 #ruleTable {
-	border:0px;
 	background:rgba(255, 255, 255, 0.7);
 
 	@include text();
