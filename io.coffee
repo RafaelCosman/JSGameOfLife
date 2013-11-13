@@ -43,7 +43,7 @@ setHidden = (jQueryKey) ->
 	root.helpShown = !root.helpShown
 	root.paused = root.helpShown
 	
-	if helpShown
+	if root.helpShown
 		setVisible ".helpBox"
 	else
 		setHidden ".helpBox"
