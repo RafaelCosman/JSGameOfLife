@@ -53,6 +53,17 @@ setHidden = (jQueryKey) ->
 
 @toggleRule = (x, y) ->
 	rules[x][y] = !rules[x][y]
+
+@moreCells = ->
+	root.gridSpacing *= .9
+	root.gridWidth = canvas.width / gridSpacing
+	root.gridHeight = canvas.width / gridSpacing
+	root.ages = randomGrid()
+
+@fewerCells = ->
+	gridSpacing *= 1/.9
+	gridWidth = canvas.width / gridSpacing
+	gridHeight = canvas.width / gridSpacing
 	
 #Mouse IO
 #-------------------
