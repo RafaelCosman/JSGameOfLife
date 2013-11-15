@@ -6,7 +6,7 @@ If these can all be replaced by builtins, that's be great.
 
 
 (function() {
-  var $, HSVtoRGB, ages, background, border, buttonHeight, buttonWidth, canvas, computeNextGeneration, context, deadClasses, draw, drawCells, getBinaryThingey, gridHeight, gridSpacing, gridWidth, inc, liveClasses, makeNewGrid, mouse, mouseX, mouseY, numNeighbors, randomGrid, rgb, rgba, root, rules, setHidden, setVisible, zero, _i, _ref;
+  var $, HSVtoRGB, background, border, buttonHeight, buttonWidth, canvas, computeNextGeneration, context, deadClasses, draw, drawCells, getBinaryThingey, inc, liveClasses, makeNewGrid, mouse, mouseX, mouseY, numNeighbors, randomGrid, randomGridWithDimensions, rgb, rgba, root, rules, setHidden, setVisible, zero, _i, _ref;
 
   getBinaryThingey = function(num) {
     if (num === 0) {
@@ -136,6 +136,20 @@ If these can all be replaced by builtins, that's be great.
 
   this.toggleRule = function(x, y) {
     return rules[x][y] = !rules[x][y];
+  };
+
+  this.moreCells = function() {
+    root.gridSpacing *= .9;
+    root.gridWidth = canvas.width / gridSpacing;
+    root.gridHeight = canvas.width / gridSpacing;
+    return root.ages = randomGrid();
+  };
+
+  this.fewerCells = function() {
+    var gridHeight, gridWidth;
+    gridSpacing *= 1 / .9;
+    gridWidth = canvas.width / gridSpacing;
+    return gridHeight = canvas.width / gridSpacing;
   };
 
   mouse = {
@@ -275,13 +289,13 @@ If these can all be replaced by builtins, that's be great.
   };
 
   makeNewGrid = function() {
-    var x, y, _j, _results;
+    var x, y, _j, _ref1, _results;
     _results = [];
-    for (x = _j = 0; 0 <= gridWidth ? _j < gridWidth : _j > gridWidth; x = 0 <= gridWidth ? ++_j : --_j) {
+    for (x = _j = 0, _ref1 = root.gridWidth; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; x = 0 <= _ref1 ? ++_j : --_j) {
       _results.push((function() {
-        var _k, _results1;
+        var _k, _ref2, _results1;
         _results1 = [];
-        for (y = _k = 0; 0 <= gridHeight ? _k < gridHeight : _k > gridHeight; y = 0 <= gridHeight ? ++_k : --_k) {
+        for (y = _k = 0, _ref2 = root.gridHeight; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; y = 0 <= _ref2 ? ++_k : --_k) {
           _results1.push(0);
         }
         return _results1;
@@ -291,14 +305,14 @@ If these can all be replaced by builtins, that's be great.
   };
 
   this.clearGrid = function() {
-    var x, y, _j, _results;
+    var x, y, _j, _ref1, _results;
     _results = [];
-    for (x = _j = 0; 0 <= gridWidth ? _j < gridWidth : _j > gridWidth; x = 0 <= gridWidth ? ++_j : --_j) {
+    for (x = _j = 0, _ref1 = root.gridWidth; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; x = 0 <= _ref1 ? ++_j : --_j) {
       _results.push((function() {
-        var _k, _results1;
+        var _k, _ref2, _results1;
         _results1 = [];
-        for (y = _k = 0; 0 <= gridHeight ? _k < gridHeight : _k > gridHeight; y = 0 <= gridHeight ? ++_k : --_k) {
-          _results1.push(ages[x][y] = 0);
+        for (y = _k = 0, _ref2 = root.gridHeight; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; y = 0 <= _ref2 ? ++_k : --_k) {
+          _results1.push(root.ages[x][y] = 0);
         }
         return _results1;
       })());
@@ -306,14 +320,15 @@ If these can all be replaced by builtins, that's be great.
     return _results;
   };
 
-  randomGrid = function() {
+  randomGridWithDimensions = function(width, height) {
     var x, y, _j, _results;
+    console.log(root.gridWidth);
     _results = [];
-    for (x = _j = 0; 0 <= gridWidth ? _j < gridWidth : _j > gridWidth; x = 0 <= gridWidth ? ++_j : --_j) {
+    for (x = _j = 0; 0 <= width ? _j < width : _j > width; x = 0 <= width ? ++_j : --_j) {
       _results.push((function() {
         var _k, _results1;
         _results1 = [];
-        for (y = _k = 0; 0 <= gridHeight ? _k < gridHeight : _k > gridHeight; y = 0 <= gridHeight ? ++_k : --_k) {
+        for (y = _k = 0; 0 <= height ? _k < height : _k > height; y = 0 <= height ? ++_k : --_k) {
           _results1.push(Math.floor(Math.random() + 0.4));
         }
         return _results1;
@@ -322,15 +337,19 @@ If these can all be replaced by builtins, that's be great.
     return _results;
   };
 
+  randomGrid = function() {
+    return randomGridWithDimensions(root.gridWidth, root.gridHeight);
+  };
+
   this.randomizeGrid = function() {
-    var x, y, _j, _results;
+    var x, y, _j, _ref1, _results;
     _results = [];
-    for (x = _j = 0; 0 <= gridWidth ? _j < gridWidth : _j > gridWidth; x = 0 <= gridWidth ? ++_j : --_j) {
+    for (x = _j = 0, _ref1 = root.gridWidth; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; x = 0 <= _ref1 ? ++_j : --_j) {
       _results.push((function() {
-        var _k, _results1;
+        var _k, _ref2, _results1;
         _results1 = [];
-        for (y = _k = 0; 0 <= gridHeight ? _k < gridHeight : _k > gridHeight; y = 0 <= gridHeight ? ++_k : --_k) {
-          _results1.push(ages[x][y] = Math.floor(Math.random() + 0.4));
+        for (y = _k = 0, _ref2 = root.gridHeight; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; y = 0 <= _ref2 ? ++_k : --_k) {
+          _results1.push(root.ages[x][y] = Math.floor(Math.random() + 0.4));
         }
         return _results1;
       })());
@@ -339,11 +358,11 @@ If these can all be replaced by builtins, that's be great.
   };
 
   computeNextGeneration = function() {
-    var x, y, _j, _k, _l, _results;
+    var x, y, _j, _k, _l, _ref1, _ref2, _ref3, _results;
     numNeighbors = makeNewGrid();
-    for (x = _j = 0; 0 <= gridWidth ? _j < gridWidth : _j > gridWidth; x = 0 <= gridWidth ? ++_j : --_j) {
-      for (y = _k = 0; 0 <= gridHeight ? _k < gridHeight : _k > gridHeight; y = 0 <= gridHeight ? ++_k : --_k) {
-        if (ages[x][y] !== 0) {
+    for (x = _j = 0, _ref1 = root.gridWidth; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; x = 0 <= _ref1 ? ++_j : --_j) {
+      for (y = _k = 0, _ref2 = root.gridHeight; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; y = 0 <= _ref2 ? ++_k : --_k) {
+        if (root.ages[x][y] !== 0) {
           inc(numNeighbors, x - 1, y - 1);
           inc(numNeighbors, x - 1, y);
           inc(numNeighbors, x - 1, y + 1);
@@ -356,15 +375,15 @@ If these can all be replaced by builtins, that's be great.
       }
     }
     _results = [];
-    for (x = _l = 0; 0 <= gridWidth ? _l < gridWidth : _l > gridWidth; x = 0 <= gridWidth ? ++_l : --_l) {
+    for (x = _l = 0, _ref3 = root.gridWidth; 0 <= _ref3 ? _l < _ref3 : _l > _ref3; x = 0 <= _ref3 ? ++_l : --_l) {
       _results.push((function() {
-        var _m, _results1;
+        var _m, _ref4, _results1;
         _results1 = [];
-        for (y = _m = 0; 0 <= gridHeight ? _m < gridHeight : _m > gridHeight; y = 0 <= gridHeight ? ++_m : --_m) {
-          if (rules[getBinaryThingey(ages[x][y])][numNeighbors[x][y]]) {
-            _results1.push(ages[x][y]++);
+        for (y = _m = 0, _ref4 = root.gridHeight; 0 <= _ref4 ? _m < _ref4 : _m > _ref4; y = 0 <= _ref4 ? ++_m : --_m) {
+          if (rules[getBinaryThingey(root.ages[x][y])][numNeighbors[x][y]]) {
+            _results1.push(root.ages[x][y]++);
           } else {
-            _results1.push(ages[x][y] = 0);
+            _results1.push(root.ages[x][y] = 0);
           }
         }
         return _results1;
@@ -374,20 +393,20 @@ If these can all be replaced by builtins, that's be great.
   };
 
   drawCells = function() {
-    var age, hue, timeModifier, x, y, _j, _results;
+    var age, hue, timeModifier, x, y, _j, _ref1, _results;
     timeModifier = new Date().getTime() / 10000;
     _results = [];
-    for (x = _j = 0; 0 <= gridWidth ? _j < gridWidth : _j > gridWidth; x = 0 <= gridWidth ? ++_j : --_j) {
+    for (x = _j = 0, _ref1 = root.gridWidth; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; x = 0 <= _ref1 ? ++_j : --_j) {
       _results.push((function() {
-        var _k, _results1;
+        var _k, _ref2, _results1;
         _results1 = [];
-        for (y = _k = 0; 0 <= gridHeight ? _k < gridHeight : _k > gridHeight; y = 0 <= gridHeight ? ++_k : --_k) {
-          age = ages[x][y];
+        for (y = _k = 0, _ref2 = root.gridHeight; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; y = 0 <= _ref2 ? ++_k : --_k) {
+          age = root.ages[x][y];
           if (age !== 0) {
             hue = Math.sqrt(age);
             hue *= 0.2;
             context.fillStyle = HSVtoRGB((hue + timeModifier) % 1, 1, 1);
-            _results1.push(context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border));
+            _results1.push(context.fillRect(root.gridSpacing * x, root.gridSpacing * y, root.gridSpacing - border, root.gridSpacing - border));
           } else {
             _results1.push(void 0);
           }
@@ -405,9 +424,9 @@ If these can all be replaced by builtins, that's be great.
     context.fillStyle = rgb(0, 0, 0);
     background();
     drawCells();
-    if (ages[mouse.getGridX()][mouse.getGridY()] !== 0) {
+    if (root.ages[mouse.getGridX()][mouse.getGridY()] !== 0) {
       context.fillStyle = rgba(255, 255, 255, 0.7);
-      context.fillRect(mouse.getGridX() * gridSpacing, mouse.getGridY() * gridSpacing, gridSpacing - border, gridSpacing - border);
+      context.fillRect(mouse.getGridX() * root.gridSpacing, mouse.getGridY() * root.gridSpacing, root.gridSpacing - border, root.gridSpacing - border);
     }
     return setTimeout(draw, root.delay);
   };
@@ -432,19 +451,19 @@ If these can all be replaced by builtins, that's be great.
 
   buttonHeight = canvas.height / 9;
 
-  gridSpacing = 15;
+  root.gridSpacing = 15;
 
   border = 3;
 
-  gridWidth = canvas.width / gridSpacing;
+  root.gridWidth = canvas.width / root.gridSpacing;
 
-  gridHeight = canvas.width / gridSpacing;
+  root.gridHeight = canvas.width / root.gridSpacing;
 
   mouseX = 0;
 
   mouseY = 0;
 
-  ages = randomGrid();
+  root.ages = randomGrid();
 
   root.helpShown = false;
 

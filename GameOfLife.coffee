@@ -26,22 +26,28 @@ background = ->
 #More serious functions
 #------------------------
 makeNewGrid = ->
-	for x in [0...gridWidth]
-		for y in [0...gridHeight]
+	for x in [0...root.gridWidth]
+		for y in [0...root.gridHeight]
 			0
 @clearGrid = ->
-	for x in [0...gridWidth]
-		for y in [0...gridHeight]
-			ages[x][y] = 0
-	
-randomGrid = ->
-	for x in [0...gridWidth]
-		for y in [0...gridHeight]
+	for x in [0...root.gridWidth]
+		for y in [0...root.gridHeight]
+			root.ages[x][y] = 0
+
+
+randomGridWithDimensions = (width, height) ->
+	console.log(root.gridWidth)
+
+	for x in [0...width]
+		for y in [0...height]
 			Math.floor(Math.random() + 0.4)
+randomGrid = ->
+	randomGridWithDimensions(root.gridWidth, root.gridHeight)
+	
 @randomizeGrid = ->
-	for x in [0...gridWidth]
-		for y in [0...gridHeight]
-			ages[x][y] = Math.floor(Math.random() + 0.4)
+	for x in [0...root.gridWidth]
+		for y in [0...root.gridHeight]
+			root.ages[x][y] = Math.floor(Math.random() + 0.4)
 
 #Run
 #----------------
@@ -49,9 +55,9 @@ computeNextGeneration = ->
 	numNeighbors = makeNewGrid()
 	
 	#Count up the number of neighbours each cell has
-	for x in [0...gridWidth]
-		for y in [0...gridHeight]
-			if ages[x][y] != 0
+	for x in [0...root.gridWidth]
+		for y in [0...root.gridHeight]
+			if root.ages[x][y] != 0
 				inc(numNeighbors, x-1, y-1)
 				inc(numNeighbors, x-1, y)
 				inc(numNeighbors, x-1, y+1)
@@ -64,26 +70,26 @@ computeNextGeneration = ->
 				inc(numNeighbors, x+1, y+1)
 	
 	#Apply the current rules
-	for x in [0...gridWidth]
-		for y in [0...gridHeight]
-			if rules[getBinaryThingey(ages[x][y])][numNeighbors[x][y]]
-				ages[x][y]++
+	for x in [0...root.gridWidth]
+		for y in [0...root.gridHeight]
+			if rules[getBinaryThingey(root.ages[x][y])][numNeighbors[x][y]]
+				root.ages[x][y]++
 			else
-				ages[x][y] = 0
+				root.ages[x][y] = 0
 
 drawCells = ->
 	#Display the cells to the screen
 	timeModifier = new Date().getTime()/10000
 	
-	for x in [0...gridWidth]
-		for y in [0...gridHeight]
-			age = ages[x][y]
+	for x in [0...root.gridWidth]
+		for y in [0...root.gridHeight]
+			age = root.ages[x][y]
 			
 			if age != 0
 				hue = Math.sqrt(age)
 				hue *= 0.2
 				context.fillStyle = HSVtoRGB((hue + timeModifier) % 1, 1, 1)
-				context.fillRect(gridSpacing * x, gridSpacing * y, gridSpacing - border, gridSpacing - border)
+				context.fillRect(root.gridSpacing * x, root.gridSpacing * y, root.gridSpacing - border, root.gridSpacing - border)
 
 draw = -> 
 	if !root.paused
@@ -96,9 +102,9 @@ draw = ->
 	drawCells()
 	
 	#Highlight the cell the mouse is over
-	if ages[mouse.getGridX()][mouse.getGridY()] != 0
+	if root.ages[mouse.getGridX()][mouse.getGridY()] != 0
 		context.fillStyle = rgba(255, 255, 255, 0.7)
-		context.fillRect(mouse.getGridX() * gridSpacing, mouse.getGridY() * gridSpacing, gridSpacing-border, gridSpacing-border)
+		context.fillRect(mouse.getGridX() * root.gridSpacing, mouse.getGridY() * root.gridSpacing, root.gridSpacing-border, root.gridSpacing-border)
 	
 	setTimeout(draw, root.delay)
 
@@ -119,16 +125,16 @@ canvas.height = window.innerHeight
 buttonWidth = 50
 buttonHeight = canvas.height / 9
 
-gridSpacing = 15
+root.gridSpacing = 15
 border = 3
 
-gridWidth = canvas.width / gridSpacing
-gridHeight = canvas.width / gridSpacing
+root.gridWidth = canvas.width / root.gridSpacing
+root.gridHeight = canvas.width / root.gridSpacing
 
 mouseX = 0
 mouseY = 0
 
-ages = randomGrid()
+root.ages = randomGrid()
 
 root.helpShown = false
 root.paused = false
