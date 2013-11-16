@@ -165,7 +165,26 @@ $(window).resize ->
 
 	if ($ this).hasClass("down")
 		($ "#ruleTable").slideToggle()
-		($ this).animate({left: "0px"})
+		#($ this).animate({left: "0px"})
 	else
 		($ "#ruleTable").slideToggle()
-		($ this).animate({left: $("#ruleTable").width()})
+		#($ this).animate({left: $("#ruleTable").width()})
+
+($ "#speedOptionsMinButton").click ->
+	($ this).toggleClass "down"
+
+	if ($ this).hasClass("down")
+		($ "#speedOptionsDiv").slideToggle()
+		#($ this).animate({left: "0px"})
+	else
+		($ "#speedOptionsDiv").slideToggle()
+		#($ this).animate({left: $("#ruleTable").width()})
+($ "#gridSizeOptionsMinButton").click ->
+	($ this).toggleClass "down"
+
+	if ($ this).hasClass("down")
+		($ "#gridSizeOptionsDiv").slideToggle()
+		#($ this).animate({left: "0px"})
+	else
+		($ "#gridSizeOptionsDiv").slideToggle()
+		#($ this).animate({left: $("#ruleTable").width()})
