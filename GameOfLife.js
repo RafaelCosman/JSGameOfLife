@@ -6,7 +6,7 @@ If these can all be replaced by builtins, that's be great.
 
 
 (function() {
-  var $, HSVtoRGB, background, border, buttonHeight, buttonWidth, canvas, computeNextGeneration, context, deadClasses, draw, drawCells, getBinaryThingey, inc, liveClasses, makeNewGrid, mouse, mouseX, mouseY, numNeighbors, randomGrid, randomGridWithDimensions, rgb, rgba, root, rules, setHidden, setVisible, zero, _i, _ref;
+  var $, HSVtoRGB, background, border, buttonHeight, buttonWidth, canvas, computeNextGeneration, context, deadClasses, draw, drawCells, extendAges, getBinaryThingey, inc, liveClasses, makeCells, makeNewGrid, mouse, mouseX, mouseY, numNeighbors, randomGrid, randomGridWithDimensions, rgb, rgba, root, rules, setHidden, setVisible, zero, _i, _ref;
 
   getBinaryThingey = function(num) {
     if (num === 0) {
@@ -142,14 +142,13 @@ If these can all be replaced by builtins, that's be great.
     root.gridSpacing *= .9;
     root.gridWidth = canvas.width / gridSpacing;
     root.gridHeight = canvas.width / gridSpacing;
-    return root.ages = randomGrid();
+    return extendAges();
   };
 
   this.fewerCells = function() {
-    var gridHeight, gridWidth;
-    gridSpacing *= 1 / .9;
-    gridWidth = canvas.width / gridSpacing;
-    return gridHeight = canvas.width / gridSpacing;
+    root.gridSpacing /= .9;
+    root.gridWidth = canvas.width / gridSpacing;
+    return root.gridHeight = canvas.width / gridSpacing;
   };
 
   mouse = {
@@ -179,19 +178,7 @@ If these can all be replaced by builtins, that's be great.
     }
   };
 
-  $("#myCanvas").mousedown(function(event) {
-    return mouse.down[event.which] = true;
-  });
-
-  $("#myCanvas").mouseup(function(event) {
-    mouse.down[event.which] = false;
-    if (root.help) {
-      root.help = false;
-      return root.paused = false;
-    }
-  });
-
-  $("#myCanvas").mousemove(function(event) {
+  makeCells = function(event) {
     var d, gridX, gridY, x, y, _j, _k, _l, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _results;
     mouse.x = event.pageX;
     mouse.y = event.pageY;
@@ -227,16 +214,38 @@ If these can all be replaced by builtins, that's be great.
       }
       return _results;
     }
+  };
+
+  $("#myCanvas").mousedown(function(event) {
+    mouse.down[event.which] = true;
+    return makeCells(event);
   });
 
+  $("#myCanvas").mouseup(function(event) {
+    mouse.down[event.which] = false;
+    if (root.help) {
+      root.help = false;
+      return root.paused = false;
+    }
+  });
+
+  $("#myCanvas").mousemove(function(event) {
+    return makeCells(event);
+  });
+
+  extendAges = function() {
+    return root.ages = randomGrid();
+  };
+
   $(window).resize(function() {
-    var buttonHeight, buttonWidth, gridHeight, gridWidth;
+    var buttonHeight, buttonWidth;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     buttonWidth = 50;
     buttonHeight = canvas.height / 9;
-    gridWidth = canvas.width / gridSpacing;
-    return gridHeight = canvas.width / gridSpacing;
+    root.gridWidth = canvas.width / gridSpacing;
+    root.gridHeight = canvas.width / gridSpacing;
+    return extendAges();
   });
 
   ($(".ruleButton")).click(function() {
@@ -256,6 +265,21 @@ If these can all be replaced by builtins, that's be great.
       return setTimeout((function() {
         return setHidden("#tutorialRightCol");
       }), 9000);
+    }
+  });
+
+  ($("#ruleTableMinButton")).click(function() {
+    ($(this)).toggleClass("down");
+    if (($(this)).hasClass("down")) {
+      ($("#ruleTable")).slideToggle();
+      return ($(this)).animate({
+        left: "0px"
+      });
+    } else {
+      ($("#ruleTable")).slideToggle();
+      return ($(this)).animate({
+        left: $("#ruleTable").width()
+      });
     }
   });
 

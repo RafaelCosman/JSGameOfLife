@@ -55,14 +55,23 @@ canvas {
 	user-select: none;
 }
 
+h1 {
+	@include text()
+}
+
+div {
+	@include unselectable()
+}
+
 .actionButton {
-	position:absolute;
 	bottom:0px;
 
 	width:90px;
 
 	background-color: $button;
 	color: $buttonTextColor;
+
+	border: 0;
 
 	@include text();
 	@include unselectable();
@@ -115,15 +124,32 @@ canvas {
 	}
 }
 
+#ruleDiv {
+	left:0px;
+	height:100%;
+}
 #ruleTable {
 	background:rgba(255, 255, 255, 0.7);
+	left: 0px;
+	height:100%;
 
 	@include text();
 	@include unselectable();
+}
+#ruleTableMinButton {
+	left:69px;
+	height:100%;
+	width:10px;
 }
 
 #shareButtons {
 	visibility:hidden;
 	position:absolute;
 	bottom:0px;
+}
+
+.minButton {
+	@extends actionButton;
+	background:rgba(255, 255, 255, 0.7);
+	border: 0;
 }
