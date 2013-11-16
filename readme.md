@@ -8,3 +8,7 @@ It has two key innovations:
 This makes it fun and beautiful! Let me know how I can improve it. Feel free to submit issues to this Github repo.
 
 Enjoy.
+
+
+If you want to contribute to this project, the recommended environment is
+yourFavoriteTextEditor for editing -> CodeKit for coffeescript and scss compilation -> yourFavoriteBrowser for testing
