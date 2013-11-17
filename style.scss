@@ -1,7 +1,7 @@
 @import "mixins.scss";
 
 //Regular buttons
-$button: rgba(60, 60, 60, 0.5);
+$button: rgba(40, 40, 40, 0.7);
 $buttonHover: lighten($button, 10%);
 $buttonActive: lighten($button, 20%);
 
@@ -23,7 +23,7 @@ $ruleButtonActiveTextColor: rgb(255, 255, 150);
 $ruleButtonDownTextColor: rgb(255, 255, 255);
 
 @mixin text() {	
-	#display:inline-block;
+	//display:inline-block;
 	font-family:Arial;
 	font-size:12px;
 	font-weight:bold;
@@ -55,14 +55,38 @@ canvas {
 	user-select: none;
 }
 
-.actionButton {
-	position:absolute;
+h1 {
+	background-color: $button;
+	padding: 0px;
+
+	@include text();
+
+	&:hover {
+		color: $buttonHoverTextColor
+	}
+
+	&:active {
+		color: $buttonActiveTextColor
+	}
+}
+
+div {
+	@include unselectable()
+}
+
+.controlGroup {
 	bottom:0px;
+	position: absolute;
+}
+
+.actionButton {
 
 	width:90px;
 
 	background-color: $button;
 	color: $buttonTextColor;
+
+	border: 0;
 
 	@include text();
 	@include unselectable();
@@ -83,6 +107,8 @@ canvas {
 	
 	background-color: $button;
 	color: $buttonTextColor;
+
+	border: 0;
 
 	@include text();
 	@include unselectable();
@@ -126,4 +152,10 @@ canvas {
 	visibility:hidden;
 	position:absolute;
 	bottom:0px;
+}
+
+.minButton {
+	color: $buttonTextColor;
+
+	@extends actionButton;
 }

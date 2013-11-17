@@ -58,12 +58,12 @@ setHidden = (jQueryKey) ->
 	root.gridSpacing *= .9
 	root.gridWidth = canvas.width / gridSpacing
 	root.gridHeight = canvas.width / gridSpacing
-	root.ages = randomGrid()
+	extendAges()
 
 @fewerCells = ->
-	gridSpacing *= 1/.9
-	gridWidth = canvas.width / gridSpacing
-	gridHeight = canvas.width / gridSpacing
+	root.gridSpacing /= .9
+	root.gridWidth = canvas.width / gridSpacing
+	root.gridHeight = canvas.width / gridSpacing
 	
 #Mouse IO
 #-------------------
@@ -84,17 +84,7 @@ mouse = {
 	distanceTo: (otherX, otherY) -> Math.sqrt(Math.pow(otherX - @x, 2) + Math.pow(otherY - @y, 2))
 	}
 	
-$("#myCanvas").mousedown (event) ->
-	mouse.down[event.which] = true
-	
-$("#myCanvas").mouseup (event) ->
-	mouse.down[event.which] = false
-
-	if root.help
-		root.help = false
-		root.paused = false
-
-$("#myCanvas").mousemove (event) ->
+makeCells = (event) ->
 	mouse.x = event.pageX
 	mouse.y = event.pageY
 
@@ -121,11 +111,28 @@ $("#myCanvas").mousemove (event) ->
 
 		for x in [gridX-d...gridX+1+d]
 			for y in [gridY-d...gridY+1+d]
-				zero(ages, x, y)
+				zero(ages, x, y)	
+
+$("#myCanvas").mousedown (event) ->
+	mouse.down[event.which] = true
+	makeCells(event)
+	
+$("#myCanvas").mouseup (event) ->
+	mouse.down[event.which] = false
+
+	if root.help
+		root.help = false
+		root.paused = false
+
+$("#myCanvas").mousemove (event) ->
+	makeCells(event)
 
 #Keyboard io
 #------------------------
 #I want to add space clears board
+
+extendAges = () ->
+	root.ages = randomGrid()
 
 #Window Resize event
 $(window).resize ->
@@ -135,8 +142,10 @@ $(window).resize ->
 	buttonWidth = 50
 	buttonHeight = canvas.height / 9
 
-	gridWidth = canvas.width / gridSpacing
-	gridHeight = canvas.width / gridSpacing
+	root.gridWidth = canvas.width / gridSpacing
+	root.gridHeight = canvas.width / gridSpacing
+
+	extendAges()
 
 ($ ".ruleButton").click ->
 	($ this).toggleClass "down"
@@ -150,3 +159,13 @@ $(window).resize ->
 		
 		setTimeout (-> setVisible "#tutorialRightCol"), 5000
 		setTimeout (-> setHidden "#tutorialRightCol"), 9000
+
+($ "#ruleTableMinButton").click ->
+	($ this).toggleClass "down"
+	($ "#ruleTableDiv").slideToggle()
+($ "#speedOptionsMinButton").click ->
+	($ this).toggleClass "down"
+	($ "#speedOptionsDiv").slideToggle()
+($ "#gridSizeOptionsMinButton").click ->
+	($ this).toggleClass "down"
+	($ "#gridSizeOptionsDiv").slideToggle()
