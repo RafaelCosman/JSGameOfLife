@@ -27,31 +27,36 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 
 		<link rel="shortcut icon" href="icon.ico">
+
+		<!-- Now we'll load JQuery -->
+		<!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>-->
+		<!--<script type="text/javascript" src="ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>-->
+		<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
 	</head>
 
 	<body>
 		<canvas id="myCanvas" style="left:100px" oncontextmenu="return false;"></canvas>
 		
-		<div data-role="controlgroup" style="position:absolute; right:300px; bottom:0px;">
-			<button title="Makes all the cells dead"	type="button" style="right:500px;" class="actionButton" onclick="clearGrid()">Clear</button>
+		<div data-role="controlgroup" class="controlGroup" style="right:250px">
+			<button title="Makes all the cells dead"	type="button" class="actionButton" onclick="clearGrid()">Clear</button>
 			<!--<button title="Displays help"				type="button" style="right:400px;" class="actionButton" onclick="help()">Help</button>-->
-			<button title="Pauses the animation"		type="button" style="right:300px;" class="actionButton" onclick="pause()">Pause</button>
+			<button title="Pauses the animation"		type="button" class="actionButton" onclick="pause()">Pause</button>
 		</div>
 
-		<div data-role="controlgroup" style="position:absolute; right:700px; bottom:0px;">
-			<h1 id="speedOptionsMinButton" title="Minimizes the speed options" type="button" class="minButton">Speed Options</h1>
-			<div id="speedOptionsDiv">
-				<button title ="Makes the animation run slowly by adding a 1.0 second delay between each generation" type="button" style="right:900px;" class="actionButton" onclick="setDelay(1000)">Slow</button>
-				<button title ="Makes the animation run slightly slower by adding a 0.1 second delay between each generation" type="button" style="right:800px;" class="actionButton" onclick="setDelay(100)">Medium</button>
-				<button title ="Makes the animation run as fast as possible" 	type="button" style="right:700px;" class="actionButton" onclick="setDelay(0)">Fast</button>
+		<div data-role="controlgroup" class="controlGroup" style="right:450px;">
+			<h1 id="speedOptionsMinButton" title="These options allow you to change the speed of Game of Life. Click here to minimize these options" type="button" class="minButton" style="width:280px">Speed Options</h1>
+			<div id="speedOptionsDiv" style="bottom:0px;">
+				<button title ="Makes the animation run slowly by adding a 1.0 second delay between each generation" type="button" class="actionButton" onclick="setDelay(1000)">Slow</button>
+				<button title ="Makes the animation run slightly slower by adding a 0.1 second delay between each generation" type="button" class="actionButton" onclick="setDelay(100)">Medium</button>
+				<button title ="Makes the animation run as fast as possible" 	type="button" class="actionButton" onclick="setDelay(0)">Fast</button>
 			</div>
 		</div>
 
-		<div data-role="controlgroup" style="position:absolute; right:500px; bottom:0px;">
-			<h1 id="gridSizeOptionsMinButton" title="Minimizes the number of cells options" class="minButton">Grid Size Options</h1>
+		<div data-role="controlgroup" class="controlGroup" style="right:750px">
+			<h1 id="gridSizeOptionsMinButton" title="These options allow you to change the number of cells on the screen. Click here to minimize these options." class="minButton" style="width:185px">Grid Size Options</h1>
 			<div id="gridSizeOptionsDiv">
-				<button title="Makes the grid contain fewer cells" type="button" style="right:0px; bottom:60px;" class="actionButton" onclick="fewerCells()">Fewer Cells</button>
-				<button title="Makes the grid contain more cells" type="button" style="right:0px; bottom:100px;" class="actionButton" onclick="moreCells()">More Cells</button>
+				<button title="Makes the grid contain fewer cells" type="button" class="actionButton" onclick="fewerCells()">Fewer Cells</button>
+				<button title="Makes the grid contain more cells" type="button" class="actionButton" onclick="moreCells()">More Cells</button>
 			</div>
 		</div>
 
@@ -62,18 +67,12 @@
 		<button id="tutorialRightCol" type="button" style="top:160px; left:100px" class="helpBox">The right column determines if live cells will stay alive</button>
 		<button id="tutorialRow" type="button" style="top:200px; left:100px" class="helpBox">The row correscponds to how many neighbors a cell has</button>
 
-		<div data-role="controlgroup" data-type="horizontal" style="position:absolute; top:0px; height:100%;">
-			<table id="ruleTable">
-				<!--<tr>	
-					<h1 id="ruleTableMinButton" type="button" class="minButton">X</h1>
-				</tr>-->
-			</table>
+		<div data-role="controlgroup" class="controlGroup" style="height:100%;">
+			<!--<h1 id="ruleTableMinButton" class="minButton" style="width:70px; height:30px;">Rule Table</h1>-->
+			<div id="ruleTableDiv" style="height:100%">
+				<table id="ruleTable" style="height:100%"></table>
+			</div>
 		<div>
-
-		<!-- Now we'll load JQuery -->
-		<!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>-->
-		<!--<script type="text/javascript" src="ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>-->
-		<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
 
 		<!-- Now we'll load the game -->
 		<script type="text/javascript" src="GameOfLife.js"></script>

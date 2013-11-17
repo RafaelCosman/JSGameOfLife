@@ -270,29 +270,17 @@ If these can all be replaced by builtins, that's be great.
 
   ($("#ruleTableMinButton")).click(function() {
     ($(this)).toggleClass("down");
-    if (($(this)).hasClass("down")) {
-      return ($("#ruleTable")).slideToggle();
-    } else {
-      return ($("#ruleTable")).slideToggle();
-    }
+    return ($("#ruleTableDiv")).slideToggle();
   });
 
   ($("#speedOptionsMinButton")).click(function() {
     ($(this)).toggleClass("down");
-    if (($(this)).hasClass("down")) {
-      return ($("#speedOptionsDiv")).slideToggle();
-    } else {
-      return ($("#speedOptionsDiv")).slideToggle();
-    }
+    return ($("#speedOptionsDiv")).slideToggle();
   });
 
   ($("#gridSizeOptionsMinButton")).click(function() {
     ($(this)).toggleClass("down");
-    if (($(this)).hasClass("down")) {
-      return ($("#gridSizeOptionsDiv")).slideToggle();
-    } else {
-      return ($("#gridSizeOptionsDiv")).slideToggle();
-    }
+    return ($("#gridSizeOptionsDiv")).slideToggle();
   });
 
   /* --------------------------------------------

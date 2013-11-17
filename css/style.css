@@ -10,7 +10,8 @@ canvas {
 
 /* To remove the scrollbars */
 h1 {
-  #display: inline-block;
+  background-color: rgba(40, 40, 40, 0.7);
+  padding: 0px;
   font-family: Arial;
   font-size: 12px;
   font-weight: bold;
@@ -19,6 +20,10 @@ h1 {
   text-decoration: none;
   text-align: center;
   outline: 0px; }
+  h1:hover {
+    color: #ffffc8; }
+  h1:active {
+    color: #ffff96; }
 
 div {
   -webkit-touch-callout: none;
@@ -28,13 +33,15 @@ div {
   -ms-user-select: none;
   user-select: none; }
 
-.actionButton {
+.controlGroup {
   bottom: 0px;
+  position: absolute; }
+
+.actionButton {
   width: 90px;
-  background-color: rgba(60, 60, 60, 0.5);
+  background-color: rgba(40, 40, 40, 0.7);
   color: white;
   border: 0;
-  #display: inline-block;
   font-family: Arial;
   font-size: 12px;
   font-weight: bold;
@@ -50,18 +57,18 @@ div {
   -ms-user-select: none;
   user-select: none; }
   .actionButton:hover {
-    background-color: rgba(86, 86, 86, 0.5);
+    background-color: rgba(66, 66, 66, 0.7);
     color: #ffffc8; }
   .actionButton:active {
-    background-color: rgba(111, 111, 111, 0.5);
+    background-color: rgba(91, 91, 91, 0.7);
     color: #ffff96; }
 
 .helpBox {
   position: absolute;
   visibility: hidden;
-  background-color: rgba(60, 60, 60, 0.5);
+  background-color: rgba(40, 40, 40, 0.7);
   color: white;
-  #display: inline-block;
+  border: 0;
   font-family: Arial;
   font-size: 12px;
   font-weight: bold;
@@ -79,12 +86,11 @@ div {
 
 .tableHeader {
   color: white;
-  background-color: rgba(60, 60, 60, 0.5); }
+  background-color: rgba(40, 40, 40, 0.7); }
 
 .ruleButton {
   color: white;
-  background-color: rgba(60, 60, 60, 0.5);
-  #display: inline-block;
+  background-color: rgba(40, 40, 40, 0.7);
   font-family: Arial;
   font-size: 12px;
   font-weight: bold;
@@ -101,23 +107,16 @@ div {
   user-select: none; }
   .ruleButton:hover {
     color: #ffffc8;
-    background-color: rgba(86, 86, 86, 0.5); }
+    background-color: rgba(66, 66, 66, 0.7); }
   .ruleButton:active {
     color: #ffff96;
-    background-color: rgba(111, 111, 111, 0.5); }
+    background-color: rgba(91, 91, 91, 0.7); }
   .ruleButton.down {
     color: white;
-    background-color: rgba(195, 195, 195, 0.5); }
-
-#ruleDiv {
-  left: 0px;
-  height: 100%; }
+    background-color: rgba(215, 215, 215, 0.7); }
 
 #ruleTable {
   background: rgba(255, 255, 255, 0.7);
-  left: 0px;
-  height: 100%;
-  #display: inline-block;
   font-family: Arial;
   font-size: 12px;
   font-weight: bold;
@@ -133,17 +132,11 @@ div {
   -ms-user-select: none;
   user-select: none; }
 
-#ruleTableMinButton {
-  left: 69px;
-  height: 100%;
-  width: 10px; }
-
 #shareButtons {
   visibility: hidden;
   position: absolute;
   bottom: 0px; }
 
 .minButton {
-  @extends actionButton;
-  background: rgba(255, 255, 255, 0.7);
-  border: 0; }
+  color: white;
+  @extends actionButton; }
