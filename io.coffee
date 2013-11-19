@@ -34,9 +34,10 @@ jQueryKey should be a string like
 #myID
 ###
 setVisible = (jQueryKey) ->
-	($ jQueryKey).css "visibility", "visible"
+	($ jQueryKey).css {visibility: "visible", opacity: 0}
+	($ jQueryKey).animate {opacity: 1.0}
 setHidden = (jQueryKey) ->
-	($ jQueryKey).css "visibility", "hidden"
+	($ jQueryKey).animate {opacity: 0}, (-> ($ jQueryKey).css {visibility: "hidden"})
 
 #Button presses
 @help = ->

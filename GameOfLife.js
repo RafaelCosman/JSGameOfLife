@@ -113,11 +113,23 @@ If these can all be replaced by builtins, that's be great.
 
 
   setVisible = function(jQueryKey) {
-    return ($(jQueryKey)).css("visibility", "visible");
+    ($(jQueryKey)).css({
+      visibility: "visible",
+      opacity: 0
+    });
+    return ($(jQueryKey)).animate({
+      opacity: 1.0
+    });
   };
 
   setHidden = function(jQueryKey) {
-    return ($(jQueryKey)).css("visibility", "hidden");
+    return ($(jQueryKey)).animate({
+      opacity: 0
+    }, (function() {
+      return ($(jQueryKey)).css({
+        visibility: "hidden"
+      });
+    }));
   };
 
   this.help = function() {
