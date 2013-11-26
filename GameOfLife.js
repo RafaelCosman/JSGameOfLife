@@ -152,6 +152,7 @@ If these can all be replaced by builtins, that's be great.
 
   this.moreCells = function() {
     root.gridSpacing *= .9;
+    border *= .9;
     root.gridWidth = canvas.width / gridSpacing;
     root.gridHeight = canvas.width / gridSpacing;
     return extendAges();
@@ -159,6 +160,7 @@ If these can all be replaced by builtins, that's be great.
 
   this.fewerCells = function() {
     root.gridSpacing /= .9;
+    border /= .9;
     root.gridWidth = canvas.width / gridSpacing;
     return root.gridHeight = canvas.width / gridSpacing;
   };
@@ -489,7 +491,7 @@ If these can all be replaced by builtins, that's be great.
 
   root.gridSpacing = 15;
 
-  border = 3;
+  border = root.gridSpacing * .2;
 
   root.gridWidth = canvas.width / root.gridSpacing;
 
