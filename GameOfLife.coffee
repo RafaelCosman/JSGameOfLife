@@ -58,16 +58,16 @@ computeNextGeneration = ->
 	for x in [0...root.gridWidth]
 		for y in [0...root.gridHeight]
 			if root.ages[x][y] != 0
-				inc(numNeighbors, x-1, y-1)
-				inc(numNeighbors, x-1, y)
-				inc(numNeighbors, x-1, y+1)
+				inc numNeighbors, x-1, y-1
+				inc numNeighbors, x-1, y
+				inc numNeighbors, x-1, y+1
 				
-				inc(numNeighbors, x, y-1)
-				inc(numNeighbors, x, y+1)
+				inc numNeighbors, x, y-1
+				inc numNeighbors, x, y+1
 				
-				inc(numNeighbors, x+1, y-1)
-				inc(numNeighbors, x+1, y)
-				inc(numNeighbors, x+1, y+1)
+				inc numNeighbors, x+1, y-1
+				inc numNeighbors, x+1, y
+				inc numNeighbors, x+1, y+1
 	
 	#Apply the current rules
 	for x in [0...root.gridWidth]
@@ -126,7 +126,7 @@ buttonWidth = 50
 buttonHeight = canvas.height / 9
 
 root.gridSpacing = 15
-border = 3
+border = root.gridSpacing * .2
 
 root.gridWidth = canvas.width / root.gridSpacing
 root.gridHeight = canvas.width / root.gridSpacing

@@ -57,12 +57,16 @@ setHidden = (jQueryKey) ->
 
 @moreCells = ->
 	root.gridSpacing *= .9
+	border *= .9
+	
 	root.gridWidth = canvas.width / gridSpacing
 	root.gridHeight = canvas.width / gridSpacing
 	extendAges()
 
 @fewerCells = ->
 	root.gridSpacing /= .9
+	border /= .9
+
 	root.gridWidth = canvas.width / gridSpacing
 	root.gridHeight = canvas.width / gridSpacing
 	

@@ -41,14 +41,14 @@
 
 		<link rel="shortcut icon" href="icon.ico">
 
-		<!-- Now we'll load JQuery -->
+		<!-- Now we'll load JQuery. There are a couple of different ways. -->
 		<!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>-->
 		<!--<script type="text/javascript" src="ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>-->
 		<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
 	</head>
 
 	<body>
-		<canvas id="myCanvas" style="left:100px" oncontextmenu="return false;"></canvas>
+		<canvas id="myCanvas" oncontextmenu="return false;"></canvas>
 		
 		<div data-role="controlgroup" class="controlGroup" style="right:250px">
 			<button title="Makes all the cells dead"	type="button" class="actionButton" onclick="clearGrid()">Clear</button>
@@ -78,8 +78,8 @@
 		<button id="tutorialChangeRules" type="button" style="top:70px; left:100px" class="helpBox">Click on these buttons to change the rules</button>
 		<button id="tutorialLeftCol" type="button" style="top:120px; left:100px" class="helpBox">The left column determines if dead cells will come to life</button>
 		<button id="tutorialRightCol" type="button" style="top:160px; left:100px" class="helpBox">The right column determines if live cells will stay alive</button>
-		<button id="tutorialRow" type="button" style="top:200px; left:100px" class="helpBox">The row correscponds to how many neighbors a cell has</button>
-		<button id="tutorialMouseOver" type="button" style="top:240px; left:100px" class="helpBox">Mouse-over any button to learn what it does</button>
+		<button id="tutorialRow" type="button" style="top:200px; left:100px" class="helpBox">The row is determined by how many neighbors a cell has</button>
+		<button id="tutorialMouseOver" type="button" style="top:240px; left:100px" class="helpBox">Mouse-over any of these numbers to learn what it does</button>
 
 
 		<div data-role="controlgroup" class="controlGroup" style="height:100%;">
