@@ -1,3 +1,13 @@
+.text {
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 30px;
+  text-decoration: none;
+  text-align: center;
+  outline: 0px;
+}
 html,
 body {
   width: 100%;
@@ -48,6 +58,7 @@ div {
   background-color: rgba(40, 40, 40, 0.8);
   color: #ffffff;
   border: 0;
+  margin-bottom: 0px;
   font-family: Arial;
   font-size: 12px;
   font-weight: bold;
@@ -127,6 +138,7 @@ div {
   background-color: rgba(40, 40, 40, 0.8);
   color: #ffffff;
   border: 0;
+  margin-bottom: 0px;
   font-family: Arial;
   font-size: 12px;
   font-weight: bold;
@@ -164,6 +176,7 @@ div {
 }
 .allTheButtons .controlGroup {
   margin: 5px;
+  margin-bottom: 0px;
   position: absolute;
   bottom: 0;
 }
@@ -172,6 +185,7 @@ div {
   background-color: rgba(40, 40, 40, 0.8);
   color: #ffffff;
   border: 0;
+  margin-bottom: 0px;
   font-family: Arial;
   font-size: 12px;
   font-weight: bold;

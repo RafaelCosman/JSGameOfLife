@@ -189,12 +189,11 @@ If these can all be replaced by builtins, that's be great.
   };
 
   makeCells = function(event) {
-    var d, gridX, gridY, x, y, _j, _k, _l, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _results;
+    var gridX, gridY, x, y, _j, _k, _l, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _results;
     mouse.x = event.pageX;
     mouse.y = event.pageY;
     gridX = mouse.getGridX();
     gridY = mouse.getGridY();
-    d = 2;
     if (mouse.down[1]) {
       if (!root.userHasCreatedCells) {
         root.userHasCreatedCells = true;
@@ -203,8 +202,8 @@ If these can all be replaced by builtins, that's be great.
           setVisible("#tutorialChangeRules");
         }
       }
-      for (x = _j = _ref1 = gridX - d, _ref2 = gridX + 1 + d; _ref1 <= _ref2 ? _j < _ref2 : _j > _ref2; x = _ref1 <= _ref2 ? ++_j : --_j) {
-        for (y = _k = _ref3 = gridY - d, _ref4 = gridY + 1 + d; _ref3 <= _ref4 ? _k < _ref4 : _k > _ref4; y = _ref3 <= _ref4 ? ++_k : --_k) {
+      for (x = _j = _ref1 = gridX - root.brushSize, _ref2 = gridX + 1 + root.brushSize; _ref1 <= _ref2 ? _j < _ref2 : _j > _ref2; x = _ref1 <= _ref2 ? ++_j : --_j) {
+        for (y = _k = _ref3 = gridY - root.brushSize, _ref4 = gridY + 1 + root.brushSize; _ref3 <= _ref4 ? _k < _ref4 : _k > _ref4; y = _ref3 <= _ref4 ? ++_k : --_k) {
           inc(ages, x, y);
         }
       }
@@ -212,11 +211,11 @@ If these can all be replaced by builtins, that's be great.
     if (mouse.down[3]) {
       root.userHasDeletedCells = true;
       _results = [];
-      for (x = _l = _ref5 = gridX - d, _ref6 = gridX + 1 + d; _ref5 <= _ref6 ? _l < _ref6 : _l > _ref6; x = _ref5 <= _ref6 ? ++_l : --_l) {
+      for (x = _l = _ref5 = gridX - root.brushSize, _ref6 = gridX + 1 + root.brushSize; _ref5 <= _ref6 ? _l < _ref6 : _l > _ref6; x = _ref5 <= _ref6 ? ++_l : --_l) {
         _results.push((function() {
           var _m, _ref7, _ref8, _results1;
           _results1 = [];
-          for (y = _m = _ref7 = gridY - d, _ref8 = gridY + 1 + d; _ref7 <= _ref8 ? _m < _ref8 : _m > _ref8; y = _ref7 <= _ref8 ? ++_m : --_m) {
+          for (y = _m = _ref7 = gridY - root.brushSize, _ref8 = gridY + 1 + root.brushSize; _ref7 <= _ref8 ? _m < _ref8 : _m > _ref8; y = _ref7 <= _ref8 ? ++_m : --_m) {
             _results1.push(zero(ages, x, y));
           }
           return _results1;
@@ -293,13 +292,22 @@ If these can all be replaced by builtins, that's be great.
     $("#myCanvas").mousemove(function(event) {
       return makeCells(event);
     });
-    return ($("#pauseButton")).click((function() {
+    ($("#pauseButton")).click((function() {
       root.paused = !root.paused;
       if (root.paused) {
         return ($(this)).html("Play");
       } else {
         return ($(this)).html("Pause");
       }
+    }));
+    ($("#1x1")).click((function() {
+      return root.brushSize = 0;
+    }));
+    ($("#3x3")).click((function() {
+      return root.brushSize = 1;
+    }));
+    return ($("#5x5")).click((function() {
+      return root.brushSize = 2;
     }));
   });
 
@@ -508,6 +516,8 @@ If these can all be replaced by builtins, that's be great.
   mouseY = 0;
 
   root.ages = randomGrid();
+
+  root.brushSize = 2;
 
   root.helpShown = false;
 

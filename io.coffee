@@ -93,8 +93,6 @@ makeCells = (event) ->
 	gridX = mouse.getGridX()
 	gridY = mouse.getGridY()
 	
-	d = 2 #this is the size of the users brush to kill or create cells
-	
 	#If dragging with the left mouse button, create cells
 	if mouse.down[1]
 		if not root.userHasCreatedCells
@@ -103,16 +101,16 @@ makeCells = (event) ->
 			if not root.userHasChangedRules
 				setVisible "#tutorialChangeRules"
 
-		for x in [gridX-d...gridX+1+d]
-			for y in [gridY-d...gridY+1+d]
+		for x in [gridX-root.brushSize...gridX+1+root.brushSize]
+			for y in [gridY-root.brushSize...gridY+1+root.brushSize]
 				inc(ages, x, y)
 				
 	#If dragging with the right mouse button, kill cells
 	if mouse.down[3]
 		root.userHasDeletedCells = true
 
-		for x in [gridX-d...gridX+1+d]
-			for y in [gridY-d...gridY+1+d]
+		for x in [gridX-root.brushSize...gridX+1+root.brushSize]
+			for y in [gridY-root.brushSize...gridY+1+root.brushSize]
 				zero(ages, x, y)	
 
 #Keyboard io
@@ -164,6 +162,7 @@ $ ->
 		($ this).toggleClass "down"
 		($ "#brushOptionsDiv").slideToggle()
 
+
 	$("#myCanvas").mousedown (event) ->
 		mouse.down[event.which] = true
 		makeCells(event)
@@ -186,4 +185,15 @@ $ ->
 			($ this).html "Play"
 		else
 			($ this).html "Pause"
+		)
+
+	#Brush options
+	($ "#1x1").click ( ->
+		root.brushSize = 0
+		)
+	($ "#3x3").click ( ->
+		root.brushSize = 1
+		)
+	($ "#5x5").click ( ->
+		root.brushSize = 2
 		)

@@ -9,7 +9,7 @@
 @buttonActiveTextColor: rgb(255, 255, 150);
 @buttonDownTextColor: rgb(255, 255, 255);
 
-.text() {	
+.text {	
 	//display:inline-block;
 	font-family:Arial;
 	font-size:12px;
@@ -46,7 +46,7 @@ h1 {
 	background-color: @button;
 	//padding: 0px;
 
-	.text();
+	.text;
 
 	&:hover {
 		color: @buttonHoverTextColor
@@ -58,7 +58,7 @@ h1 {
 }
 
 div {
-	.unselectable()
+	.unselectable
 }
 
 .actionButton {
@@ -68,9 +68,10 @@ div {
 	color: @buttonTextColor;
 
 	border: 0;
+	margin-bottom: 0px;
 
-	.text();
-	.unselectable();
+	.text;
+	.unselectable;
 
 	&:hover {
 		background-color: @buttonHover;
@@ -95,8 +96,8 @@ div {
 
 	border: 0;
 
-	.text();
-	.unselectable();
+	.text;
+	.unselectable;
 }
 
 
@@ -136,6 +137,7 @@ div {
 
 	.controlGroup {
 		margin: 5px;
+		margin-bottom: 0px;
 
 		position: absolute;
 		bottom: 0;

@@ -136,6 +136,8 @@ mouseY = 0
 
 root.ages = randomGrid()
 
+root.brushSize = 2 #this is the size of the users brush to kill or create cells
+
 root.helpShown = false
 root.paused = false
 
