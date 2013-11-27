@@ -49,11 +49,14 @@ setHidden = (jQueryKey) ->
 	else
 		setHidden ".helpBox"
 
+<<<<<<< HEAD
 @pause = ->
 	root.paused = !root.paused
 
 	($ "#pauseButton").html "Play"
 
+=======
+>>>>>>> develop
 @toggleRule = (x, y) ->
 	rules[x][y] = !rules[x][y]
 
@@ -98,8 +101,6 @@ makeCells = (event) ->
 	gridX = mouse.getGridX()
 	gridY = mouse.getGridY()
 	
-	d = 2 #this is the size of the users brush to kill or create cells
-	
 	#If dragging with the left mouse button, create cells
 	if mouse.down[1]
 		if not root.userHasCreatedCells
@@ -108,31 +109,17 @@ makeCells = (event) ->
 			if not root.userHasChangedRules
 				setVisible "#tutorialChangeRules"
 
-		for x in [gridX-d...gridX+1+d]
-			for y in [gridY-d...gridY+1+d]
+		for x in [gridX-root.brushSize...gridX+1+root.brushSize]
+			for y in [gridY-root.brushSize...gridY+1+root.brushSize]
 				inc(ages, x, y)
 				
 	#If dragging with the right mouse button, kill cells
 	if mouse.down[3]
 		root.userHasDeletedCells = true
 
-		for x in [gridX-d...gridX+1+d]
-			for y in [gridY-d...gridY+1+d]
+		for x in [gridX-root.brushSize...gridX+1+root.brushSize]
+			for y in [gridY-root.brushSize...gridY+1+root.brushSize]
 				zero(ages, x, y)	
-
-$("#myCanvas").mousedown (event) ->
-	mouse.down[event.which] = true
-	makeCells(event)
-	
-$("#myCanvas").mouseup (event) ->
-	mouse.down[event.which] = false
-
-	if root.help
-		root.help = false
-		root.paused = false
-
-$("#myCanvas").mousemove (event) ->
-	makeCells(event)
 
 #Keyboard io
 #------------------------
@@ -154,25 +141,67 @@ $(window).resize ->
 
 	extendAges()
 
-($ ".ruleButton").click ->
-	($ this).toggleClass "down"
+$ ->
+	($ ".ruleButton").click ->
+		($ this).toggleClass "down"
 
-	if not root.userHasChangedRules
-		root.userHasChangedRules = true
-		setHidden "#tutorialChangeRules"
-		
-		setTimeout (-> setVisible "#tutorialLeftCol"), 1000
-		setTimeout (-> setHidden "#tutorialLeftCol"), 5000
-		
-		setTimeout (-> setVisible "#tutorialRightCol"), 5000
-		setTimeout (-> setHidden "#tutorialRightCol"), 9000
+		if not root.userHasChangedRules
+			root.userHasChangedRules = true
+			setHidden "#tutorialChangeRules"
+			
+			setTimeout (-> setVisible "#tutorialLeftCol"), 1000
+			setTimeout (-> setHidden "#tutorialLeftCol"), 5000
+			
+			setTimeout (-> setVisible "#tutorialRightCol"), 5000
+			setTimeout (-> setHidden "#tutorialRightCol"), 9000
+	###
+	($ "#ruleTableMinButton").click ->
+		($ this).toggleClass "down"
+		($ "#ruleTableDiv").slideToggle()
+	###
+	#These are all of the minimization buttons
+	($ "#speedOptionsMinButton").click ->
+		($ this).toggleClass "down"
+		($ "#speedOptionsDiv").slideToggle()
+	($ "#gridSizeOptionsMinButton").click ->
+		($ this).toggleClass "down"
+		($ "#gridSizeOptionsDiv").slideToggle()
+	($ "#brushOptionsMinButton").click ->
+		($ this).toggleClass "down"
+		($ "#brushOptionsDiv").slideToggle()
 
-($ "#ruleTableMinButton").click ->
-	($ this).toggleClass "down"
-	($ "#ruleTableDiv").slideToggle()
-($ "#speedOptionsMinButton").click ->
-	($ this).toggleClass "down"
-	($ "#speedOptionsDiv").slideToggle()
-($ "#gridSizeOptionsMinButton").click ->
-	($ this).toggleClass "down"
-	($ "#gridSizeOptionsDiv").slideToggle()
+
+	$("#myCanvas").mousedown (event) ->
+		mouse.down[event.which] = true
+		makeCells(event)
+		
+	$("#myCanvas").mouseup (event) ->
+		mouse.down[event.which] = false
+
+		if root.help
+			root.help = false
+			root.paused = false
+
+	$("#myCanvas").mousemove (event) ->
+		makeCells(event)
+
+	#Pause button
+	($ "#pauseButton").click ( ->
+		root.paused = not root.paused
+
+		if root.paused
+			($ this).html "Play"
+		else
+			($ this).html "Pause"
+		)
+
+	#Brush options
+	($ "#1x1").click ( ->
+		root.brushSize = 0
+		)
+	($ "#3x3").click ( ->
+		root.brushSize = 1
+		)
+	($ "#5x5").click ( ->
+		root.brushSize = 2
+		)
