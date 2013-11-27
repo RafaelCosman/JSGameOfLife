@@ -57,7 +57,7 @@
 			
 			<button title="Pauses the animation" id="pauseButton" type="button" class="actionButton" onclick="pause()">Pause</button>
 
-			<div class="controlGroup" style="right: 250px;">
+			<div class="controlGroup" style="right: 375px;">
 				<h1 id="speedOptionsMinButton" title="These options allow you to change the speed of Game of Life. Click here to minimize these options" type="button" class="minButton">Speed Options<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
 				<div id="speedOptionsDiv" class="buttonGroup" style="bottom:0px;">
 					<div title ="Makes the animation run slowly by adding a 1.0 second delay between each generation" type="button" class="actionButton" onclick="setDelay(1000)">Slow</div>
@@ -66,11 +66,11 @@
 				</div>
 			</div>
 
-			<div class="controlGroup" style="right: 375px;">
+			<div class="controlGroup" style="right: 250px;">
 				<h1 id="gridSizeOptionsMinButton" title="These options allow you to change the number of cells on the screen. Click here to minimize these options." class="minButton">Grid Size Options<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
 				<div id="gridSizeOptionsDiv" class="buttonGroup" >
-					<div title="Makes the grid contain fewer cells" type="button" class="actionButton" onclick="fewerCells()">Fewer Cells</div>
 					<div title="Makes the grid contain more cells" type="button" class="actionButton" onclick="moreCells()">More Cells</div>
+					<div title="Makes the grid contain fewer cells" type="button" class="actionButton" onclick="fewerCells()">Fewer Cells</div>
 				</div>
 			</div>
 
@@ -80,6 +80,7 @@
 					<div id="1x1" title="1x1 brush" type="button" class="actionButton">1x1</div>
 					<div id="3x3" title="3x3 brush" type="button" class="actionButton">3x3</div>
 					<div id="5x5" title="5x5 brush" type="button" class="actionButton">5x5</div>
+					<div id="9x9" title="9x9 brush" type="button" class="actionButton">9x9</div>
 				</div>
 			</div>
 		</div>

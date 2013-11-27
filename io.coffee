@@ -162,7 +162,7 @@ $ ->
 		($ this).toggleClass "down"
 		($ "#brushOptionsDiv").slideToggle()
 
-
+	#Canvas listeners
 	$("#myCanvas").mousedown (event) ->
 		mouse.down[event.which] = true
 		makeCells(event)
@@ -179,6 +179,8 @@ $ ->
 
 	#Pause button
 	($ "#pauseButton").click ( ->
+		($ this).toggleClass "down"
+
 		root.paused = not root.paused
 
 		if root.paused
@@ -196,4 +198,7 @@ $ ->
 		)
 	($ "#5x5").click ( ->
 		root.brushSize = 2
+		)
+	($ "#9x9").click ( ->
+		root.brushSize = 4
 		)

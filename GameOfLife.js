@@ -293,6 +293,7 @@ If these can all be replaced by builtins, that's be great.
       return makeCells(event);
     });
     ($("#pauseButton")).click((function() {
+      ($(this)).toggleClass("down");
       root.paused = !root.paused;
       if (root.paused) {
         return ($(this)).html("Play");
@@ -306,8 +307,11 @@ If these can all be replaced by builtins, that's be great.
     ($("#3x3")).click((function() {
       return root.brushSize = 1;
     }));
-    return ($("#5x5")).click((function() {
+    ($("#5x5")).click((function() {
       return root.brushSize = 2;
+    }));
+    return ($("#9x9")).click((function() {
+      return root.brushSize = 4;
     }));
   });
 
