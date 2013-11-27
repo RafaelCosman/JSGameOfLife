@@ -20,7 +20,6 @@ canvas {
 }
 h1 {
   background-color: rgba(40, 40, 40, 0.8);
-  padding: 0px;
   font-family: Arial;
   font-size: 12px;
   font-weight: bold;
@@ -44,18 +43,26 @@ div {
   -ms-user-select: none;
   user-select: none;
 }
-.controlGroup {
-  bottom: 0px;
-  position: absolute;
-}
 .actionButton {
   width: 120px;
   background-color: rgba(40, 40, 40, 0.8);
   color: #ffffff;
   border: 0;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 30px;
+  text-decoration: none;
+  text-align: center;
+  outline: 0px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
-@include text();
-@include unselectable();
 .actionButton:hover {
   background-color: rgba(66, 66, 66, 0.8);
   color: #ffffc8;
@@ -66,28 +73,7 @@ div {
 }
 .actionButton.down {
   color: #ffffff;
-  background-color: rgba(244, 244, 244, 0.8);
-}
-.ruleButton {
-  width: 120px;
-  background-color: rgba(40, 40, 40, 0.8);
-  color: #ffffff;
-  border: 0;
-  width: 20px;
-}
-@include text();
-@include unselectable();
-.ruleButton:hover {
-  background-color: rgba(66, 66, 66, 0.8);
-  color: #ffffc8;
-}
-.ruleButton:active {
-  background-color: rgba(91, 91, 91, 0.8);
-  color: #ffff96;
-}
-.ruleButton.down {
-  color: #ffffff;
-  background-color: rgba(244, 244, 244, 0.8);
+  background-color: rgba(193, 193, 193, 0.8);
 }
 .helpBox {
   position: absolute;
@@ -95,24 +81,122 @@ div {
   background-color: rgba(40, 40, 40, 0.8);
   color: #ffffff;
   border: 0;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 30px;
+  text-decoration: none;
+  text-align: center;
+  outline: 0px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
-@include text();
-@include unselectable();
-.tableHeader {
+.rules {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+}
+.rules #ruleTable {
+  background: rgba(255, 255, 255, 0.7);
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 30px;
+  text-decoration: none;
+  text-align: center;
+  outline: 0px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.rules #ruleTable .tableHeader {
   color: #ffffff;
   background-color: rgba(40, 40, 40, 0.8);
 }
-#ruleTable {
-  background: rgba(255, 255, 255, 0.7);
-}
-@include text();
-@include unselectable();
-#shareButtons {
-  visibility: hidden;
-  position: absolute;
-  bottom: 0px;
-}
-.minButton {
+.rules #ruleTable .ruleButton {
+  width: 120px;
+  background-color: rgba(40, 40, 40, 0.8);
   color: #ffffff;
+  border: 0;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 30px;
+  text-decoration: none;
+  text-align: center;
+  outline: 0px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 20px;
 }
-@extends actionButton;
+.rules #ruleTable .ruleButton:hover {
+  background-color: rgba(66, 66, 66, 0.8);
+  color: #ffffc8;
+}
+.rules #ruleTable .ruleButton:active {
+  background-color: rgba(91, 91, 91, 0.8);
+  color: #ffff96;
+}
+.rules #ruleTable .ruleButton.down {
+  color: #ffffff;
+  background-color: rgba(193, 193, 193, 0.8);
+}
+.allTheButtons {
+  position: absolute;
+  right: 250px;
+  bottom: 0px;
+  text-align: bottom;
+  vertical-align: text-bottom;
+}
+.allTheButtons .controlGroup {
+  margin: 5px;
+  position: absolute;
+  bottom: 0;
+}
+.allTheButtons .controlGroup .minButton {
+  width: 120px;
+  background-color: rgba(40, 40, 40, 0.8);
+  color: #ffffff;
+  border: 0;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 30px;
+  text-decoration: none;
+  text-align: center;
+  outline: 0px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-bottom: 3px;
+}
+.allTheButtons .controlGroup .minButton:hover {
+  background-color: rgba(66, 66, 66, 0.8);
+  color: #ffffc8;
+}
+.allTheButtons .controlGroup .minButton:active {
+  background-color: rgba(91, 91, 91, 0.8);
+  color: #ffff96;
+}
+.allTheButtons .controlGroup .minButton.down {
+  color: #ffffff;
+  background-color: rgba(193, 193, 193, 0.8);
+}

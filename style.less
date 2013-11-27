@@ -2,7 +2,7 @@
 @button: rgba(40, 40, 40, 0.8);
 @buttonHover: lighten(@button, 10%);
 @buttonActive: lighten(@button, 20%);
-@buttonDown: lighten(@button, 80%);
+@buttonDown: lighten(@button, 60%);
 
 @buttonTextColor: rgb(255, 255, 255);
 @buttonHoverTextColor: rgb(255, 255, 200);
@@ -44,7 +44,7 @@ canvas {
 
 h1 {
 	background-color: @button;
-	padding: 0px;
+	//padding: 0px;
 
 	.text();
 
@@ -61,11 +61,6 @@ div {
 	.unselectable()
 }
 
-.controlGroup {
-	bottom:0px;
-	position: absolute;
-}
-
 .actionButton {
 	width:120px;
 
@@ -74,8 +69,8 @@ div {
 
 	border: 0;
 
-	@include text();
-	@include unselectable();
+	.text();
+	.unselectable();
 
 	&:hover {
 		background-color: @buttonHover;
@@ -91,12 +86,6 @@ div {
 	}
 }
 
-.ruleButton {
-	.actionButton();
-
-	width: 20px;
-}
-
 .helpBox {
 	position:absolute;
 	visibility:hidden;
@@ -106,31 +95,58 @@ div {
 
 	border: 0;
 
-	@include text();
-	@include unselectable();
+	.text();
+	.unselectable();
 }
 
-.tableHeader {
-	color:rgb(255, 255, 255);
 
-	background-color: @button;
+
+
+.rules {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	
+	#ruleTable {
+		background: rgba(255, 255, 255, 0.7);
+
+		.text;
+		.unselectable;
+		
+		.tableHeader {
+			color: rgb(255, 255, 255);
+
+			background-color: @button;
+		}
+	
+		.ruleButton {
+			.actionButton();
+
+			width: 20px;
+		}
+	}
 }
 
-#ruleTable {
-	background:rgba(255, 255, 255, 0.7);
+.allTheButtons {
+	position: absolute;
+	right: 250px;
+	bottom: 0px;
+	text-align: bottom;
+	vertical-align: text-bottom;
 
-	@include text();
-	@include unselectable();
-}
+	.controlGroup {
+		margin: 5px;
 
-#shareButtons {
-	visibility:hidden;
-	position:absolute;
-	bottom:0px;
-}
+		position: absolute;
+		bottom: 0;
 
-.minButton {
-	color: @buttonTextColor;
+		.buttonGroup {
+		}
+		.minButton {
+			color: @buttonTextColor;
 
-	@extends actionButton;
+			.actionButton;
+			margin-bottom: 3px;
+		}
+	}
 }
