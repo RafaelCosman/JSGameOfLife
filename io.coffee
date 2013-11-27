@@ -49,9 +49,6 @@ setHidden = (jQueryKey) ->
 	else
 		setHidden ".helpBox"
 
-@pause = ->
-	root.paused = !root.paused
-
 @toggleRule = (x, y) ->
 	rules[x][y] = !rules[x][y]
 
@@ -118,20 +115,6 @@ makeCells = (event) ->
 			for y in [gridY-d...gridY+1+d]
 				zero(ages, x, y)	
 
-$("#myCanvas").mousedown (event) ->
-	mouse.down[event.which] = true
-	makeCells(event)
-	
-$("#myCanvas").mouseup (event) ->
-	mouse.down[event.which] = false
-
-	if root.help
-		root.help = false
-		root.paused = false
-
-$("#myCanvas").mousemove (event) ->
-	makeCells(event)
-
 #Keyboard io
 #------------------------
 #I want to add space clears board
@@ -152,25 +135,51 @@ $(window).resize ->
 
 	extendAges()
 
-($ ".ruleButton").click ->
-	($ this).toggleClass "down"
+$ ->
+	($ ".ruleButton").click ->
+		($ this).toggleClass "down"
 
-	if not root.userHasChangedRules
-		root.userHasChangedRules = true
-		setHidden "#tutorialChangeRules"
-		
-		setTimeout (-> setVisible "#tutorialLeftCol"), 1000
-		setTimeout (-> setHidden "#tutorialLeftCol"), 5000
-		
-		setTimeout (-> setVisible "#tutorialRightCol"), 5000
-		setTimeout (-> setHidden "#tutorialRightCol"), 9000
+		if not root.userHasChangedRules
+			root.userHasChangedRules = true
+			setHidden "#tutorialChangeRules"
+			
+			setTimeout (-> setVisible "#tutorialLeftCol"), 1000
+			setTimeout (-> setHidden "#tutorialLeftCol"), 5000
+			
+			setTimeout (-> setVisible "#tutorialRightCol"), 5000
+			setTimeout (-> setHidden "#tutorialRightCol"), 9000
+	###
+	($ "#ruleTableMinButton").click ->
+		($ this).toggleClass "down"
+		($ "#ruleTableDiv").slideToggle()
+	###
+	($ "#speedOptionsMinButton").click ->
+		($ this).toggleClass "down"
+		($ "#speedOptionsDiv").slideToggle()
+	($ "#gridSizeOptionsMinButton").click ->
+		($ this).toggleClass "down"
+		($ "#gridSizeOptionsDiv").slideToggle()
 
-($ "#ruleTableMinButton").click ->
-	($ this).toggleClass "down"
-	($ "#ruleTableDiv").slideToggle()
-($ "#speedOptionsMinButton").click ->
-	($ this).toggleClass "down"
-	($ "#speedOptionsDiv").slideToggle()
-($ "#gridSizeOptionsMinButton").click ->
-	($ this).toggleClass "down"
-	($ "#gridSizeOptionsDiv").slideToggle()
+	$("#myCanvas").mousedown (event) ->
+		mouse.down[event.which] = true
+		makeCells(event)
+		
+	$("#myCanvas").mouseup (event) ->
+		mouse.down[event.which] = false
+
+		if root.help
+			root.help = false
+			root.paused = false
+
+	$("#myCanvas").mousemove (event) ->
+		makeCells(event)
+
+	#Pause button
+	($ "#pauseButton").click ( ->
+		root.paused = not root.paused
+
+		if root.paused
+			($ this).html "Play"
+		else
+			($ this).html "Pause"
+		)

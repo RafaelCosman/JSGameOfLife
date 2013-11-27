@@ -51,9 +51,9 @@
 		<canvas id="myCanvas" oncontextmenu="return false;"></canvas>
 		
 		<div data-role="controlgroup" class="controlGroup" style="right:250px">
-			<button title="Makes all the cells dead"	type="button" class="actionButton" onclick="clearGrid()">Clear</button>
+			<button title="Makes all the cells dead" type="button" class="actionButton" onclick="clearGrid()">Clear</button>
 			<!--<button title="Displays help"				type="button" style="right:400px;" class="actionButton" onclick="help()">Help</button>-->
-			<button title="Pauses the animation"		type="button" class="actionButton" onclick="pause()">Pause</button>
+			<button title="Pauses the animation" id="pauseButton" type="button" class="actionButton" onclick="pause()">Pause</button>
 		</div>
 
 		<div data-role="controlgroup" class="controlGroup" style="right:450px;">
@@ -70,6 +70,15 @@
 			<div id="gridSizeOptionsDiv">
 				<button title="Makes the grid contain fewer cells" type="button" class="actionButton" onclick="fewerCells()">Fewer Cells</button>
 				<button title="Makes the grid contain more cells" type="button" class="actionButton" onclick="moreCells()">More Cells</button>
+			</div>
+		</div>
+
+		<div data-role="controlgroup" class="controlGroup" style="right:950px">
+			<h1 id="brushOptionsMinButton" title="These optinos allow you to change the size and shape of the brush" class="minButton">Brush Options</h1>
+			<div>
+				<button title="1x1 brush" type="button" class="actionButton">1x1</div>
+				<button title="3x3 brush" type="button" class="actionButton">3x3</div>
+				<button title="5x5 brush" type="button" class="actionButton">5x5</div>
 			</div>
 		</div>
 

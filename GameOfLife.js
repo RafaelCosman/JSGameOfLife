@@ -142,10 +142,6 @@ If these can all be replaced by builtins, that's be great.
     }
   };
 
-  this.pause = function() {
-    return root.paused = !root.paused;
-  };
-
   this.toggleRule = function(x, y) {
     return rules[x][y] = !rules[x][y];
   };
@@ -230,23 +226,6 @@ If these can all be replaced by builtins, that's be great.
     }
   };
 
-  $("#myCanvas").mousedown(function(event) {
-    mouse.down[event.which] = true;
-    return makeCells(event);
-  });
-
-  $("#myCanvas").mouseup(function(event) {
-    mouse.down[event.which] = false;
-    if (root.help) {
-      root.help = false;
-      return root.paused = false;
-    }
-  });
-
-  $("#myCanvas").mousemove(function(event) {
-    return makeCells(event);
-  });
-
   extendAges = function() {
     return root.ages = randomGrid();
   };
@@ -262,39 +241,62 @@ If these can all be replaced by builtins, that's be great.
     return extendAges();
   });
 
-  ($(".ruleButton")).click(function() {
-    ($(this)).toggleClass("down");
-    if (!root.userHasChangedRules) {
-      root.userHasChangedRules = true;
-      setHidden("#tutorialChangeRules");
-      setTimeout((function() {
-        return setVisible("#tutorialLeftCol");
-      }), 1000);
-      setTimeout((function() {
-        return setHidden("#tutorialLeftCol");
-      }), 5000);
-      setTimeout((function() {
-        return setVisible("#tutorialRightCol");
-      }), 5000);
-      return setTimeout((function() {
-        return setHidden("#tutorialRightCol");
-      }), 9000);
-    }
-  });
+  $(function() {
+    ($(".ruleButton")).click(function() {
+      ($(this)).toggleClass("down");
+      if (!root.userHasChangedRules) {
+        root.userHasChangedRules = true;
+        setHidden("#tutorialChangeRules");
+        setTimeout((function() {
+          return setVisible("#tutorialLeftCol");
+        }), 1000);
+        setTimeout((function() {
+          return setHidden("#tutorialLeftCol");
+        }), 5000);
+        setTimeout((function() {
+          return setVisible("#tutorialRightCol");
+        }), 5000);
+        return setTimeout((function() {
+          return setHidden("#tutorialRightCol");
+        }), 9000);
+      }
+    });
+    /*
+    	($ "#ruleTableMinButton").click ->
+    		($ this).toggleClass "down"
+    		($ "#ruleTableDiv").slideToggle()
+    */
 
-  ($("#ruleTableMinButton")).click(function() {
-    ($(this)).toggleClass("down");
-    return ($("#ruleTableDiv")).slideToggle();
-  });
-
-  ($("#speedOptionsMinButton")).click(function() {
-    ($(this)).toggleClass("down");
-    return ($("#speedOptionsDiv")).slideToggle();
-  });
-
-  ($("#gridSizeOptionsMinButton")).click(function() {
-    ($(this)).toggleClass("down");
-    return ($("#gridSizeOptionsDiv")).slideToggle();
+    ($("#speedOptionsMinButton")).click(function() {
+      ($(this)).toggleClass("down");
+      return ($("#speedOptionsDiv")).slideToggle();
+    });
+    ($("#gridSizeOptionsMinButton")).click(function() {
+      ($(this)).toggleClass("down");
+      return ($("#gridSizeOptionsDiv")).slideToggle();
+    });
+    $("#myCanvas").mousedown(function(event) {
+      mouse.down[event.which] = true;
+      return makeCells(event);
+    });
+    $("#myCanvas").mouseup(function(event) {
+      mouse.down[event.which] = false;
+      if (root.help) {
+        root.help = false;
+        return root.paused = false;
+      }
+    });
+    $("#myCanvas").mousemove(function(event) {
+      return makeCells(event);
+    });
+    return ($("#pauseButton")).click((function() {
+      root.paused = !root.paused;
+      if (root.paused) {
+        return ($(this)).html("Play");
+      } else {
+        return ($(this)).html("Pause");
+      }
+    }));
   });
 
   /* --------------------------------------------
