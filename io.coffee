@@ -10,7 +10,7 @@ rules = [[false, false, false, true, false, false, false, false, false], [false,
 <tr>
 	<th title="This column determines how dead cells can come to life" style="height:30px;" class="tableHeader">Dead</th>
 	<th title="This column determines how live cells can stay alive" style="height:30px;" class="tableHeader">Alive</th>
-</tr>
+</tr>	
 """
 
 for numNeighbors in [0...8+1]
@@ -49,14 +49,6 @@ setHidden = (jQueryKey) ->
 	else
 		setHidden ".helpBox"
 
-<<<<<<< HEAD
-@pause = ->
-	root.paused = !root.paused
-
-	($ "#pauseButton").html "Play"
-
-=======
->>>>>>> develop
 @toggleRule = (x, y) ->
 	rules[x][y] = !rules[x][y]
 
