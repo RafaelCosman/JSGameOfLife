@@ -52,6 +52,8 @@ setHidden = (jQueryKey) ->
 @pause = ->
 	root.paused = !root.paused
 
+	($ "#pauseButton").html "Play"
+
 @toggleRule = (x, y) ->
 	rules[x][y] = !rules[x][y]
 

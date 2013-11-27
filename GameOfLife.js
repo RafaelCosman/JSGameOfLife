@@ -143,7 +143,8 @@ If these can all be replaced by builtins, that's be great.
   };
 
   this.pause = function() {
-    return root.paused = !root.paused;
+    root.paused = !root.paused;
+    return ($("#pauseButton")).html("Play");
   };
 
   this.toggleRule = function(x, y) {
