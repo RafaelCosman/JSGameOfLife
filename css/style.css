@@ -1,14 +1,23 @@
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   margin: 0;
-  padding: 0; }
-
+  padding: 0;
+}
 /* just to be sure these are full screen*/
 canvas {
-  display: block; }
-
+  display: block;
+}
 /* To remove the scrollbars */
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 h1 {
   background-color: rgba(40, 40, 40, 0.7);
   padding: 0px;
@@ -19,124 +28,91 @@ h1 {
   line-height: 30px;
   text-decoration: none;
   text-align: center;
-  outline: 0px; }
-  h1:hover {
-    color: #ffffc8; }
-  h1:active {
-    color: #ffff96; }
-
+  outline: 0px;
+}
+h1:hover {
+  color: #ffffc8;
+}
+h1:active {
+  color: #ffff96;
+}
 div {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none; }
-
+  user-select: none;
+}
 .controlGroup {
   bottom: 0px;
-  position: absolute; }
-
+  position: absolute;
+}
 .actionButton {
   width: 90px;
   background-color: rgba(40, 40, 40, 0.7);
-  color: white;
+  color: #ffffff;
   border: 0;
-  font-family: Arial;
-  font-size: 12px;
-  font-weight: bold;
-  font-style: normal;
-  line-height: 30px;
-  text-decoration: none;
-  text-align: center;
-  outline: 0px;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; }
-  .actionButton:hover {
-    background-color: rgba(66, 66, 66, 0.7);
-    color: #ffffc8; }
-  .actionButton:active {
-    background-color: rgba(91, 91, 91, 0.7);
-    color: #ffff96; }
-
+}
+@include text();
+@include unselectable();
+.actionButton:hover {
+  background-color: rgba(66, 66, 66, 0.7);
+  color: #ffffc8;
+}
+.actionButton:active {
+  background-color: rgba(91, 91, 91, 0.7);
+  color: #ffff96;
+}
+.actionButton.down {
+  color: #ffffff;
+  background-color: rgba(244, 244, 244, 0.7);
+}
+.ruleButton {
+  width: 90px;
+  background-color: rgba(40, 40, 40, 0.7);
+  color: #ffffff;
+  border: 0;
+  width: 20px;
+}
+@include text();
+@include unselectable();
+.ruleButton:hover {
+  background-color: rgba(66, 66, 66, 0.7);
+  color: #ffffc8;
+}
+.ruleButton:active {
+  background-color: rgba(91, 91, 91, 0.7);
+  color: #ffff96;
+}
+.ruleButton.down {
+  color: #ffffff;
+  background-color: rgba(244, 244, 244, 0.7);
+}
 .helpBox {
   position: absolute;
   visibility: hidden;
   background-color: rgba(40, 40, 40, 0.7);
-  color: white;
+  color: #ffffff;
   border: 0;
-  font-family: Arial;
-  font-size: 12px;
-  font-weight: bold;
-  font-style: normal;
-  line-height: 30px;
-  text-decoration: none;
-  text-align: center;
-  outline: 0px;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; }
-
+}
+@include text();
+@include unselectable();
 .tableHeader {
-  color: white;
-  background-color: rgba(40, 40, 40, 0.7); }
-
-.ruleButton {
-  color: white;
+  color: #ffffff;
   background-color: rgba(40, 40, 40, 0.7);
-  font-family: Arial;
-  font-size: 12px;
-  font-weight: bold;
-  font-style: normal;
-  line-height: 30px;
-  text-decoration: none;
-  text-align: center;
-  outline: 0px;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; }
-  .ruleButton:hover {
-    color: #ffffc8;
-    background-color: rgba(66, 66, 66, 0.7); }
-  .ruleButton:active {
-    color: #ffff96;
-    background-color: rgba(91, 91, 91, 0.7); }
-  .ruleButton.down {
-    color: white;
-    background-color: rgba(215, 215, 215, 0.7); }
-
+}
 #ruleTable {
   background: rgba(255, 255, 255, 0.7);
-  font-family: Arial;
-  font-size: 12px;
-  font-weight: bold;
-  font-style: normal;
-  line-height: 30px;
-  text-decoration: none;
-  text-align: center;
-  outline: 0px;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; }
-
+}
+@include text();
+@include unselectable();
 #shareButtons {
   visibility: hidden;
   position: absolute;
-  bottom: 0px; }
-
+  bottom: 0px;
+}
 .minButton {
-  color: white;
-  @extends actionButton; }
+  color: #ffffff;
+}
+@extends actionButton;
