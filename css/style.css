@@ -19,7 +19,7 @@ canvas {
   user-select: none;
 }
 h1 {
-  background-color: rgba(40, 40, 40, 0.7);
+  background-color: rgba(40, 40, 40, 0.8);
   padding: 0px;
   font-family: Arial;
   font-size: 12px;
@@ -49,28 +49,28 @@ div {
   position: absolute;
 }
 .actionButton {
-  width: 90px;
-  background-color: rgba(40, 40, 40, 0.7);
+  width: 120px;
+  background-color: rgba(40, 40, 40, 0.8);
   color: #ffffff;
   border: 0;
 }
 @include text();
 @include unselectable();
 .actionButton:hover {
-  background-color: rgba(66, 66, 66, 0.7);
+  background-color: rgba(66, 66, 66, 0.8);
   color: #ffffc8;
 }
 .actionButton:active {
-  background-color: rgba(91, 91, 91, 0.7);
+  background-color: rgba(91, 91, 91, 0.8);
   color: #ffff96;
 }
 .actionButton.down {
   color: #ffffff;
-  background-color: rgba(244, 244, 244, 0.7);
+  background-color: rgba(244, 244, 244, 0.8);
 }
 .ruleButton {
-  width: 90px;
-  background-color: rgba(40, 40, 40, 0.7);
+  width: 120px;
+  background-color: rgba(40, 40, 40, 0.8);
   color: #ffffff;
   border: 0;
   width: 20px;
@@ -78,21 +78,21 @@ div {
 @include text();
 @include unselectable();
 .ruleButton:hover {
-  background-color: rgba(66, 66, 66, 0.7);
+  background-color: rgba(66, 66, 66, 0.8);
   color: #ffffc8;
 }
 .ruleButton:active {
-  background-color: rgba(91, 91, 91, 0.7);
+  background-color: rgba(91, 91, 91, 0.8);
   color: #ffff96;
 }
 .ruleButton.down {
   color: #ffffff;
-  background-color: rgba(244, 244, 244, 0.7);
+  background-color: rgba(244, 244, 244, 0.8);
 }
 .helpBox {
   position: absolute;
   visibility: hidden;
-  background-color: rgba(40, 40, 40, 0.7);
+  background-color: rgba(40, 40, 40, 0.8);
   color: #ffffff;
   border: 0;
 }
@@ -100,7 +100,7 @@ div {
 @include unselectable();
 .tableHeader {
   color: #ffffff;
-  background-color: rgba(40, 40, 40, 0.7);
+  background-color: rgba(40, 40, 40, 0.8);
 }
 #ruleTable {
   background: rgba(255, 255, 255, 0.7);

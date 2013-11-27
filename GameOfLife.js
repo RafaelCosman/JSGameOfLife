@@ -275,6 +275,10 @@ If these can all be replaced by builtins, that's be great.
       ($(this)).toggleClass("down");
       return ($("#gridSizeOptionsDiv")).slideToggle();
     });
+    ($("#brushOptionsMinButton")).click(function() {
+      ($(this)).toggleClass("down");
+      return ($("#brushOptionsDiv")).slideToggle();
+    });
     $("#myCanvas").mousedown(function(event) {
       mouse.down[event.which] = true;
       return makeCells(event);

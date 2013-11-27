@@ -153,12 +153,16 @@ $ ->
 		($ this).toggleClass "down"
 		($ "#ruleTableDiv").slideToggle()
 	###
+	#These are all of the minimization buttons
 	($ "#speedOptionsMinButton").click ->
 		($ this).toggleClass "down"
 		($ "#speedOptionsDiv").slideToggle()
 	($ "#gridSizeOptionsMinButton").click ->
 		($ this).toggleClass "down"
 		($ "#gridSizeOptionsDiv").slideToggle()
+	($ "#brushOptionsMinButton").click ->
+		($ this).toggleClass "down"
+		($ "#brushOptionsDiv").slideToggle()
 
 	$("#myCanvas").mousedown (event) ->
 		mouse.down[event.which] = true

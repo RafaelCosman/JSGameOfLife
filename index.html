@@ -57,28 +57,28 @@
 		</div>
 
 		<div data-role="controlgroup" class="controlGroup" style="right:450px;">
-			<h1 id="speedOptionsMinButton" title="These options allow you to change the speed of Game of Life. Click here to minimize these options" type="button" class="minButton" style="width:280px">Speed Options<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
+			<h1 id="speedOptionsMinButton" title="These options allow you to change the speed of Game of Life. Click here to minimize these options" type="button" class="minButton">Speed Options<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
 			<div id="speedOptionsDiv" style="bottom:0px;">
-				<button title ="Makes the animation run slowly by adding a 1.0 second delay between each generation" type="button" class="actionButton" onclick="setDelay(1000)">Slow</button>
-				<button title ="Makes the animation run slightly slower by adding a 0.1 second delay between each generation" type="button" class="actionButton" onclick="setDelay(100)">Medium</button>
-				<button title ="Makes the animation run as fast as possible" 	type="button" class="actionButton" onclick="setDelay(0)">Fast</button>
+				<div title ="Makes the animation run slowly by adding a 1.0 second delay between each generation" type="button" class="actionButton" onclick="setDelay(1000)">Slow</div>
+				<div title ="Makes the animation run slightly slower by adding a 0.1 second delay between each generation" type="button" class="actionButton" onclick="setDelay(100)">Medium</div>
+				<div title ="Makes the animation run as fast as possible" 	type="button" class="actionButton" onclick="setDelay(0)">Fast</div>
 			</div>
 		</div>
 
-		<div data-role="controlgroup" class="controlGroup" style="right:750px">
-			<h1 id="gridSizeOptionsMinButton" title="These options allow you to change the number of cells on the screen. Click here to minimize these options." class="minButton" style="width:185px">Grid Size Options<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
+		<div data-role="controlgroup" class="controlGroup" style="right:550px">
+			<h1 id="gridSizeOptionsMinButton" title="These options allow you to change the number of cells on the screen. Click here to minimize these options." class="minButton">Grid Size Options<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
 			<div id="gridSizeOptionsDiv">
-				<button title="Makes the grid contain fewer cells" type="button" class="actionButton" onclick="fewerCells()">Fewer Cells</button>
-				<button title="Makes the grid contain more cells" type="button" class="actionButton" onclick="moreCells()">More Cells</button>
+				<div title="Makes the grid contain fewer cells" type="button" class="actionButton" onclick="fewerCells()">Fewer Cells</div>
+				<div title="Makes the grid contain more cells" type="button" class="actionButton" onclick="moreCells()">More Cells</div>
 			</div>
 		</div>
 
-		<div data-role="controlgroup" class="controlGroup" style="right:950px">
-			<h1 id="brushOptionsMinButton" title="These optinos allow you to change the size and shape of the brush" class="minButton">Brush Options</h1>
-			<div>
-				<button title="1x1 brush" type="button" class="actionButton">1x1</div>
-				<button title="3x3 brush" type="button" class="actionButton">3x3</div>
-				<button title="5x5 brush" type="button" class="actionButton">5x5</div>
+		<div data-role="controlgroup" class="controlGroup" style="right:680px">
+			<h1 id="brushOptionsMinButton" title="These optinos allow you to change the size and shape of the brush. Click here to minimize these options." class="minButton" class="minButton">Brush Options<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
+			<div id="brushOptionsDiv">
+				<div title="1x1 brush" type="button" class="actionButton">1x1</div>
+				<div title="3x3 brush" type="button" class="actionButton">3x3</div>
+				<div title="5x5 brush" type="button" class="actionButton">5x5</div>
 			</div>
 		</div>
 
