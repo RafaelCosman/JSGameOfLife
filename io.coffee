@@ -6,6 +6,7 @@ $ = jQuery
 
 rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]]
 
+<<<<<<< HEAD
 ($ "#ruleTable").append """
 <tr>
 	<th title="This column determines how dead cells can come to life" style="height:30px;" class="tableHeader">Dead</th>
@@ -28,6 +29,14 @@ for numNeighbors in [0...8+1]
 			<td title="When this button is illuminated, live cells with """ + numNeighbors + """ neighbors will stay alive.\nWhen this button is dark, live cells with """ + numNeighbors + """ neighbors will die." type="button" class=" """ + liveClasses + """ " onclick="toggleRule(1, """ + numNeighbors + """)">""" + numNeighbors + """</td>
 		</tr>
 	"""
+=======
+neighborhood =
+	[[false, false, false, false, false],
+	 [false, true,  true,  true, false],
+	 [false, true,  false, true, false],
+	 [false, true,  true,  true, false],
+	 [false, false, false, false, false]]
+>>>>>>> develop
 
 ###
 jQueryKey should be a string like
@@ -50,7 +59,9 @@ setHidden = (jQueryKey) ->
 		setHidden ".helpBox"
 
 @toggleRule = (x, y) ->
-	rules[x][y] = !rules[x][y]
+	rules[x][y] = not rules[x][y]
+@toggleNeighborhood = (x, y) ->
+	neighborhood[x][y] = not neighborhood[x][y]
 
 @moreCells = ->
 	root.gridSpacing *= .9
@@ -134,6 +145,57 @@ $(window).resize ->
 	extendAges()
 
 $ ->
+	# ---------- Make the header of the rule table ------------
+	($ "#ruleTable").append """
+	<tr>
+		<th title="This column determines how dead cells can come to life" style="height:30px;" class="tableHeader">Dead</th>
+		<th title="This column determines how live cells can stay alive" style="height:30px;" class="tableHeader">Alive</th>
+	</tr>
+	"""
+
+	# ----------- Make the body of the ruletable ------------
+	for numNeighbors in [0...8+1]
+		deadClasses = "ruleButton"
+		if rules[0][numNeighbors]
+			deadClasses += " down"
+
+		liveClasses = "ruleButton"
+		if rules[1][numNeighbors]
+			liveClasses += " down"
+
+		($ "#ruleTable").append """
+			<tr>
+				<td title="When this button is illuminated, dead cells with """ + numNeighbors + """ neighbors will come to life.\nWhen this button is dark, dead cells with """ + numNeighbors + """ neighbors will stay dead."
+				type="button" class=" """ + deadClasses + """ " onclick="toggleRule(0, """ + numNeighbors + """)">""" + numNeighbors + """</td>
+				<td title="When this button is illuminated, live cells with """ + numNeighbors + """ neighbors will stay alive.\nWhen this button is dark, live cells with """ + numNeighbors + """ neighbors will die."
+				type="button" class=" """ + liveClasses + """ " onclick="toggleRule(1, """ + numNeighbors + """)">""" + numNeighbors + """</td>
+			</tr>
+		"""
+
+	# ---------- Make the neighborhood options table ---------------
+	tableBody = ($ "#neighborhoodOptionsTable>tbody")
+	for y in [0...maxNeighborhoodSize].reverse()
+		tableBody.append """
+			<tr>
+		"""
+
+		for x in [0...maxNeighborhoodSize].reverse()
+			classes = "neighborhoodButton"
+			if neighborhood[x][y]
+				classes += " down"
+
+			tableBody.append """
+				<td type="button" class=" """ + classes + """ " onclick="toggleNeighborhood( """ + x + """,""" + y + """ )"></td>
+			"""
+
+		tableBody.append """
+			</tr>
+		"""
+
+	($ ".neighborhoodButton").click ->
+		($ this).toggleClass "down"
+
+	# ------------ Add the rule button click listeners -----------
 	($ ".ruleButton").click ->
 		($ this).toggleClass "down"
 
@@ -151,7 +213,7 @@ $ ->
 		($ this).toggleClass "down"
 		($ "#ruleTableDiv").slideToggle()
 	###
-	#These are all of the minimization buttons
+	# ------------ These are all of the minimization buttons -------------
 	($ "#speedOptionsMinButton").click ->
 		($ this).toggleClass "down"
 		($ "#speedOptionsDiv").slideToggle()
@@ -161,8 +223,11 @@ $ ->
 	($ "#brushOptionsMinButton").click ->
 		($ this).toggleClass "down"
 		($ "#brushOptionsDiv").slideToggle()
+	($ "#neighborhoodOptionsMinButton").click ->
+		($ this).toggleClass "down"
+		($ "#neighborhoodOptionsDiv").slideToggle()
 
-	#Canvas listeners
+	# ---------- Canvas listeners -----------
 	$("#myCanvas").mousedown (event) ->
 		mouse.down[event.which] = true
 		makeCells(event)
