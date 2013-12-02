@@ -340,6 +340,9 @@ If these can all be replaced by builtins, that's be great.
     ($("#1x1")).click((function() {
       return root.brushSize = 0;
     }));
+    ($("#2x2")).click((function() {
+      return root.brushSize = .5;
+    }));
     ($("#3x3")).click((function() {
       return root.brushSize = 1;
     }));

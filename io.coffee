@@ -128,7 +128,7 @@ $ ->
 	</tr>
 	"""
 
-	# ----------- Make the body of the ruletable ------------
+	# ------	----- Make the body of the ruletable ------------
 	for numNeighbors in [0...8+1]
 		deadClasses = "ruleButton"
 		if rules[0][numNeighbors]
@@ -217,7 +217,7 @@ $ ->
 	$("#myCanvas").mousemove (event) ->
 		makeCells(event)
 
-	#Pause button
+	# ------------- Pause button ------------
 	($ "#pauseButton").click ( ->
 		($ this).toggleClass "down"
 
@@ -229,9 +229,12 @@ $ ->
 			($ this).html "Pause"
 		)
 
-	#Brush options
+	# ------------ Brush options --------------
 	($ "#1x1").click ( ->
 		root.brushSize = 0
+		)
+	($ "#2x2").click ( ->
+		root.brushSize = .5
 		)
 	($ "#3x3").click ( ->
 		root.brushSize = 1

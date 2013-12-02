@@ -1,20 +1,19 @@
-# Example project 
+This is my version of Conway's Game of Life.
+Go to conwaygame.tk
 
-This is meant to be a template for getting working with a server-side Coffeescript project.
+It has two key innovations:
+(1) You can click on the buttons on the left to change the rules of life and death
+(2) Cell's hue is a function of their age
 
-It uses the Zappa framework and should work on Heroku.
+This makes it fun and beautiful! Let me know how I can improve it. Feel free to submit issues to this Github repo.
 
-## Running locally
+Enjoy.
 
-npm install
-foreman start
+How to build the code
+----
+If you want to contribute to this project, the recommended environment is
+yourFavoriteTextEditor for editing -> CodeKit for coffeescript and scss compilation -> yourFavoriteBrowser for testing
 
-## Compiling the code
-
-coffee --compile --watch web.coffee
-
-## More information
-
-* [Zappajs Github page](https://github.com/zappajs/zappajs)
-* [Zappa tutorial](http://zappajs.org)
-* [Deploying node apps to Heroku](https://devcenter.heroku.com/articles/nodejs)
+Using the repo
+----
+Please treat gh-pages as master -- so DON'T COMMIT TO GH-PAGES. Commit to develop (or another branch) and then merge your changes in.
