@@ -1,13 +1,13 @@
 //Regular buttons
-@button: rgba(40, 40, 50, .8);
-@buttonHover: lighten(@button, 10%);
-@buttonActive: lighten(@button, 20%);
-@buttonDown: lighten(@button, 60%);
+@button: rgba(10, 40, 200, .8);
+@buttonHover: lighten(@button, 20%);
+@buttonActive: lighten(@button, 30%);
+@buttonDown: lighten(@button, 40%);
 
-@buttonTextColor: rgb(255, 255, 255);
-@buttonHoverTextColor: rgb(255, 255, 200);
-@buttonActiveTextColor: rgb(255, 255, 150);
-@buttonDownTextColor: rgb(255, 255, 255);
+@buttonTextColor:		rgb(255, 255, 255);
+@buttonHoverTextColor:	rgb(255, 240, 120);
+@buttonActiveTextColor:	rgb(255, 200, 100);
+@buttonDownTextColor:	rgb(255, 255, 0);
 
 .text {	
 	font-family:Arial;
@@ -53,6 +53,8 @@ div {
 	border: 0;
 	margin-bottom: 0px;
 
+	transition: color 1s;
+
 	.text;
 	.unselectable;
 
@@ -70,6 +72,12 @@ div {
 	}
 }
 
+.neighborhoodButton {
+	.actionButton;
+	width:	20px;
+	height:	20px;
+}
+
 .helpBox {
 	position:absolute;
 	visibility:hidden;
@@ -83,16 +91,13 @@ div {
 	.unselectable;
 }
 
-
-
-
 .rules {
 	position: absolute;
 	left: 0px;
 	bottom: 0px;
-	
-	#ruleTable {
-		background: rgba(255, 255, 255, 0.7);
+
+	.ruleTable {
+		background: rgba(0, 0, 0, 1);
 
 		.text;
 		.unselectable;
@@ -104,12 +109,13 @@ div {
 		}
 	
 		.ruleButton {
-			.actionButton();
+			.actionButton;
 
 			width: 20px;
 		}
 	}
 }
+
 
 .allTheButtons {
 	position: absolute;

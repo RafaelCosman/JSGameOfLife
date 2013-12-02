@@ -6,7 +6,7 @@ If these can all be replaced by builtins, that's be great.
 
 
 (function() {
-  var $, HSVtoRGB, background, border, buttonHeight, buttonWidth, canvas, computeNextGeneration, context, deadClasses, draw, drawCells, extendAges, getBinaryThingey, inc, liveClasses, makeCells, makeNewGrid, mouse, mouseX, mouseY, numNeighbors, randomGrid, randomGridWithDimensions, rgb, rgba, root, rules, setHidden, setVisible, zero, _i, _ref;
+  var $, HSVtoRGB, background, border, buttonHeight, buttonWidth, canvas, computeNextGeneration, context, draw, drawCells, extendAges, getBinaryThingey, inc, makeCells, makeNewGrid, maxNeighborhoodSize, mouse, mouseX, mouseY, neighborhood, randomGrid, randomGridWithDimensions, rgb, rgba, root, rules, setHidden, setVisible, zero;
 
   getBinaryThingey = function(num) {
     if (num === 0) {
@@ -92,19 +92,7 @@ If these can all be replaced by builtins, that's be great.
 
   rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]];
 
-  ($("#ruleTable")).append("<tr>\n	<th title=\"This column determines how dead cells can come to life\" style=\"height:30px;\" class=\"tableHeader\">Dead</th>\n	<th title=\"This column determines how live cells can stay alive\" style=\"height:30px;\" class=\"tableHeader\">Alive</th>\n</tr>");
-
-  for (numNeighbors = _i = 0, _ref = 8 + 1; 0 <= _ref ? _i < _ref : _i > _ref; numNeighbors = 0 <= _ref ? ++_i : --_i) {
-    deadClasses = "ruleButton";
-    if (rules[0][numNeighbors]) {
-      deadClasses += " down";
-    }
-    liveClasses = "ruleButton";
-    if (rules[1][numNeighbors]) {
-      liveClasses += " down";
-    }
-    ($("#ruleTable")).append("<tr>\n	<td title=\"When this button is illuminated, dead cells with " + numNeighbors + " neighbors will come to life.\nWhen this button is dark, dead cells with " + numNeighbors + " neighbors will stay dead.\" type=\"button\" class=\" " + deadClasses + " \" onclick=\"toggleRule(0, " + numNeighbors + ")\">" + numNeighbors + "</td>\n<td title=\"When this button is illuminated, live cells with " + numNeighbors + " neighbors will stay alive.\nWhen this button is dark, live cells with " + numNeighbors + " neighbors will die.\" type=\"button\" class=\" " + liveClasses + " \" onclick=\"toggleRule(1, " + numNeighbors + ")\">" + numNeighbors + "</td>\n</tr>");
-  }
+  neighborhood = [[false, false, false, false, false], [false, true, true, true, false], [false, true, false, true, false], [false, true, true, true, false], [false, false, false, false, false]];
 
   /*
   jQueryKey should be a string like
@@ -144,6 +132,10 @@ If these can all be replaced by builtins, that's be great.
 
   this.toggleRule = function(x, y) {
     return rules[x][y] = !rules[x][y];
+  };
+
+  this.toggleNeighborhood = function(x, y) {
+    return neighborhood[x][y] = !neighborhood[x][y];
   };
 
   this.moreCells = function() {
@@ -189,7 +181,7 @@ If these can all be replaced by builtins, that's be great.
   };
 
   makeCells = function(event) {
-    var gridX, gridY, x, y, _j, _k, _l, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _results;
+    var gridX, gridY, x, y, _i, _j, _k, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _results;
     mouse.x = event.pageX;
     mouse.y = event.pageY;
     gridX = mouse.getGridX();
@@ -202,8 +194,8 @@ If these can all be replaced by builtins, that's be great.
           setVisible("#tutorialChangeRules");
         }
       }
-      for (x = _j = _ref1 = gridX - root.brushSize, _ref2 = gridX + 1 + root.brushSize; _ref1 <= _ref2 ? _j < _ref2 : _j > _ref2; x = _ref1 <= _ref2 ? ++_j : --_j) {
-        for (y = _k = _ref3 = gridY - root.brushSize, _ref4 = gridY + 1 + root.brushSize; _ref3 <= _ref4 ? _k < _ref4 : _k > _ref4; y = _ref3 <= _ref4 ? ++_k : --_k) {
+      for (x = _i = _ref = gridX - root.brushSize, _ref1 = gridX + 1 + root.brushSize; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; x = _ref <= _ref1 ? ++_i : --_i) {
+        for (y = _j = _ref2 = gridY - root.brushSize, _ref3 = gridY + 1 + root.brushSize; _ref2 <= _ref3 ? _j < _ref3 : _j > _ref3; y = _ref2 <= _ref3 ? ++_j : --_j) {
           inc(ages, x, y);
         }
       }
@@ -211,11 +203,11 @@ If these can all be replaced by builtins, that's be great.
     if (mouse.down[3]) {
       root.userHasDeletedCells = true;
       _results = [];
-      for (x = _l = _ref5 = gridX - root.brushSize, _ref6 = gridX + 1 + root.brushSize; _ref5 <= _ref6 ? _l < _ref6 : _l > _ref6; x = _ref5 <= _ref6 ? ++_l : --_l) {
+      for (x = _k = _ref4 = gridX - root.brushSize, _ref5 = gridX + 1 + root.brushSize; _ref4 <= _ref5 ? _k < _ref5 : _k > _ref5; x = _ref4 <= _ref5 ? ++_k : --_k) {
         _results.push((function() {
-          var _m, _ref7, _ref8, _results1;
+          var _l, _ref6, _ref7, _results1;
           _results1 = [];
-          for (y = _m = _ref7 = gridY - root.brushSize, _ref8 = gridY + 1 + root.brushSize; _ref7 <= _ref8 ? _m < _ref8 : _m > _ref8; y = _ref7 <= _ref8 ? ++_m : --_m) {
+          for (y = _l = _ref6 = gridY - root.brushSize, _ref7 = gridY + 1 + root.brushSize; _ref6 <= _ref7 ? _l < _ref7 : _l > _ref7; y = _ref6 <= _ref7 ? ++_l : --_l) {
             _results1.push(zero(ages, x, y));
           }
           return _results1;
@@ -241,6 +233,34 @@ If these can all be replaced by builtins, that's be great.
   });
 
   $(function() {
+    var classes, deadClasses, liveClasses, numNeighbors, tableBody, x, y, _i, _j, _k, _ref;
+    ($("#ruleTable")).append("<tr>\n	<th title=\"This column determines how dead cells can come to life\" style=\"height:30px;\" class=\"tableHeader\">Dead</th>\n	<th title=\"This column determines how live cells can stay alive\" style=\"height:30px;\" class=\"tableHeader\">Alive</th>\n</tr>");
+    for (numNeighbors = _i = 0, _ref = 8 + 1; 0 <= _ref ? _i < _ref : _i > _ref; numNeighbors = 0 <= _ref ? ++_i : --_i) {
+      deadClasses = "ruleButton";
+      if (rules[0][numNeighbors]) {
+        deadClasses += " down";
+      }
+      liveClasses = "ruleButton";
+      if (rules[1][numNeighbors]) {
+        liveClasses += " down";
+      }
+      ($("#ruleTable")).append("<tr>\n	<td title=\"When this button is illuminated, dead cells with " + numNeighbors + " neighbors will come to life.\nWhen this button is dark, dead cells with " + numNeighbors + " neighbors will stay dead.\"\ntype=\"button\" class=\" " + deadClasses + " \" onclick=\"toggleRule(0, " + numNeighbors + ")\">" + numNeighbors + "</td>\n<td title=\"When this button is illuminated, live cells with " + numNeighbors + " neighbors will stay alive.\nWhen this button is dark, live cells with " + numNeighbors + " neighbors will die.\"\ntype=\"button\" class=\" " + liveClasses + " \" onclick=\"toggleRule(1, " + numNeighbors + ")\">" + numNeighbors + "</td>\n</tr>");
+    }
+    tableBody = $("#neighborhoodOptionsTable>tbody");
+    for (x = _j = 0; 0 <= maxNeighborhoodSize ? _j < maxNeighborhoodSize : _j > maxNeighborhoodSize; x = 0 <= maxNeighborhoodSize ? ++_j : --_j) {
+      tableBody.append("<tr>");
+      for (y = _k = 0; 0 <= maxNeighborhoodSize ? _k < maxNeighborhoodSize : _k > maxNeighborhoodSize; y = 0 <= maxNeighborhoodSize ? ++_k : --_k) {
+        classes = "neighborhoodButton";
+        if (neighborhood[x][y]) {
+          classes += " down";
+        }
+        tableBody.append("<td type=\"button\" class=\" " + classes + " \" onclick=\"toggleNeighborhood( " + x + "," + y + " )\"></td>");
+      }
+      tableBody.append("</tr>");
+    }
+    ($(".neighborhoodButton")).click(function() {
+      return ($(this)).toggleClass("down");
+    });
     ($(".ruleButton")).click(function() {
       ($(this)).toggleClass("down");
       if (!root.userHasChangedRules) {
@@ -277,6 +297,10 @@ If these can all be replaced by builtins, that's be great.
     ($("#brushOptionsMinButton")).click(function() {
       ($(this)).toggleClass("down");
       return ($("#brushOptionsDiv")).slideToggle();
+    });
+    ($("#neighborhoodOptionsMinButton")).click(function() {
+      ($(this)).toggleClass("down");
+      return ($("#neighborhoodOptionsDiv")).slideToggle();
     });
     $("#myCanvas").mousedown(function(event) {
       mouse.down[event.which] = true;
@@ -345,13 +369,13 @@ If these can all be replaced by builtins, that's be great.
   };
 
   makeNewGrid = function() {
-    var x, y, _j, _ref1, _results;
+    var x, y, _i, _ref, _results;
     _results = [];
-    for (x = _j = 0, _ref1 = root.gridWidth; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; x = 0 <= _ref1 ? ++_j : --_j) {
+    for (x = _i = 0, _ref = root.gridWidth; 0 <= _ref ? _i < _ref : _i > _ref; x = 0 <= _ref ? ++_i : --_i) {
       _results.push((function() {
-        var _k, _ref2, _results1;
+        var _j, _ref1, _results1;
         _results1 = [];
-        for (y = _k = 0, _ref2 = root.gridHeight; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; y = 0 <= _ref2 ? ++_k : --_k) {
+        for (y = _j = 0, _ref1 = root.gridHeight; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
           _results1.push(0);
         }
         return _results1;
@@ -361,13 +385,13 @@ If these can all be replaced by builtins, that's be great.
   };
 
   this.clearGrid = function() {
-    var x, y, _j, _ref1, _results;
+    var x, y, _i, _ref, _results;
     _results = [];
-    for (x = _j = 0, _ref1 = root.gridWidth; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; x = 0 <= _ref1 ? ++_j : --_j) {
+    for (x = _i = 0, _ref = root.gridWidth; 0 <= _ref ? _i < _ref : _i > _ref; x = 0 <= _ref ? ++_i : --_i) {
       _results.push((function() {
-        var _k, _ref2, _results1;
+        var _j, _ref1, _results1;
         _results1 = [];
-        for (y = _k = 0, _ref2 = root.gridHeight; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; y = 0 <= _ref2 ? ++_k : --_k) {
+        for (y = _j = 0, _ref1 = root.gridHeight; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
           _results1.push(root.ages[x][y] = 0);
         }
         return _results1;
@@ -377,14 +401,14 @@ If these can all be replaced by builtins, that's be great.
   };
 
   randomGridWithDimensions = function(width, height) {
-    var x, y, _j, _results;
+    var x, y, _i, _results;
     console.log(root.gridWidth);
     _results = [];
-    for (x = _j = 0; 0 <= width ? _j < width : _j > width; x = 0 <= width ? ++_j : --_j) {
+    for (x = _i = 0; 0 <= width ? _i < width : _i > width; x = 0 <= width ? ++_i : --_i) {
       _results.push((function() {
-        var _k, _results1;
+        var _j, _results1;
         _results1 = [];
-        for (y = _k = 0; 0 <= height ? _k < height : _k > height; y = 0 <= height ? ++_k : --_k) {
+        for (y = _j = 0; 0 <= height ? _j < height : _j > height; y = 0 <= height ? ++_j : --_j) {
           _results1.push(Math.floor(Math.random() + 0.4));
         }
         return _results1;
@@ -398,13 +422,13 @@ If these can all be replaced by builtins, that's be great.
   };
 
   this.randomizeGrid = function() {
-    var x, y, _j, _ref1, _results;
+    var x, y, _i, _ref, _results;
     _results = [];
-    for (x = _j = 0, _ref1 = root.gridWidth; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; x = 0 <= _ref1 ? ++_j : --_j) {
+    for (x = _i = 0, _ref = root.gridWidth; 0 <= _ref ? _i < _ref : _i > _ref; x = 0 <= _ref ? ++_i : --_i) {
       _results.push((function() {
-        var _k, _ref2, _results1;
+        var _j, _ref1, _results1;
         _results1 = [];
-        for (y = _k = 0, _ref2 = root.gridHeight; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; y = 0 <= _ref2 ? ++_k : --_k) {
+        for (y = _j = 0, _ref1 = root.gridHeight; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
           _results1.push(root.ages[x][y] = Math.floor(Math.random() + 0.4));
         }
         return _results1;
@@ -414,28 +438,27 @@ If these can all be replaced by builtins, that's be great.
   };
 
   computeNextGeneration = function() {
-    var x, y, _j, _k, _l, _ref1, _ref2, _ref3, _results;
+    var dx, dy, numNeighbors, x, y, _i, _j, _k, _l, _m, _ref, _ref1, _ref2, _results;
     numNeighbors = makeNewGrid();
-    for (x = _j = 0, _ref1 = root.gridWidth; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; x = 0 <= _ref1 ? ++_j : --_j) {
-      for (y = _k = 0, _ref2 = root.gridHeight; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; y = 0 <= _ref2 ? ++_k : --_k) {
+    for (x = _i = 0, _ref = root.gridWidth; 0 <= _ref ? _i < _ref : _i > _ref; x = 0 <= _ref ? ++_i : --_i) {
+      for (y = _j = 0, _ref1 = root.gridHeight; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
         if (root.ages[x][y] !== 0) {
-          inc(numNeighbors, x - 1, y - 1);
-          inc(numNeighbors, x - 1, y);
-          inc(numNeighbors, x - 1, y + 1);
-          inc(numNeighbors, x, y - 1);
-          inc(numNeighbors, x, y + 1);
-          inc(numNeighbors, x + 1, y - 1);
-          inc(numNeighbors, x + 1, y);
-          inc(numNeighbors, x + 1, y + 1);
+          for (dx = _k = 0; 0 <= maxNeighborhoodSize ? _k < maxNeighborhoodSize : _k > maxNeighborhoodSize; dx = 0 <= maxNeighborhoodSize ? ++_k : --_k) {
+            for (dy = _l = 0; 0 <= maxNeighborhoodSize ? _l < maxNeighborhoodSize : _l > maxNeighborhoodSize; dy = 0 <= maxNeighborhoodSize ? ++_l : --_l) {
+              if (neighborhood[dx][dy]) {
+                inc(numNeighbors, x + dx - 2, y + dy - 2);
+              }
+            }
+          }
         }
       }
     }
     _results = [];
-    for (x = _l = 0, _ref3 = root.gridWidth; 0 <= _ref3 ? _l < _ref3 : _l > _ref3; x = 0 <= _ref3 ? ++_l : --_l) {
+    for (x = _m = 0, _ref2 = root.gridWidth; 0 <= _ref2 ? _m < _ref2 : _m > _ref2; x = 0 <= _ref2 ? ++_m : --_m) {
       _results.push((function() {
-        var _m, _ref4, _results1;
+        var _n, _ref3, _results1;
         _results1 = [];
-        for (y = _m = 0, _ref4 = root.gridHeight; 0 <= _ref4 ? _m < _ref4 : _m > _ref4; y = 0 <= _ref4 ? ++_m : --_m) {
+        for (y = _n = 0, _ref3 = root.gridHeight; 0 <= _ref3 ? _n < _ref3 : _n > _ref3; y = 0 <= _ref3 ? ++_n : --_n) {
           if (rules[getBinaryThingey(root.ages[x][y])][numNeighbors[x][y]]) {
             _results1.push(root.ages[x][y]++);
           } else {
@@ -449,14 +472,14 @@ If these can all be replaced by builtins, that's be great.
   };
 
   drawCells = function() {
-    var age, hue, timeModifier, x, y, _j, _ref1, _results;
+    var age, hue, timeModifier, x, y, _i, _ref, _results;
     timeModifier = new Date().getTime() / 10000;
     _results = [];
-    for (x = _j = 0, _ref1 = root.gridWidth; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; x = 0 <= _ref1 ? ++_j : --_j) {
+    for (x = _i = 0, _ref = root.gridWidth; 0 <= _ref ? _i < _ref : _i > _ref; x = 0 <= _ref ? ++_i : --_i) {
       _results.push((function() {
-        var _k, _ref2, _results1;
+        var _j, _ref1, _results1;
         _results1 = [];
-        for (y = _k = 0, _ref2 = root.gridHeight; 0 <= _ref2 ? _k < _ref2 : _k > _ref2; y = 0 <= _ref2 ? ++_k : --_k) {
+        for (y = _j = 0, _ref1 = root.gridHeight; 0 <= _ref1 ? _j < _ref1 : _j > _ref1; y = 0 <= _ref1 ? ++_j : --_j) {
           age = root.ages[x][y];
           if (age !== 0) {
             hue = Math.sqrt(age);
@@ -518,6 +541,8 @@ If these can all be replaced by builtins, that's be great.
   mouseX = 0;
 
   mouseY = 0;
+
+  maxNeighborhoodSize = 5;
 
   root.ages = randomGrid();
 

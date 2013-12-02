@@ -58,16 +58,11 @@ computeNextGeneration = ->
 	for x in [0...root.gridWidth]
 		for y in [0...root.gridHeight]
 			if root.ages[x][y] != 0
-				inc numNeighbors, x-1, y-1
-				inc numNeighbors, x-1, y
-				inc numNeighbors, x-1, y+1
-				
-				inc numNeighbors, x, y-1
-				inc numNeighbors, x, y+1
-				
-				inc numNeighbors, x+1, y-1
-				inc numNeighbors, x+1, y
-				inc numNeighbors, x+1, y+1
+
+				for dx in [0...maxNeighborhoodSize]
+					for dy in [0...maxNeighborhoodSize]
+						if neighborhood[dx][dy]
+							inc numNeighbors, x + dx - 2, y + dy - 2
 	
 	#Apply the current rules
 	for x in [0...root.gridWidth]
@@ -133,6 +128,8 @@ root.gridHeight = canvas.width / root.gridSpacing
 
 mouseX = 0
 mouseY = 0
+
+maxNeighborhoodSize = 5
 
 root.ages = randomGrid()
 
