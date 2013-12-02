@@ -21,8 +21,6 @@ background = ->
 	bigNum = 100000
 	context.fillRect -bigNum, -bigNum, 2*bigNum, 2*bigNum
 
-
-
 #More serious functions
 #------------------------
 makeNewGrid = ->

@@ -6,37 +6,12 @@ $ = jQuery
 
 rules = [[false, false, false, true, false, false, false, false, false], [false, false, true, true, false, false, false, false, false]]
 
-<<<<<<< HEAD
-($ "#ruleTable").append """
-<tr>
-	<th title="This column determines how dead cells can come to life" style="height:30px;" class="tableHeader">Dead</th>
-	<th title="This column determines how live cells can stay alive" style="height:30px;" class="tableHeader">Alive</th>
-</tr>	
-"""
-
-for numNeighbors in [0...8+1]
-	deadClasses = "ruleButton"
-	if rules[0][numNeighbors]
-		deadClasses += " down"
-
-	liveClasses = "ruleButton"
-	if rules[1][numNeighbors]
-		liveClasses += " down"
-
-	($ "#ruleTable").append """
-		<tr>
-			<td title="When this button is illuminated, dead cells with """ + numNeighbors + """ neighbors will come to life.\nWhen this button is dark, dead cells with """ + numNeighbors + """ neighbors will stay dead." type="button" class=" """ + deadClasses + """ " onclick="toggleRule(0, """ + numNeighbors + """)">""" + numNeighbors + """</td>
-			<td title="When this button is illuminated, live cells with """ + numNeighbors + """ neighbors will stay alive.\nWhen this button is dark, live cells with """ + numNeighbors + """ neighbors will die." type="button" class=" """ + liveClasses + """ " onclick="toggleRule(1, """ + numNeighbors + """)">""" + numNeighbors + """</td>
-		</tr>
-	"""
-=======
 neighborhood =
 	[[false, false, false, false, false],
 	 [false, true,  true,  true, false],
 	 [false, true,  false, true, false],
 	 [false, true,  true,  true, false],
 	 [false, false, false, false, false]]
->>>>>>> develop
 
 ###
 jQueryKey should be a string like
@@ -153,7 +128,7 @@ $ ->
 	</tr>
 	"""
 
-	# ----------- Make the body of the ruletable ------------
+	# ------	----- Make the body of the ruletable ------------
 	for numNeighbors in [0...8+1]
 		deadClasses = "ruleButton"
 		if rules[0][numNeighbors]
@@ -242,7 +217,7 @@ $ ->
 	$("#myCanvas").mousemove (event) ->
 		makeCells(event)
 
-	#Pause button
+	# ------------- Pause button ------------
 	($ "#pauseButton").click ( ->
 		($ this).toggleClass "down"
 
@@ -254,9 +229,12 @@ $ ->
 			($ this).html "Pause"
 		)
 
-	#Brush options
+	# ------------ Brush options --------------
 	($ "#1x1").click ( ->
 		root.brushSize = 0
+		)
+	($ "#2x2").click ( ->
+		root.brushSize = .5
 		)
 	($ "#3x3").click ( ->
 		root.brushSize = 1
