@@ -149,12 +149,12 @@ $ ->
 
 	# ---------- Make the neighborhood options table ---------------
 	tableBody = ($ "#neighborhoodOptionsTable>tbody")
-	for x in [0...maxNeighborhoodSize]
+	for y in [0...maxNeighborhoodSize].reverse()
 		tableBody.append """
 			<tr>
 		"""
 
-		for y in [0...maxNeighborhoodSize]
+		for x in [0...maxNeighborhoodSize].reverse()
 			classes = "neighborhoodButton"
 			if neighborhood[x][y]
 				classes += " down"

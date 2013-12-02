@@ -233,7 +233,7 @@ If these can all be replaced by builtins, that's be great.
   });
 
   $(function() {
-    var classes, deadClasses, liveClasses, numNeighbors, tableBody, x, y, _i, _j, _k, _ref;
+    var classes, deadClasses, liveClasses, numNeighbors, tableBody, x, y, _i, _j, _k, _l, _len, _len1, _m, _ref, _ref1, _ref2, _results, _results1;
     ($("#ruleTable")).append("<tr>\n	<th title=\"This column determines how dead cells can come to life\" style=\"height:30px;\" class=\"tableHeader\">Dead</th>\n	<th title=\"This column determines how live cells can stay alive\" style=\"height:30px;\" class=\"tableHeader\">Alive</th>\n</tr>");
     for (numNeighbors = _i = 0, _ref = 8 + 1; 0 <= _ref ? _i < _ref : _i > _ref; numNeighbors = 0 <= _ref ? ++_i : --_i) {
       deadClasses = "ruleButton";
@@ -247,9 +247,21 @@ If these can all be replaced by builtins, that's be great.
       ($("#ruleTable")).append("<tr>\n	<td title=\"When this button is illuminated, dead cells with " + numNeighbors + " neighbors will come to life.\nWhen this button is dark, dead cells with " + numNeighbors + " neighbors will stay dead.\"\ntype=\"button\" class=\" " + deadClasses + " \" onclick=\"toggleRule(0, " + numNeighbors + ")\">" + numNeighbors + "</td>\n<td title=\"When this button is illuminated, live cells with " + numNeighbors + " neighbors will stay alive.\nWhen this button is dark, live cells with " + numNeighbors + " neighbors will die.\"\ntype=\"button\" class=\" " + liveClasses + " \" onclick=\"toggleRule(1, " + numNeighbors + ")\">" + numNeighbors + "</td>\n</tr>");
     }
     tableBody = $("#neighborhoodOptionsTable>tbody");
-    for (x = _j = 0; 0 <= maxNeighborhoodSize ? _j < maxNeighborhoodSize : _j > maxNeighborhoodSize; x = 0 <= maxNeighborhoodSize ? ++_j : --_j) {
+    _ref1 = (function() {
+      _results = [];
+      for (var _k = 0; 0 <= maxNeighborhoodSize ? _k < maxNeighborhoodSize : _k > maxNeighborhoodSize; 0 <= maxNeighborhoodSize ? _k++ : _k--){ _results.push(_k); }
+      return _results;
+    }).apply(this).reverse();
+    for (_j = 0, _len = _ref1.length; _j < _len; _j++) {
+      y = _ref1[_j];
       tableBody.append("<tr>");
-      for (y = _k = 0; 0 <= maxNeighborhoodSize ? _k < maxNeighborhoodSize : _k > maxNeighborhoodSize; y = 0 <= maxNeighborhoodSize ? ++_k : --_k) {
+      _ref2 = (function() {
+        _results1 = [];
+        for (var _m = 0; 0 <= maxNeighborhoodSize ? _m < maxNeighborhoodSize : _m > maxNeighborhoodSize; 0 <= maxNeighborhoodSize ? _m++ : _m--){ _results1.push(_m); }
+        return _results1;
+      }).apply(this).reverse();
+      for (_l = 0, _len1 = _ref2.length; _l < _len1; _l++) {
+        x = _ref2[_l];
         classes = "neighborhoodButton";
         if (neighborhood[x][y]) {
           classes += " down";
