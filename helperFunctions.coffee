@@ -9,9 +9,13 @@ getBinaryThingey = (num) ->
 	else
 		return 1
 		
-inc = (arr, x, y) ->
+incModeDead = (arr, x, y) ->
 	if x >= 0 and y >= 0 and x < arr.length and y < arr[0].length
 		arr[x][y]++
+incModeWrap = (arr, x, y) ->
+	arr[(x + arr.length) % arr.length][(y + arr[1].length) % arr[1].length]++
+inc = incModeWrap
+
 zero = (arr, x, y) ->
 	if x >= 0 and y >= 0 and x < arr.length and y < arr[0].length
 		arr[x][y] = 0

@@ -1,3 +1,36 @@
+.radio {
+  width: 120px;
+  background-color: rgba(10, 40, 200, 0.8);
+  color: #ffffff;
+  border: 0;
+  margin-bottom: 0px;
+  transition: color .2s;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 30px;
+  text-decoration: none;
+  text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.radio:hover {
+  background-color: rgba(66, 95, 246, 0.8);
+  color: #fff078;
+}
+.radio:active {
+  background-color: rgba(115, 136, 248, 0.8);
+  color: #ffc864;
+}
+.radio.down {
+  color: #ffff00;
+  background-color: rgba(164, 177, 250, 0.8);
+}
 .text {
   font-family: Arial;
   font-size: 12px;
@@ -31,7 +64,7 @@ h1 {
   color: #ffffff;
   border: 0;
   margin-bottom: 0px;
-  transition: color 1s;
+  transition: color .2s;
   font-family: Arial;
   font-size: 12px;
   font-weight: bold;
@@ -72,7 +105,7 @@ div {
   color: #ffffff;
   border: 0;
   margin-bottom: 0px;
-  transition: color 1s;
+  transition: color .2s;
   font-family: Arial;
   font-size: 12px;
   font-weight: bold;
@@ -105,7 +138,7 @@ div {
   color: #ffffff;
   border: 0;
   margin-bottom: 0px;
-  transition: color 1s;
+  transition: color .2s;
   font-family: Arial;
   font-size: 12px;
   font-weight: bold;
@@ -185,7 +218,7 @@ div {
   color: #ffffff;
   border: 0;
   margin-bottom: 0px;
-  transition: color 1s;
+  transition: color .2s;
   font-family: Arial;
   font-size: 12px;
   font-weight: bold;
@@ -232,7 +265,7 @@ div {
   color: #ffffff;
   border: 0;
   margin-bottom: 0px;
-  transition: color 1s;
+  transition: color .2s;
   font-family: Arial;
   font-size: 12px;
   font-weight: bold;

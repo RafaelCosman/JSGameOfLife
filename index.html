@@ -55,14 +55,17 @@
 
 			<!--<button title="Displays help"				type="button" style="right:400px;" class="actionButton" onclick="help()">Help</button>-->
 			
-			<button title="Pauses the animation" id="pauseButton" type="button" class="actionButton" onclick="pause()">Pause</button>
+			<button title="Pauses the animation" id="pauseButton" type="button" class="actionButton toggle" onclick="pause()">Pause</button>
 
 			<div class="controlGroup" style="right: 375px;">
 				<h1 id="speedOptionsMinButton" title="These options allow you to change the speed of Game of Life. Click here to minimize these options" type="button" class="minButton">Speed Options<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
 				<div id="speedOptionsDiv" class="buttonGroup" style="bottom:0px;">
-					<div title ="Makes the animation run slowly by adding a 1.0 second delay between each generation" type="button" class="actionButton" onclick="setDelay(1000)">Slow</div>
-					<div title ="Makes the animation run slightly slower by adding a 0.1 second delay between each generation" type="button" class="actionButton" onclick="setDelay(100)">Medium</div>
-					<div title ="Makes the animation run as fast as possible" 	type="button" class="actionButton" onclick="setDelay(0)">Fast</div>
+					<div id="slow" title="Makes the animation run slowly by adding a 1.0 second delay between each generation"
+					type="button" class="radio" onclick="setDelay(1000)">Slow</div>
+					<div id="medium" title="Makes the animation run slightly slower by adding a 0.1 second delay between each generation"
+					type="button" class="radio" onclick="setDelay(100)">Medium</div>
+					<div id="fast" title ="Makes the animation run as fast as possible"
+					type="button"class="radio" onclick="setDelay(0)">Fast</div>
 				</div>
 			</div>
 
@@ -75,18 +78,18 @@
 			</div>
 
 			<div class="controlGroup" style="right: 500px;">
-				<h1 id="brushOptionsMinButton" title="These optinos allow you to change the size and shape of the brush. Click here to minimize these options." class="minButton" class="minButton">Brush Options<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
+				<h1 id="brushOptionsMinButton" title="These optinos allow you to change the size and shape of the brush. Click here to minimize these options." class="minButton">Brush Options<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
 				<div id="brushOptionsDiv" class="buttonGroup">
-					<div id="1x1" title="1x1 brush" type="button" class="actionButton">1x1</div>
-					<!-- <div id="2x2" title="2x2 brush" type="button" class="actionButton">2x2</div> -->
-					<div id="3x3" title="3x3 brush" type="button" class="actionButton">3x3</div>
-					<div id="5x5" title="5x5 brush" type="button" class="actionButton">5x5</div>
-					<div id="9x9" title="9x9 brush" type="button" class="actionButton">9x9</div>
+					<div id="1x1" title="1x1 brush" type="button" class="actionButton radio">1x1</div>
+					<!-- <div id="2x2" title="2x2 brush" type="button" class="actionButton radio">2x2</div> -->
+					<div id="3x3" title="3x3 brush" type="button" class="actionButton radio">3x3</div>
+					<div id="5x5" title="5x5 brush" type="button" class="actionButton radio">5x5</div>
+					<div id="9x9" title="9x9 brush" type="button" class="actionButton radio">9x9</div>
 				</div>
 			</div>
 
 			<div class="controlGroup" style="right: 625px;">
-				<h1 id="neighborhoodOptionsMinButton" title="These options allow your to change the definition of a cells neighbors">Neighborhood Options<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
+				<h1 id="neighborhoodOptionsMinButton" title="These options allow your to change the definition of a cells neighbors" class="minButton">Neighborhood<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
 				<div id="neighborhoodOptionsDiv">
 					<table id="neighborhoodOptionsTable" class="ruleTable"><tbody></tbody></table>
 				</div>
@@ -99,7 +102,7 @@
 		<button id="tutorialLeftCol" type="button" style="top:120px; left:100px" class="helpBox">The left column determines if dead cells will come to life</button>
 		<button id="tutorialRightCol" type="button" style="top:160px; left:100px" class="helpBox">The right column determines if live cells will stay alive</button>
 		<button id="tutorialRow" type="button" style="top:200px; left:100px" class="helpBox">The row is determined by how many neighbors a cell has</button>
-		<button id="tutorialMouseOver" type="button" style="top:240px; left:100px" class="helpBox">Mouse-over any of these numbers to learn what it does</button>
+		<button id="tutorialMouseOver" type="button" style="top:240px; left:100px" class="helpBox">Mouseover any of these numbers to learn what it does</button>
 
 		<div data-role="controlgroup" class="rules" style="height:100%;">
 			<!--<h1 id="ruleTableMinButton" class="minButton" style="width:70px; height:30px;">Rule Table</h1>-->

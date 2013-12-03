@@ -89,7 +89,7 @@ makeCells = (event) ->
 
 		for x in [gridX-root.brushSize...gridX+1+root.brushSize]
 			for y in [gridY-root.brushSize...gridY+1+root.brushSize]
-				inc(ages, x, y)
+				inc ages, x, y
 				
 	#If dragging with the right mouse button, kill cells
 	if mouse.down[3]
@@ -97,7 +97,7 @@ makeCells = (event) ->
 
 		for x in [gridX-root.brushSize...gridX+1+root.brushSize]
 			for y in [gridY-root.brushSize...gridY+1+root.brushSize]
-				zero(ages, x, y)	
+				zero ages, x, y
 
 #Keyboard io
 #------------------------
@@ -128,7 +128,7 @@ $ ->
 	</tr>
 	"""
 
-	# ------	----- Make the body of the ruletable ------------
+	# ----------- Make the body of the ruletable ------------
 	for numNeighbors in [0...8+1]
 		deadClasses = "ruleButton"
 		if rules[0][numNeighbors]
@@ -167,22 +167,26 @@ $ ->
 			</tr>
 		"""
 
-	($ ".neighborhoodButton").click ->
-		($ this).toggleClass "down"
-
 	# ------------ Add the rule button click listeners -----------
 	($ ".ruleButton").click ->
-		($ this).toggleClass "down"
-
 		if not root.userHasChangedRules
 			root.userHasChangedRules = true
 			setHidden "#tutorialChangeRules"
 			
-			setTimeout (-> setVisible "#tutorialLeftCol"), 1000
-			setTimeout (-> setHidden "#tutorialLeftCol"), 5000
+			time = 1000
+
+			setTimeout (-> setVisible "#tutorialLeftCol"), time
+			setTimeout (-> setHidden "#tutorialLeftCol"), time += 4000
 			
-			setTimeout (-> setVisible "#tutorialRightCol"), 5000
-			setTimeout (-> setHidden "#tutorialRightCol"), 9000
+			setTimeout (-> setVisible "#tutorialRightCol"), time
+			setTimeout (-> setHidden "#tutorialRightCol"), time += 4000
+
+			setTimeout (-> setVisible "#tutorialRow"), time
+			setTimeout (-> setHidden "#tutorialRow"), time += 4000
+
+			setTimeout (-> setVisible "#tutorialMouseOver"), time
+			setTimeout (-> setHidden "#tutorialMouseOver"), time += 4000
+
 	###
 	($ "#ruleTableMinButton").click ->
 		($ this).toggleClass "down"
@@ -190,16 +194,12 @@ $ ->
 	###
 	# ------------ These are all of the minimization buttons -------------
 	($ "#speedOptionsMinButton").click ->
-		($ this).toggleClass "down"
 		($ "#speedOptionsDiv").slideToggle()
 	($ "#gridSizeOptionsMinButton").click ->
-		($ this).toggleClass "down"
 		($ "#gridSizeOptionsDiv").slideToggle()
 	($ "#brushOptionsMinButton").click ->
-		($ this).toggleClass "down"
 		($ "#brushOptionsDiv").slideToggle()
 	($ "#neighborhoodOptionsMinButton").click ->
-		($ this).toggleClass "down"
 		($ "#neighborhoodOptionsDiv").slideToggle()
 
 	# ---------- Canvas listeners -----------
@@ -219,8 +219,6 @@ $ ->
 
 	# ------------- Pause button ------------
 	($ "#pauseButton").click ( ->
-		($ this).toggleClass "down"
-
 		root.paused = not root.paused
 
 		if root.paused
@@ -234,7 +232,7 @@ $ ->
 		root.brushSize = 0
 		)
 	($ "#2x2").click ( ->
-		root.brushSize = .5
+		root.brushSize = .5 #doesn't work
 		)
 	($ "#3x3").click ( ->
 		root.brushSize = 1
@@ -245,3 +243,20 @@ $ ->
 	($ "#9x9").click ( ->
 		root.brushSize = 4
 		)
+
+	# --------------- Toggles ---------------
+	($ ".neighborhoodButton,.minButton,.ruleButton").addClass "toggle"
+	($ ".toggle").click ( ->
+		($ this).toggleClass "down"
+		)
+
+	# ------------- Radio Buttons ---------
+	($ ".radio").click ( -> 
+		($ this).siblings().removeClass "down"
+		($ this).addClass "down"
+		)
+
+	# ------------ Initialization :D --------------
+	($ "#5x5").click()
+	($ "#fast").click()
+	
