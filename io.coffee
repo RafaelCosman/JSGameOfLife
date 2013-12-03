@@ -89,7 +89,7 @@ makeCells = (event) ->
 
 		for x in [gridX-root.brushSize...gridX+1+root.brushSize]
 			for y in [gridY-root.brushSize...gridY+1+root.brushSize]
-				inc(ages, x, y)
+				inc ages, x, y
 				
 	#If dragging with the right mouse button, kill cells
 	if mouse.down[3]
@@ -97,7 +97,7 @@ makeCells = (event) ->
 
 		for x in [gridX-root.brushSize...gridX+1+root.brushSize]
 			for y in [gridY-root.brushSize...gridY+1+root.brushSize]
-				zero(ages, x, y)	
+				zero ages, x, y
 
 #Keyboard io
 #------------------------
@@ -128,7 +128,7 @@ $ ->
 	</tr>
 	"""
 
-	# ------	----- Make the body of the ruletable ------------
+	# ----------- Make the body of the ruletable ------------
 	for numNeighbors in [0...8+1]
 		deadClasses = "ruleButton"
 		if rules[0][numNeighbors]
@@ -178,11 +178,20 @@ $ ->
 			root.userHasChangedRules = true
 			setHidden "#tutorialChangeRules"
 			
-			setTimeout (-> setVisible "#tutorialLeftCol"), 1000
-			setTimeout (-> setHidden "#tutorialLeftCol"), 5000
+			time = 1000
+
+			setTimeout (-> setVisible "#tutorialLeftCol"), time
+			setTimeout (-> setHidden "#tutorialLeftCol"), time += 4000
 			
-			setTimeout (-> setVisible "#tutorialRightCol"), 5000
-			setTimeout (-> setHidden "#tutorialRightCol"), 9000
+			setTimeout (-> setVisible "#tutorialRightCol"), time
+			setTimeout (-> setHidden "#tutorialRightCol"), time += 4000
+
+			setTimeout (-> setVisible "#tutorialRow"), time
+			setTimeout (-> setHidden "#tutorialRow"), time += 4000
+
+			setTimeout (-> setVisible "#tutorialMouseOver"), time
+			setTimeout (-> setHidden "#tutorialMouseOver"), time += 4000
+
 	###
 	($ "#ruleTableMinButton").click ->
 		($ this).toggleClass "down"

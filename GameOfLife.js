@@ -274,22 +274,36 @@ If these can all be replaced by builtins, that's be great.
       return ($(this)).toggleClass("down");
     });
     ($(".ruleButton")).click(function() {
+      var time;
       ($(this)).toggleClass("down");
       if (!root.userHasChangedRules) {
         root.userHasChangedRules = true;
         setHidden("#tutorialChangeRules");
+        time = 1000;
         setTimeout((function() {
           return setVisible("#tutorialLeftCol");
-        }), 1000);
+        }), time);
         setTimeout((function() {
           return setHidden("#tutorialLeftCol");
-        }), 5000);
+        }), time += 4000);
         setTimeout((function() {
           return setVisible("#tutorialRightCol");
-        }), 5000);
-        return setTimeout((function() {
+        }), time);
+        setTimeout((function() {
           return setHidden("#tutorialRightCol");
-        }), 9000);
+        }), time += 4000);
+        setTimeout((function() {
+          return setVisible("#tutorialRow");
+        }), time);
+        setTimeout((function() {
+          return setHidden("#tutorialRow");
+        }), time += 4000);
+        setTimeout((function() {
+          return setVisible("#tutorialMouseOver");
+        }), time);
+        return setTimeout((function() {
+          return setHidden("#tutorialMouseOver");
+        }), time += 4000);
       }
     });
     /*
