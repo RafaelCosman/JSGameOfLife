@@ -167,13 +167,8 @@ $ ->
 			</tr>
 		"""
 
-	($ ".neighborhoodButton").click ->
-		($ this).toggleClass "down"
-
 	# ------------ Add the rule button click listeners -----------
 	($ ".ruleButton").click ->
-		($ this).toggleClass "down"
-
 		if not root.userHasChangedRules
 			root.userHasChangedRules = true
 			setHidden "#tutorialChangeRules"
@@ -199,16 +194,12 @@ $ ->
 	###
 	# ------------ These are all of the minimization buttons -------------
 	($ "#speedOptionsMinButton").click ->
-		($ this).toggleClass "down"
 		($ "#speedOptionsDiv").slideToggle()
 	($ "#gridSizeOptionsMinButton").click ->
-		($ this).toggleClass "down"
 		($ "#gridSizeOptionsDiv").slideToggle()
 	($ "#brushOptionsMinButton").click ->
-		($ this).toggleClass "down"
 		($ "#brushOptionsDiv").slideToggle()
 	($ "#neighborhoodOptionsMinButton").click ->
-		($ this).toggleClass "down"
 		($ "#neighborhoodOptionsDiv").slideToggle()
 
 	# ---------- Canvas listeners -----------
@@ -228,8 +219,6 @@ $ ->
 
 	# ------------- Pause button ------------
 	($ "#pauseButton").click ( ->
-		($ this).toggleClass "down"
-
 		root.paused = not root.paused
 
 		if root.paused
@@ -243,7 +232,7 @@ $ ->
 		root.brushSize = 0
 		)
 	($ "#2x2").click ( ->
-		root.brushSize = .5
+		root.brushSize = .5 #doesn't work
 		)
 	($ "#3x3").click ( ->
 		root.brushSize = 1
@@ -254,3 +243,20 @@ $ ->
 	($ "#9x9").click ( ->
 		root.brushSize = 4
 		)
+
+	# --------------- Toggles ---------------
+	($ ".neighborhoodButton,.minButton,.ruleButton").addClass "toggle"
+	($ ".toggle").click ( ->
+		($ this).toggleClass "down"
+		)
+
+	# ------------- Radio Buttons ---------
+	($ ".radio").click ( -> 
+		($ this).siblings().removeClass "down"
+		($ this).addClass "down"
+		)
+
+	# ------------ Initialization :D --------------
+	($ "#5x5").click()
+	($ "#fast").click()
+	
