@@ -124,9 +124,6 @@ border = root.gridSpacing * .2
 root.gridWidth = canvas.width / root.gridSpacing
 root.gridHeight = canvas.width / root.gridSpacing
 
-mouseX = 0
-mouseY = 0
-
 maxNeighborhoodSize = 5
 
 root.ages = randomGrid()
@@ -136,5 +133,4 @@ root.brushSize = 2 #this is the size of the users brush to kill or create cells
 root.helpShown = false
 root.paused = false
 
-context.font="20px Georgia";
 draw()
