@@ -58,8 +58,8 @@
 			<button title="Pauses the animation" id="pauseButton" type="button" class="actionButton toggle" onclick="pause()">Pause</button>
 
 			<div class="controlGroup" style="right: 375px;">
-				<h1 id="speedOptionsMinButton" title="These options allow you to change the speed of Game of Life. Click here to minimize these options" type="button" class="minButton">Speed Options<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
-				<div id="speedOptionsDiv" class="buttonGroup" style="bottom:0px;">
+				<h1 title="These options allow you to change the speed of Game of Life. Click here to minimize these options" type="button" class="minButton">Speed Options<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
+				<div class="buttonGroup" style="bottom:0px;">
 					<div id="slow" title="Makes the animation run slowly by adding a 1.0 second delay between each generation"
 					type="button" class="radio" onclick="setDelay(1000)">Slow</div>
 					<div id="medium" title="Makes the animation run slightly slower by adding a 0.1 second delay between each generation"
@@ -70,16 +70,16 @@
 			</div>
 
 			<div class="controlGroup" style="right: 250px;">
-				<h1 id="gridSizeOptionsMinButton" title="These options allow you to change the number of cells on the screen. Click here to minimize these options." class="minButton">Grid Size Options<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
-				<div id="gridSizeOptionsDiv" class="buttonGroup" >
+				<h1 title="These options allow you to change the number of cells on the screen. Click here to minimize these options." class="minButton">Grid Size Options<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
+				<div class="buttonGroup">
 					<div title="Makes the grid contain more cells" type="button" class="actionButton" onclick="moreCells()">More Cells</div>
 					<div title="Makes the grid contain fewer cells" type="button" class="actionButton" onclick="fewerCells()">Fewer Cells</div>
 				</div>
 			</div>
 
 			<div class="controlGroup" style="right: 500px;">
-				<h1 id="brushOptionsMinButton" title="These optinos allow you to change the size and shape of the brush. Click here to minimize these options." class="minButton">Brush Options<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
-				<div id="brushOptionsDiv" class="buttonGroup">
+				<h1 id="brushOptionsMinButton" title="These optinos allow you to change the size of the brush. Click here to minimize these options." class="minButton">Brush Options<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
+				<div class="buttonGroup">
 					<div id="1x1" title="1x1 brush" type="button" class="actionButton radio">1x1</div>
 					<!-- <div id="2x2" title="2x2 brush" type="button" class="actionButton radio">2x2</div> -->
 					<div id="3x3" title="3x3 brush" type="button" class="actionButton radio">3x3</div>
@@ -89,8 +89,8 @@
 			</div>
 
 			<div class="controlGroup" style="right: 625px;">
-				<h1 id="neighborhoodOptionsMinButton" title="These options allow your to change the definition of a cells neighbors" class="minButton">Neighborhood<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
-				<div id="neighborhoodOptionsDiv">
+				<h1 title="These options allow your to change the definition of a cells neighbors" class="minButton">Neighborhood<img src="up-down-arrow.png" height="13" width="13" style="border-top-width:50;"></h1>
+				<div>
 					<table id="neighborhoodOptionsTable" class="ruleTable"><tbody></tbody></table>
 				</div>
 			</div>
@@ -105,8 +105,8 @@
 		<button id="tutorialMouseOver" type="button" style="top:240px; left:100px" class="helpBox">Mouseover any of these numbers to learn what it does</button>
 
 		<div data-role="controlgroup" class="rules" style="height:100%;">
-			<!--<h1 id="ruleTableMinButton" class="minButton" style="width:70px; height:30px;">Rule Table</h1>-->
-			<div id="ruleTableDiv" style="height:100%">
+			<!--<h1 class="minButton" style="width:70px; height:30px;">Rule Table</h1>-->
+			<div style="height:100%">
 				<table id="ruleTable" class="ruleTable" style="height:100%"></table>
 			</div>
 		<div>

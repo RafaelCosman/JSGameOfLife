@@ -193,14 +193,8 @@ $ ->
 		($ "#ruleTableDiv").slideToggle()
 	###
 	# ------------ These are all of the minimization buttons -------------
-	($ "#speedOptionsMinButton").click ->
-		($ "#speedOptionsDiv").slideToggle()
-	($ "#gridSizeOptionsMinButton").click ->
-		($ "#gridSizeOptionsDiv").slideToggle()
-	($ "#brushOptionsMinButton").click ->
-		($ "#brushOptionsDiv").slideToggle()
-	($ "#neighborhoodOptionsMinButton").click ->
-		($ "#neighborhoodOptionsDiv").slideToggle()
+	($ ".minButton").click ->
+		($ this).parent().children("div").slideToggle()
 
 	# ---------- Canvas listeners -----------
 	$("#myCanvas").mousedown (event) ->
