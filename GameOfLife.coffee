@@ -87,6 +87,8 @@ drawCells = ->
 				context.fillStyle = HSVtoRGB((hue + timeModifier) % 1, 1, 1)
 				context.fillRect(root.gridSpacing * x, root.gridSpacing * y, root.gridSpacing - border, root.gridSpacing - border)
 
+lastDrawTime = 0
+
 draw = -> 
 			
 	#Clear the background
@@ -100,13 +102,15 @@ draw = ->
 		context.fillStyle = rgba(255, 255, 255, 0.7)
 		context.fillRect(mouse.getGridX() * root.gridSpacing, mouse.getGridY() * root.gridSpacing, root.gridSpacing-border, root.gridSpacing-border)
 	
-	if !root.paused
+	currentTime = new Date().getTime()
+
+	if lastDrawTime + root.delay < currentTime and !root.paused
 		computeNextGeneration()
+		lastDrawTime = currentTime
 
-	nextDraw = requestAnimationFrame.bind(this, draw)
-	setTimeout(nextDraw, root.delay)
+	setTimeout(draw)
 
-root.drawImmediately = ->
+root.drawImmediately = -> 
 	drawCells()
 
 #Setup
