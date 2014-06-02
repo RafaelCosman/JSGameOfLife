@@ -18,6 +18,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  cursor: pointer;
 }
 .radio:hover {
   background-color: rgba(66, 95, 246, 0.8);
@@ -49,6 +50,11 @@ canvas {
   padding: 0;
   display: block;
 }
+html canvas,
+body canvas,
+canvas canvas {
+  cursor: crosshair;
+}
 /* just to be sure these are full screen*/
 .unselectable {
   -webkit-touch-callout: none;
@@ -78,6 +84,7 @@ h1 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  cursor: pointer;
 }
 h1:hover {
   background-color: rgba(66, 95, 246, 0.8);
@@ -119,6 +126,7 @@ div {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  cursor: pointer;
 }
 .actionButton:hover {
   background-color: rgba(66, 95, 246, 0.8);
@@ -152,6 +160,7 @@ div {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  cursor: pointer;
   width: 20px;
   height: 20px;
 }
@@ -232,6 +241,7 @@ div {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  cursor: pointer;
   width: 20px;
 }
 .rules .ruleTable .ruleButton:hover {
@@ -252,6 +262,7 @@ div {
   bottom: 0px;
   text-align: bottom;
   vertical-align: text-bottom;
+  cursor: pointer;
 }
 .allTheButtons .controlGroup {
   margin: 5px;
@@ -279,6 +290,7 @@ div {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  cursor: pointer;
   margin-bottom: 3px;
 }
 .allTheButtons .controlGroup .minButton:hover {

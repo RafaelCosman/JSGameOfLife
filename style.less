@@ -32,6 +32,9 @@ html, body, canvas {
 	margin:0;
 	padding:0;
 	display:block;
+	canvas {
+		cursor: crosshair;
+	}
 } /* just to be sure these are full screen*/
 
 .unselectable {
@@ -64,6 +67,7 @@ div {
 
 	.text;
 	.unselectable;
+	cursor: pointer;
 
 	&:hover {
 		background-color: @buttonHover;
@@ -129,6 +133,7 @@ div {
 	bottom: 0px;
 	text-align: bottom;
 	vertical-align: text-bottom;
+	cursor: pointer;
 
 	.controlGroup {
 		margin: 5px;
