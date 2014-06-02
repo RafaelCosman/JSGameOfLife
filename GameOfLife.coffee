@@ -88,8 +88,6 @@ drawCells = ->
 				context.fillRect(root.gridSpacing * x, root.gridSpacing * y, root.gridSpacing - border, root.gridSpacing - border)
 
 draw = -> 
-	if !root.paused
-		computeNextGeneration()
 			
 	#Clear the background
 	context.fillStyle = rgb(0, 0, 0)
@@ -102,6 +100,9 @@ draw = ->
 		context.fillStyle = rgba(255, 255, 255, 0.7)
 		context.fillRect(mouse.getGridX() * root.gridSpacing, mouse.getGridY() * root.gridSpacing, root.gridSpacing-border, root.gridSpacing-border)
 	
+	if !root.paused
+		computeNextGeneration()
+		
 	nextDraw = requestAnimationFrame.bind(this, draw)
 	setTimeout(nextDraw, root.delay)
 
