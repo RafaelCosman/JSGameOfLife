@@ -4,6 +4,9 @@ Author Rafael Cosman
 This code is Maddy approved.
 ###
 
+#@codekit-prepend helperFunctions.coffee
+#@codekit-prepend io.coffee
+
 root = exports ? this
 
 #Get the canvas
@@ -99,7 +102,8 @@ draw = ->
 		context.fillStyle = rgba(255, 255, 255, 0.7)
 		context.fillRect(mouse.getGridX() * root.gridSpacing, mouse.getGridY() * root.gridSpacing, root.gridSpacing-border, root.gridSpacing-border)
 	
-	setTimeout(draw, root.delay)
+	nextDraw = requestAnimationFrame.bind(this, draw)
+	setTimeout(nextDraw, root.delay)
 
 #Setup
 #----------
