@@ -102,9 +102,12 @@ draw = ->
 	
 	if !root.paused
 		computeNextGeneration()
-		
+
 	nextDraw = requestAnimationFrame.bind(this, draw)
 	setTimeout(nextDraw, root.delay)
+
+root.drawImmediately = ->
+	drawCells()
 
 #Setup
 #----------

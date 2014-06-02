@@ -81,6 +81,7 @@ makeCells = (event) ->
 	
 	#If dragging with the left mouse button, create cells
 	if mouse.down[1]
+		requestAnimationFrame(root.drawImmediately)
 		if not root.userHasCreatedCells
 			root.userHasCreatedCells = true
 			setHidden "#tutorialCreateCells"
@@ -94,6 +95,7 @@ makeCells = (event) ->
 	#If dragging with the right mouse button, kill cells
 	if mouse.down[3]
 		root.userHasDeletedCells = true
+		requestAnimationFrame(root.drawImmediately)
 
 		for x in [gridX-root.brushSize...gridX+1+root.brushSize]
 			for y in [gridY-root.brushSize...gridY+1+root.brushSize]
