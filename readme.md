@@ -1,5 +1,4 @@
 This is my version of Conway's Game of Life.
-Go to conwaygame.tk
 
 It has two key innovations:
 (1) You can click on the buttons on the left to change the rules of life and death
